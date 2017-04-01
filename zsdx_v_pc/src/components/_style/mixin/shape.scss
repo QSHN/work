@@ -1,0 +1,62 @@
+//圆形
+@mixin circular($radius){
+    width: $radius*2;
+    height: $radius*2;
+    line-height: $radius*2;
+    text-align: center;
+    font-size: $radius*2*0.8;
+    @extend %flex-aligin-items-center;
+    @include border-radius($radius);
+    overflow: hidden;
+    padding: 0;
+}
+
+//方形
+@mixin square($width){
+    width: $width;
+    height: $width;
+}
+
+//三角形
+@mixin triangle ($size, $color, $direction) {
+    height: 0;
+    width: 0;
+
+    //三角向上、向下、向右和向左时，设置边框样式
+    @if ($direction == up) or ($direction == down) or ($direction == right) or ($direction == left) {
+        border: solid $size / 2 transparent;
+
+        @if $direction == up {
+            border-bottom-color: $color;
+
+        } @else if $direction == right {
+            border-left-color:   $color;
+
+        } @else if $direction == down {
+            border-top-color:    $color;
+
+        } @else if $direction == left {
+            border-right-color:  $color;
+        }
+    }
+
+    @else if ($direction == up-right) or ($direction == up-left) {
+        border-top: $size solid $color;
+        @if $direction == up-right {
+            border-left:  $size solid transparent;
+        } @else if $direction == up-left {
+            border-right: $size solid transparent;
+        }
+    }
+
+    @else if ($direction == down-right) or ($direction == down-left) {
+        border-bottom: $size solid $color;
+        @if $direction == down-right {
+            border-left:  $size solid transparent;
+        } @else if $direction == down-left {
+            border-right: $size solid transparent;
+        }
+    }
+}
+
+

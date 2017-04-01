@@ -1,0 +1,72 @@
+// Created by tommyZZM on 2016/2/25.
+
+@import "flexbox";
+
+%flex-0-5{
+    @include flex(0.5);
+}
+
+%flex-1{
+    @include flex(1);
+}
+
+%flex-2{
+    @include flex(2);
+}
+
+//子元素满铺父元素
+%flex-aligin-items-stretch{
+    //default row;
+    @extend %flexbox;
+    @include align-items(stretch);
+}
+
+%flex-aligin-items-stretch-vertical{
+    @extend %flex-aligin-items-stretch;
+    @extend %flex-direction-column;
+}
+
+%flex-aligin-items-stretch-horizontal{
+    @extend %flex-aligin-items-stretch;
+    @extend %flex-direction-row;
+}
+
+//子元素相对父元素居中
+%flex-aligin-items-center-vertical{
+    @extend %flexbox;
+    @include align-items(center);
+    @include justify-content(center);
+    @extend %flex-direction-column;
+}
+
+%flex-aligin-items-center{
+    @extend %flexbox;
+    @include align-items(center);
+    @include justify-content(center);
+}
+
+%flex-direction-row {
+    @include flex-direction(row);
+}
+
+%flex-direction-row-center {
+    @extend %flexbox;
+    @include flex-direction(row);
+    @include align-items(center);
+}
+
+%flex-direction-row-lateral-center{
+    @extend %flexbox;
+    @include flex-direction(row);
+    @include justify-content(center);
+}
+
+%flex-direction-column {
+    @include flex-direction(column);
+}
+
+%flex-direction-column-center {
+    @extend %flexbox;
+    @include flex-direction(column);
+    @include justify-content(center);
+}

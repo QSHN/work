@@ -1,0 +1,8 @@
+//多行省略
+@mixin font-omitted($row) {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $row;
+    -webkit-box-orient: vertical;
+}

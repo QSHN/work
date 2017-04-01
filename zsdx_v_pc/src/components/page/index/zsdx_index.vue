@@ -1,6 +1,6 @@
 <template>
   <div class="zsdx_index_page">
-
+    77778
   </div>
 </template>
 
@@ -9,13 +9,15 @@
     name: 'zsdx_index_page',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+
       }
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style rel="stylesheet/scss" lang="scss" scoped>
+  .zsdx_index_page{
+    padding-top: 69px;
+  }
 </style>

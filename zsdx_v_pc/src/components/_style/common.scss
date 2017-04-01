@@ -1,0 +1,72 @@
+//********************* 省略号 ******************//
+.font-omitted {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+//******************** flex 布局 ******************//
+.flex-1{
+  @include flex(1);
+}
+
+// 方向: 水平;
+.f--h {
+  @include flexbox;
+  @include align-items(stretch);
+}
+
+// 方向： 垂直;
+.f--s {
+  @include flexbox;
+  @include align-items(stretch);
+  @include flex-direction(column);
+}
+
+// 方向: 水平; 对齐: 水平居左, 垂直居中
+.f--hlc {
+  @include flexbox;
+  @include flex-direction(row);
+  @include align-items(center);
+}
+
+// 方向: 水平; 对齐: 水平居左, 垂直居上
+.f--hlt {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(center);
+}
+
+// 方向: 水平; 对齐: 水平居中, 垂直居中
+.f--hcc {
+  @include flexbox;
+  @include align-items(center);
+  @include justify-content(center);
+}
+
+// 方向：垂直; 对齐：水平居左，垂直居中
+.f--slc{
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(center);
+}
+
+// 经过样式
+.ho_8{
+  @include hover_o(0.8,300ms);
+}
+
+.ho_6{
+  @include hover_o(0.6,300ms);
+}
+
+// 圆角
+.br2{
+  @include border-radius(2px);
+}
+.br4{
+  @include border-radius(4px);
+}
+.br5{
+  @include border-radius(5px);
+}

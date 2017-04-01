@@ -1,0 +1,15 @@
+// 背景渐变（从上到下）
+@mixin background-gradiented-top($color,$color1,$color2) {
+    background: -webkit-linear-gradient(top, $color, $color1, $color2);
+    background: -moz-linear-gradient(top, $color, $color1, $color2);
+    background: -ms-linear-gradient(top, $color, $color1, $color2);
+    background: -o-linear-gradient(top, $color, $color1, $color2);
+}
+
+// 背景渐变（度）
+@mixin background-gradiented-deg($deg, $color, $color1, $color2) {
+    background: -moz-linear-gradient($deg, $color, $color1, $color2);
+    background: -webkit-gradient(linear, 0 100%, 100% 0%, from($color), to($color1));
+    background: -webkit-linear-gradient($deg, $color, $color1, $color2);
+    background: -o-linear-gradient($deg, $color, $color1, $color2);
+}

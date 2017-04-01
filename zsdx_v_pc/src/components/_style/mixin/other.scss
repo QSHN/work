@@ -1,0 +1,25 @@
+//- 圆角
+
+@mixin border-radius($deg) {
+  border-radius: $deg;
+}
+
+@mixin border-radius-top($deg) {
+  border-top-left-radius: $deg;
+  border-top-right-radius: $deg;
+}
+
+@mixin border-radius-left($deg) {
+  border-top-left-radius: $deg;
+  border-bottom-left-radius: $deg;
+}
+
+@mixin border-radius-right($deg) {
+  border-top-right-radius: $deg;
+  border-bottom-right-radius: $deg;
+}
+
+@mixin border-radius-bottom($deg) {
+  border-bottom-left-radius: $deg;
+  border-bottom-right-radius: $deg;
+}
