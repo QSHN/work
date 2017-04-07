@@ -1,25 +1,70 @@
 //- 圆角
-
 @mixin border-radius($deg) {
-  border-radius: $deg;
+    border-radius: $deg;
 }
 
 @mixin border-radius-top($deg) {
-  border-top-left-radius: $deg;
-  border-top-right-radius: $deg;
+    border-top-left-radius: $deg;
+    border-top-right-radius: $deg;
 }
 
 @mixin border-radius-left($deg) {
-  border-top-left-radius: $deg;
-  border-bottom-left-radius: $deg;
+    border-top-left-radius: $deg;
+    border-bottom-left-radius: $deg;
 }
 
 @mixin border-radius-right($deg) {
-  border-top-right-radius: $deg;
-  border-bottom-right-radius: $deg;
+    border-top-right-radius: $deg;
+    border-bottom-right-radius: $deg;
 }
 
 @mixin border-radius-bottom($deg) {
-  border-bottom-left-radius: $deg;
-  border-bottom-right-radius: $deg;
+    border-bottom-left-radius: $deg;
+    border-bottom-right-radius: $deg;
+}
+
+
+//- input
+@mixin input1($height,$size,$color1,$color2) {
+    height: $height;
+    line-height: $height;
+    font-size: $size;
+    color: $color1;
+
+    ::-webkit-input-placeholder{
+      color: $color2;
+    }
+}
+
+//- button
+@mixin btn($width,$height,$size,$color,$bg,$radius,$border) {
+    width: $width;
+    height: $height;
+    font-size: $size;
+    color: $color;
+    background: $bg;
+    border: $border;
+    cursor: pointer;
+
+    @include border-radius($radius);
+}
+
+//- position
+@mixin position($type,$index,$v1,$v2,$v3,$v4) {
+    position: $type;
+    @if($v1 != false){
+        top : $v1;
+    }
+    @if($v2 != false){
+        right : $v2;
+    }
+    @if($v3 != false){
+        bottom : $v3;
+    }
+    @if($v4 != false){
+        left : $v4;
+    }
+    @if($index != false){
+        z-index: $index;
+    }
 }

@@ -25,6 +25,19 @@ module.exports = {
       '@': resolve('src')
     }
   },
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    stats: { colors: true },
+    proxy: {
+      '/xlearn/*': {
+        target: 'https://api.github.com',
+        pathRewrite: {'^/column' : '/column'},
+        changeOrigin: true
+      }
+    }
+  },
   module: {
     rules: [
       {

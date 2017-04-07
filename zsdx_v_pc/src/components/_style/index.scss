@@ -1,19 +1,12 @@
 //- 重置样式
 @import "./reset";
 
+//- 函数css
+@import "./mixin/_index";
+
 //- 动画
 @import "./animations/animate";
 @import "./animations/animations";
-
-//- 函数css
-@import "./mixin/other";
-@import "./mixin/background";
-@import "./mixin/flexbox";
-@import "./mixin/flexlayout";
-@import "./mixin/font-omitted";
-@import "./mixin/shadow";
-@import "./mixin/shape";
-@import "./mixin/hover";
 
 //- 公用样式
 @import "./common";

@@ -25,3 +25,85 @@
         transform: rotate(0deg);
     }
 }
+
+// 闪烁
+@include keyframes(flashing){
+    0% { opacity: 0; }
+    49%{ opacity: 0; }
+    50% { opacity: 1; }
+    99% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+// 横向渡过
+@include keyframes(cross){
+    0% {
+        right: -146px;
+        top: 0;
+    }
+    5%{
+        right: -146px;
+        top: 0;
+    }
+    10%{ top: -20px; }
+    15%{ top: 0; }
+    20%{ top: -20px; }
+    25%{ top: 0; }
+    30%{ top: -15px; }
+    35%{ top: 0; }
+    40%{ top: -20px; }
+    45%{ top: -10px; }
+    50%{ top: -20px; }
+    55%{ top: -10px; }
+    60%{ top: -20px; }
+    65%{ top: 0; }
+    70%{ top: -15px; }
+    75%{ top: 0; }
+    80%{ top: -10px; }
+    85%{ top: 0; }
+    90%{ top: -10px; }
+    95%{
+        right: 100%;
+        top: 0;
+    }
+    100% {
+        right: 150%;
+        top: 0;
+    }
+}
+
+// 手机二维码动画
+@include keyframes(phone){
+  0% { margin-left: 0; }
+  4% { margin-left: 0; }
+  4.00000001% { margin-left: -80px; }
+  8% { margin-left: -80px; }
+  8.00000001% { margin-left: -160px; }
+  12% { margin-left: -160px; }
+  12.00000001% { margin-left: -240px; }
+  16% { margin-left: -240px; }
+  16.00000001% { margin-left: -320px; }
+  20% { margin-left: -320px; }
+  20.00000001% { margin-left: -400px; }
+  24% { margin-left: -400px; }
+  24.00000001% { margin-left: -480px; }
+  28% { margin-left: -480px; }
+  28.00000001% { margin-left: -560px; }
+  32% { margin-left: -560px; }
+  32.00000001% { margin-left: -640px; }
+  36% { margin-left: -640px; }
+  36.00000001% { margin-left: -720px; }
+  40% { margin-left: -720px; }
+  40.00000001% { margin-left: -800px; }
+  44% { margin-left: -800px; }
+  44.00000001% { margin-left: -880px; }
+  48% { margin-left: -880px; }
+  48.00000001% { margin-left: -960px; }
+  52% { margin-left: -960px; }
+  52.00000001% { margin-left: -1040px; }
+  56% { margin-left: -1040px; }
+  56.00000001% { margin-left: -1120px; }
+  60% { margin-left: -1120px; }
+  60.00000001% { margin-left: -1200px; }
+  100% { margin-left: -1200px; }
+}

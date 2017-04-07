@@ -2,10 +2,12 @@
 
 //- 减透明度
 @mixin hover_o($alpha,$speed) {
-  &:hover{
-    opacity: $alpha;
-    transition: $speed;
-  }
+    cursor: pointer;
+
+    &:hover{
+        opacity: $alpha;
+        transition: $speed;
+    }
 }
 
 //- 放大

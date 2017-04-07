@@ -1,5 +1,5 @@
 <template>
-  <div class="zsdx_index_page">
+  <div class="zsdx_index_page" v-bind:style="{ minHeight: height+'px'}">
     77778
   </div>
 </template>
@@ -9,7 +9,7 @@
     name: 'zsdx_index_page',
     data () {
       return {
-
+        height: window.innerHeight - 69 - 292
       }
     }
   }

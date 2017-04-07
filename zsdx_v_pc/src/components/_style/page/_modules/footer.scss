@@ -1,0 +1,196 @@
+.page_footer{
+    position: relative;
+    width: 100%;
+    background: #fff;
+
+    .footer_content{
+        width: 100%;
+        height: 242px;
+        background: #f2f1f1;
+
+        .item_layer{
+            width: 1028px;
+            height: 242px;
+            margin: 0 auto;
+            padding-left: 182px;
+            clear: both;
+            // overflow: hidden;
+
+            .item{
+                float: left;
+
+                .title{
+                    height: 54px;
+                    line-height: 54px;
+                    font-size: 18px;
+                    color: #6a6969;
+                    font-weight: bold;
+                }
+
+                .list{
+                    height: 21px;
+                    line-height: 21px;
+                    font-size: 12px;
+                    color: #a1a6a8;
+                    display: block;
+                }
+
+                .first_list{
+                    margin-top: -0.5px;
+                }
+
+                .second_list{
+                    margin-top: 8px;
+                }
+
+                .special{
+                    font-weight: bold;
+                    color: #6a6969;
+
+                    &:hover{
+                        color: #6a6969 !important;
+                    }
+                }
+
+                a{
+                    display: block;
+                    cursor: pointer;
+                    &:hover{ color: #3457ed; }
+
+                    &.no_a:hover{
+                        color: #a1a6a8;
+                    }
+                }
+            }
+
+            .contact,
+            .link{
+                width: 376px;
+            }
+
+            .link .list{
+                line-height: 30px;
+                height: 30px;
+
+                &.first_list{
+                    margin-top: -8.5px;
+                }
+            }
+
+            .contact .icon{
+                position: relative;
+                padding-left: 20px;
+
+                &:before{
+                    position: absolute;
+                    top: 0;
+                    left: -1px;
+                    width: 20px;
+                    height: 16px;
+                    content: "";
+                    display: block;
+                    background: url("../../_img/icon/footer_icon.png") no-repeat;
+                }
+
+                &.icon1:before{ background-position: 0 0; top: 1px;}
+                &.icon2:before{ background-position: -30px 0; top: 3px; }
+                &.icon3:before{ background-position: -60px 0; top: 5px; }
+            }
+
+            .last{
+                line-height: 30px;
+                height: 30px;
+
+                .list{
+                    line-height: 30px;
+                    height: 30px;
+                    cursor: pointer;
+
+                    &.first_list{
+                        margin-top: -8.5px;
+                    }
+                }
+
+                .icon{
+                    position: relative;
+                    padding-left: 22px;
+
+                    &:before{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 22px;
+                        height: 16px;
+                        content: "";
+                        display: block;
+                        background: url("../../_img/icon/footer_icon.png") no-repeat;
+                    }
+
+                    &.icon1:before{ background-position: -90px 0; top: 10px;}
+                    &.icon2:before{ background-position: -120px 0; top: 9px; }
+
+                    &:hover:after{
+                        opacity: 1;
+                        transition: 300ms;
+                    }
+
+                    &:after{
+                        position: absolute;
+                        top: 0;
+                        right: -161px;
+                        width: 161px;
+                        height: 154px;
+                        content: "";
+                        display: block;
+                        opacity: 0;
+                    }
+
+                    &.WXC_icon1:after{
+                        background:url('../../_img/icon/weinxin_1.png');
+                        top: -62px;
+                        right: -162px;
+                    }
+
+                    &.WXC_icon2:after{
+                        background:url('../../_img/icon/weinxin_2.png');
+                        top: -62px;
+                        right: -140px;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer_others{
+        width: 1210px;
+        margin: 0 auto;
+        padding: 10px 0;
+
+        ul{
+            width: 100%;
+            text-align: center;
+
+            li{
+                height: 30px;
+                line-height: 30px;
+                display: inline-block;
+                font-size: 12px;
+                color: #a1a6a8;
+                margin-right: 35px;
+
+                &:last-child{
+                    margin: 0;
+                }
+            }
+        }
+
+        p{
+            width: 393px;
+            height: 22px;
+            line-height: 22px;
+            margin: 0 auto;
+            font-size: 12px;
+            color: #a1a6a8;
+        }
+    }
+}

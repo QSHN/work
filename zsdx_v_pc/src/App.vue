@@ -2,14 +2,16 @@
   <div id="app">
     <page-header></page-header>
     <router-view></router-view>
+    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
   import pageHeader from './components/_modules/header/header.vue'
+  import pageFooter from './components/_modules/footer/footer.vue'
   export default {
     name: 'app',
-    components: { pageHeader },
+    components: { pageHeader, pageFooter },
     data () {
       return {
 

@@ -1,0 +1,228 @@
+@import "../../mixin/_index";
+
+.page_header{
+    @include position(fixed,99,0,0,false,0);
+    @include shadow(5px,0,10px,0.3);
+    height: 69px;
+    padding: 0 12.5% 0 8.4375%;
+    background: #fff;
+
+    .header_nav{
+        height: 100%;
+
+        a{
+            display: block;
+        }
+
+        img{
+            width: 150px;
+            height: 37px;
+        }
+
+        .logo{
+            width: 150px;
+            height: 37px;
+            margin-right: 15px;
+        }
+
+        .text{
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            padding: 0 15px;
+        }
+    }
+
+    .search_layer{
+        position: relative;
+        margin-left: 15px;
+        overflow: hidden;
+
+        .open_btn_icon,
+        .search_box{
+            position: absolute;
+            left: 0;
+        }
+
+        .open_btn_icon{
+            width: 16px;
+            height: 16px;
+            background: url("../../_img/icon/seach_black_w16.png") no-repeat;
+            cursor: pointer;
+
+            &.animated{
+                transition: 1s;
+            }
+        }
+
+        .search_box{
+            width: 453px;
+            height: 38px;
+            border: 1px solid #8d8b94;
+        }
+
+        .close_btn_icon,
+        .clear_btn_icon{
+            width: 38px;
+            height: 38px;
+            background: url("../../_img/icon/seach_black_w16.png") no-repeat center;
+        }
+
+        input{
+            border: none;
+            @include input1(38px,14px,#000,#b7b7b7);
+        }
+
+        .clear_btn_icon{
+            background-image: url("../../_img/icon/close_black_w16.png");
+        }
+    }
+
+    .header_right{
+        position: relative;
+        width: 320px;
+        height: 100%;
+
+        &:after{
+            @include position(fixed,false,0,0,false,false);
+            content: "";
+            width: 12.5%;
+            height: 69px;
+            background: #fff;
+        }
+
+        .logout,
+        .login{
+            @include position(absolute,false,0,0,false,false);
+            height: 100%;
+
+            &.bounceInRight .box_layer{ display: block; }
+            &.bounceOutRight .box_layer{ display: none; }
+
+            p{
+                font-size: 14px;
+                color: #000;
+                height: 25px;
+                line-height: 25px;
+                cursor: pointer;
+
+                &:hover + .box_layer{
+                    height: 87px;
+                    transition: 300ms;
+                }
+            }
+
+            .menu{ position: relative; }
+
+            .box_layer{
+                @include position(absolute,false,25px,0,false,false);
+                width: 133px;
+                height: 0;
+                background: #e9ebec;
+                transition: 300ms;
+                overflow: hidden;
+
+                &:hover{
+                  height: 87px;
+                }
+            }
+
+            ul{
+                width: 133px;
+                border-bottom: 4px solid #e2dede;
+
+                li{
+                    width: 102px;
+                    height: 41px;
+                    line-height: 41px;
+                    margin: 0 auto;
+                    border-bottom: 1px solid #b7b7b7;
+                    font-size: 14px;
+                    color: #000;
+                    cursor: pointer;
+
+                    &:hover{
+                        color: rgba(0,0,0,0.4);
+                        transition: 300ms;
+                    }
+
+                    &:last-child{
+                        border: none;
+                    }
+                }
+            }
+
+            button{
+                margin-left: 30px;
+                @include btn(70px,25px,14px,#fff,#0088cc,5px,0);
+                @include hover_o(0.8,300ms);
+            }
+        }
+
+        .logout{
+
+        }
+
+        .login{
+            .icon{
+                height: 25px;
+                font-size: 12px;
+                color: #c80505;
+                margin-right: 15px;
+
+                &:before{
+                    content: "";
+                    display: block;
+                    margin-right: 5px;
+                }
+
+                span{ animation: flashing 1s infinite linear; }
+            }
+
+            .message_icon:before{
+                width: 19px;
+                height: 13px;
+                background: url("../../_img/icon/message_black_w19.png") no-repeat;
+            }
+
+            .shop_icon:before{
+                width: 24px;
+                height: 20px;
+                background: url("../../_img/icon/shop_black_w24.png") no-repeat;
+            }
+
+            p:hover + .box_layer,
+            .box_layer:hover{
+                height: 170px;
+            }
+
+            p:hover ~ .triangle,
+            .box_layer:hover + .triangle{
+              transform: rotate(0deg);
+            }
+
+            p{
+                .t_icon,
+                .s_icon{
+                    width: 12px;
+                    height: 12px;
+                    display: block;
+                    margin: 0 11px 0 5px;
+                }
+
+                .t_icon{ background: url("../../_img/icon/v_blue_w12.png") no-repeat; }
+                .s_icon{ background: url("../../_img/icon/v_red_w12.png") no-repeat; }
+            }
+
+            .triangle{
+                @include position(absolute,false,9.5px,0,false,false);
+                width: 6px;
+                height: 6px;
+                display: block;
+                background: url("../../_img/icon/triangle_black_w6.png") no-repeat;
+                transform: rotate(90deg);
+                transition: 300ms;
+            }
+        }
+    }
+}
