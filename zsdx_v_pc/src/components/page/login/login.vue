@@ -122,7 +122,32 @@
         }
 
         if (isC && isP && isU) {
-          Pub.sendDataFuc(this, '/shop/user/toLogin.do', sendData)
+          let _self = this
+          let errorTxt = ''
+          let cabFuc = (data) => {
+            switch (data.ret.retCode) {
+              case '0000' :
+                _self.updateError(' ', false, false)
+                errorTxt = false
+                break
+              case '6978' :
+                errorTxt = '账户或者密码错误'
+                break
+              case '6974' :
+                errorTxt = '账户没激活，请前往邮箱激活账户'
+                break
+              case '6960' :
+                errorTxt = '账户不存在'
+                break
+              default:
+                errorTxt = data.ret.retError
+            }
+            if (errorTxt) {
+              _self.updateError(errorTxt, false, false)
+              Pub.globalPrompt('error', errorTxt)
+            }
+          }
+          Pub.sendDataFuc(this, '/shop/user/toLogin.do', sendData, cabFuc)
         }
         // console.log(sendData, code, this.vCode)
       }

@@ -1,3 +1,4 @@
+import iziToast from 'izitoast'
 // 验证码
 export const createCode = () => {
   let code = ''
@@ -72,15 +73,15 @@ export const createCode = () => {
 }
 
 // 发送数据接口
-export const sendDataFuc = (self, url, data) => {
-  var aa = 'http://xlearn.zsup.com.cn/xlearn'
-  self.$http.get(aa + url, {params: data}).then((response) => {
+export const sendDataFuc = (self, url, data, success) => {
+  let domainName = '/xlearn'
+  self.$http.get(domainName + url, {params: data}).then((response) => {
     // 响应成功回调
-    console.log(response)
-  })
-  .catch(function (response) {
+    success(response.body)
+  }).catch(function (response) {
     // 响应错误回调
-    console.log(response)
+    console.log(2, response)
+    globalPrompt('error', response.statusText)
   })
 }
 
@@ -91,8 +92,36 @@ export const isTrueUser = (obj) => {
   return tel.test(obj) || mail.test(obj)
 }
 
+// 全局提示
+export const globalPrompt = (type, content) => {
+  switch (type) {
+    case 'success' :
+      iziToast.success({
+        title: 'OK',
+        position: 'bottomCenter',
+        message: content
+      })
+      break
+    case 'warning' :
+      iziToast.warning({
+        title: 'Caution',
+        position: 'bottomCenter',
+        message: content
+      })
+      break
+    case 'error' :
+      iziToast.error({
+        title: 'Error',
+        position: 'bottomCenter',
+        message: content
+      })
+      break
+  }
+}
+
 export default {
   createCode,
   sendDataFuc,
-  isTrueUser
+  isTrueUser,
+  globalPrompt
 }
