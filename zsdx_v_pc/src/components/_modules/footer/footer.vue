@@ -51,5 +51,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style rel="stylesheet/scss" lang="scss" scoped>
-  @import "../../_style/page/_modules/footer";
+  @import "../../../style/page/_modules/footer";
 </style>

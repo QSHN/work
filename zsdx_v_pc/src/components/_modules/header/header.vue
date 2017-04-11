@@ -95,5 +95,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style rel="stylesheet/scss" lang="scss" scoped>
-  @import "../../_style/page/_modules/header";
+  @import "../../../style/page/_modules/header";
 </style>

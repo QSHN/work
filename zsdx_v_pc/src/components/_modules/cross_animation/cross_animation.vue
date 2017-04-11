@@ -13,7 +13,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style rel="stylesheet/scss" lang="scss" scoped>
-  @import "../../_style/mixin/index";
+  @import "../../../style/mixin/index";
   .cross_animation{
     position: relative;
     width: 100%;

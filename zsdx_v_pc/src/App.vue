@@ -21,7 +21,7 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-  @import "./components/_style/index";
+  @import "./style/index";
   #app {
 
   }
