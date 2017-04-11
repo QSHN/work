@@ -18,7 +18,7 @@
     position: relative;
     width: 100%;
     height: 106px;
-    background: url("../../_img/icon/login_top_bg.png") no-repeat center;
+    background: url("../../../img/icon/login_top_bg.png") no-repeat center;
     overflow: hidden;
 
     &:before{
@@ -37,7 +37,7 @@
       height: 106px;
       content: "";
       display: block;
-      background: url("../../_img/icon/login_top_bg_animation.png") no-repeat;
+      background: url("../../../img/icon/login_top_bg_animation.png") no-repeat;
       animation: cross 30s infinite linear;
     }
   }

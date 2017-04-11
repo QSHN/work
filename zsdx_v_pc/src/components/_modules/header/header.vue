@@ -1,7 +1,7 @@
 <template>
   <div class="page_header f--h">
     <nav class="header_nav f--hlc">
-      <a class="logo ho_6" href="/"><img src="../../_img/icon/logo_green_w150.png"/></a>
+      <a class="logo ho_6" href="/"><img src="../../../img/icon/logo_green_w150.png"/></a>
       <a class="text ho_6" href="/">课程</a>
       <a class="text ho_6" href="/">学院</a>
     </nav>

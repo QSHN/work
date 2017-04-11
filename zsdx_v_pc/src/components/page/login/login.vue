@@ -7,10 +7,10 @@
         <transition enter-active-class="animated bounceInLeft" appear>
           <div class="left flex-1">
             <div class="phone">
-              <img src="../../_img/icon/code_animation.gif" />
+              <img src="../../../img/icon/code_animation.gif" />
             </div>
             <div class="code">
-              <img src="../../_img/icon/code.png" />
+              <img src="../../../img/icon/code.png" />
             </div>
             <span>扫描二维码登录</span>
             <p>请使用<em>微信扫描</em></p>
@@ -52,7 +52,7 @@
 
 <script>
   import crossAnimation from '../../_modules/cross_animation/cross_animation.vue'
-  import Pub from '../../_js/public'
+  import Pub from '../../../js/public'
   export default {
     name: 'login_page',
     components: { crossAnimation },
