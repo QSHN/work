@@ -1,9 +1,9 @@
 <template>
   <div class="page_header f--h">
     <nav class="header_nav f--hlc">
-      <a class="logo ho_6" href="/"><img src="../../../img/icon/logo_green_w150.png"/></a>
-      <a class="text ho_6" href="/">课程</a>
-      <a class="text ho_6" href="/">学院</a>
+      <router-link class="logo ho_6" to="/"><img src="../../../img/icon/logo_green_w150.png"/></router-link>
+      <router-link class="text ho_6" to="/">课程</router-link>
+      <router-link class="text ho_6" to="/">学院</router-link>
     </nav>
 
     <div class="search_layer f--hlc flex-1">
@@ -30,13 +30,17 @@
       <transition
         enter-active-class="animated bounceInRight"
         leave-active-class="animated bounceOutRight">
-        <div class="login f--hlc" v-if="isLogin">
+        <div class="login f--hlc" v-if="userInfo">
           <div class="icon message_icon f--hlc ho_6"><span>100</span></div>
-          <div class="icon shop_icon f--hlc ho_6"><span>90</span></div>
+          <div class="icon shop_icon f--hlc ho_6">
+            <span>{{userInfo.carNum ? userInfo.carNum : ''}}</span>
+          </div>
           <div class="menu">
             <p class="f--hlc">
-              风清扬
-              <span v-bind:class="[accountType==1 ? 's_icon' : accountType==2 ? 't_icon' :'hidden']"></span>
+              {{userInfo.nickName}}
+              <span v-bind:class="[userInfo.identity == '01'
+                      ? 's_icon' : userInfo.identity == '02' ? 't_icon' :'icon']">
+              </span>
             </p>
             <div class="box_layer">
               <ul>
@@ -55,13 +59,13 @@
       <transition
         enter-active-class="animated bounceInRight"
         leave-active-class="animated bounceOutRight">
-        <div class="logout f--hlc" v-if="!isLogin">
+        <div class="logout f--hlc" v-if="!userInfo">
           <div class="menu">
             <p>登录/注册</p>
             <div class="box_layer">
               <ul>
-                <li v-on:click.stop="LoginToggle">登录</li>
-                <li v-on:click.stop="LoginToggle">创建帐户</li>
+                <li v-on:click.stop="RememberUrl">登录</li>
+                <li>创建帐户</li>
               </ul>
             </div>
           </div>
@@ -76,19 +80,28 @@
   export default {
     name: 'page_header',
     data () {
+      this.$store.commit('USER_INFO', {type: 'get'})
       return {
-        isSearch: true,
-        isLogin: false,
-        accountType: 1
+        isSearch: true
+      }
+    },
+    computed: {
+      userInfo () {
+        return this.$store.state.Public.userInfo
       }
     },
     methods: {
       ToggleSearchBox: function () {
         this.isSearch = !this.isSearch
       },
-      LoginToggle: function () {
-        this.isLogin = !this.isLogin
+      RememberUrl: function () {
+        this.$store.commit('REMEMBER_URL', this.$route.path)
+        this.$router.push('/login')
       }
+    },
+    mounted: function () {
+      this.userInfo = this.$store.state.Public.userInfo
+//      console.log(this.userInfo)
     }
   }
 </script>

@@ -75,13 +75,16 @@ export const createCode = () => {
 // 发送数据接口
 export const sendDataFuc = (self, url, data, success) => {
   let domainName = '/xlearn'
+  self.$store.commit('LOADING_STATUS', true)
   self.$http.get(domainName + url, {params: data}).then((response) => {
     // 响应成功回调
     success(response.body)
-  }).catch(function (response) {
+    self.$store.commit('LOADING_STATUS', false)
+  }, (response) => {
     // 响应错误回调
     console.log(2, response)
     globalPrompt('error', response.statusText)
+    self.$store.commit('LOADING_STATUS', false)
   })
 }
 

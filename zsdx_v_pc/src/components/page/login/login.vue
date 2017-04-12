@@ -4,7 +4,7 @@
     <div class="LP_content">
       <div class="LP_header"><span>登录</span></div>
       <div class="LP_main f--h">
-        <transition enter-active-class="animated bounceInLeft" appear>
+        <transition enter-active-class="animated bounceInRight" appear>
           <div class="left flex-1">
             <div class="phone">
               <img src="../../../img/icon/code_animation.gif" />
@@ -17,7 +17,7 @@
           </div>
         </transition>
         <span class="line"></span>
-        <transition enter-active-class="animated bounceInRight" appear>
+        <transition enter-active-class="animated bounceInLeft" appear>
           <div class="right flex-1">
             <div class="input_layer">
               <div class="error">{{accountError}}</div>
@@ -62,7 +62,8 @@
         vCode: null,
         accountError: '',
         passwordError: '',
-        codeError: ''
+        codeError: '',
+        PublicStore: this.$store.state.Public
       }
     },
     methods: {
@@ -129,6 +130,8 @@
               case '0000' :
                 _self.updateError(' ', false, false)
                 errorTxt = false
+                this.$store.commit('USER_INFO', {type: 'set', userInfo: data.userInfo})
+                this.$router.push(this.PublicStore.rememberUrl)
                 break
               case '6978' :
                 errorTxt = '账户或者密码错误'
@@ -145,6 +148,7 @@
             if (errorTxt) {
               _self.updateError(errorTxt, false, false)
               Pub.globalPrompt('error', errorTxt)
+              this.updateCode()
             }
           }
           Pub.sendDataFuc(this, '/shop/user/toLogin.do', sendData, cabFuc)
