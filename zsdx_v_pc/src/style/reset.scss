@@ -14,3 +14,12 @@ a{text-decoration:none;}
 a:hover , a:active, a:focus{text-decoration:none;}
 a, a:active, a:focus, input{outline:none;}
 label{ cursor: pointer; }
+button{ padding: 0; }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"]{
+  -moz-appearance: textfield;
+}
+

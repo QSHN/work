@@ -1,0 +1,158 @@
+@import "../../mixin/index";
+
+.register_page{
+    padding-top: 69px;
+    margin-bottom: 50px;
+
+    .RP_phone, .RP_mail{
+        width: 980px;
+        margin: 0 auto;
+        overflow: hidden;
+
+        .RP_header{
+            position: relative;
+            width: 100%;
+            height: 52px;
+            text-align: center;
+
+            &:before{
+                @include position(absolute,false,25px,false,false,0);
+                content: "";
+                width: 100%;
+                height: 2px;
+                background: #dddddd;
+            }
+
+            span{
+                position: relative;
+                z-index: 1;
+                width: 120px;
+                height: 52px;
+                line-height: 48px;
+                display: inline-block;
+                background: #fff;
+                font-size: 36px;
+                color: #000;
+            }
+        }
+    }
+
+    .RPP_content{
+        width: 415px;
+        margin: 25px auto 0 auto;
+
+        .input_layer{ position: relative; }
+
+        input{
+            width: 402px;
+            height: 38px;
+            line-height: 38px;
+            border: 1px solid #ddd;
+            color: #aaa;
+            font-size: 14px;
+            padding: 0 0 0 10px;
+            display: block;
+        }
+
+        .error{
+            @include position(absolute,false,0,false,false,420px);
+            width: 250px;
+            font-size: 12px;
+            line-height: 40px;
+            color: #F66495;
+            display: block;
+        }
+
+        .phone, .password{ margin-bottom: 30px; }
+
+        .safety_factor{
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            height: 30px;
+
+            .title{
+                font-size: 14px;
+                color: #00a0d8;
+            }
+
+            .color{
+                width: 30px;
+                height: 5px;
+                margin-left: 15px;
+
+                &.red{ background: red; }
+                &.orange{ background: #ff7f00; }
+                &.yellow{ background: #f0f028; }
+                &.blue{ background: #7ade18; }
+                &.green{ background: #49c519; }
+            }
+
+            .factor{
+                font-size: 12px;
+                margin-left: 20px;
+
+                &.red{ color: red; }
+                &.orange{ color: #ff7f00; }
+                &.yellow{ color: #f0f028; }
+                &.blue{ color: #7ade18; }
+                &.green{ color: #49c519; }
+            }
+        }
+
+        .get_code{
+            @include position(absolute,false,1px,1px,false,false);
+            width: 130px;
+            height: 38px;
+            line-height: 38px;
+            font-size: 12px;
+            color: #fff;
+            border: none;
+            background: #00a1d6;
+            cursor: pointer;
+
+            &.active{
+                cursor: not-allowed;
+                opacity: 0.6;
+            }
+        }
+
+        .other{
+            width: 100%;
+            height: 30px;
+            font-size: 12px;
+
+            input{
+                width: 13px;
+                margin: 0px 10px 0 0;
+            }
+
+            label a{
+                margin-left: 5px;
+            }
+
+            a{
+                color: #00a0d8;
+            }
+        }
+
+        .register_btn{
+            width: 100%;
+            height: 40px;
+            color: #555;
+            border: none;
+            background: #f7f7f7;
+            display: block;
+        }
+
+        .page_link{
+            width: 100%;
+            font-size: 12px;
+            line-height: 30px;
+            color: #00a0d8;
+            text-align: right;
+            display: block;
+        }
+    }
+}
