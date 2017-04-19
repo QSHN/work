@@ -65,7 +65,7 @@
             <div class="box_layer">
               <ul>
                 <li v-on:click.stop="RememberUrl">登录</li>
-                <li>创建帐户</li>
+                <li><router-link to="/register/phone">创建帐户</router-link></li>
               </ul>
             </div>
           </div>

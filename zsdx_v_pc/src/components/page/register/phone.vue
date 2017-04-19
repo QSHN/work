@@ -1,7 +1,7 @@
 <template>
   <div class="RP_phone">
     <div class="RP_header"><span>注册</span></div>
-    <div class="RPP_content">
+    <div class="RP_content">
       <div class="input_layer phone">
         <div class="error">多少集啊放开手</div>
         <input class="br2" type="text" placeholder="输入您的手机号" />

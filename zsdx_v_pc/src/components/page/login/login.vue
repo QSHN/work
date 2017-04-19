@@ -41,7 +41,7 @@
             </label>
             <div class="btn_group f--hlc">
               <button class="br2 ho_6" v-on:click.stop="login">登录</button>
-              <button class="br2 ho_6">注册</button>
+              <router-link class="br2 ho_6" to="/register/phone">注册</router-link>
             </div>
           </div>
         </transition>
