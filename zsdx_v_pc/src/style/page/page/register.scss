@@ -81,27 +81,51 @@
                 color: #00a0d8;
             }
 
+            &.red{
+              .color1{ opacity: 1; transition: 300ms;}
+              .color2,.color3,.color4,.color5{ opacity: 0; transition: 300ms;}
+              .factor{ color: red; }
+            }
+
+            &.orange{
+              .color1,.color2{ opacity: 1; transition: 300ms;}
+              .color3,.color4,.color5{ opacity: 0; transition: 300ms;}
+              .factor{ color: #ff7f00; }
+            }
+
+            &.yellow{
+              .color1,.color2,.color3{ opacity: 1; transition: 300ms;}
+              .color4,.color5{ opacity: 0; transition: 300ms;}
+              .factor{ color: #f0f028; }
+            }
+
+            &.blue{
+              .color1,.color2,.color3,.color4{ opacity: 1; transition: 300ms;}
+              .color5{ opacity: 0; transition: 300ms;}
+              .factor{ color: #7ade18; }
+            }
+
+            &.green{
+              .color1,.color2,.color3,.color4,.color5{ opacity: 1; transition: 300ms;}
+              .factor{ color: #49c519; }
+            }
+
             .color{
                 width: 30px;
                 height: 5px;
                 margin-left: 15px;
+                opacity: 0;
 
-                &.red{ background: red; }
-                &.orange{ background: #ff7f00; }
-                &.yellow{ background: #f0f028; }
-                &.blue{ background: #7ade18; }
-                &.green{ background: #49c519; }
+                &.color1{ background: red; }
+                &.color2{ background: #ff7f00; }
+                &.color3{ background: #f0f028; }
+                &.color4{ background: #7ade18; }
+                &.color5{ background: #49c519; }
             }
 
             .factor{
                 font-size: 12px;
                 margin-left: 20px;
-
-                &.red{ color: red; }
-                &.orange{ color: #ff7f00; }
-                &.yellow{ color: #f0f028; }
-                &.blue{ color: #7ade18; }
-                &.green{ color: #49c519; }
             }
         }
 
@@ -116,9 +140,9 @@
             background: #00a1d6;
             cursor: pointer;
 
-            &.active{
+            &.active, &.active:hover{
                 cursor: not-allowed;
-                opacity: 0.6;
+                opacity: 0.4;
             }
         }
 

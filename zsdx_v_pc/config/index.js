@@ -28,7 +28,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/xlearn/shop': {
+      '/xlearn': {
         target: 'http://xlearn.zsup.com.cn',
         changeOrigin: true
       }

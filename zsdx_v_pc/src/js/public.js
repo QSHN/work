@@ -89,10 +89,12 @@ export const sendDataFuc = (self, url, data, success) => {
 }
 
 // 验证账号格式
-export const isTrueUser = (obj) => {
+export const isTrueUser = (obj, type) => {
   let mail = /[a-zA-Z0-9]{1,10}@[a-zA-Z0-9]{1,5}\.[a-zA-Z0-9]{1,5}/
   let tel = /^1[34578]\d{9}$/
-  return tel.test(obj) || mail.test(obj)
+  return type === undefined
+    ? tel.test(obj) || mail.test(obj)
+    : type ? tel.test(obj) : mail.test(obj)
 }
 
 // 全局提示
@@ -122,9 +124,24 @@ export const globalPrompt = (type, content) => {
   }
 }
 
+// 判断密码强度
+export const checkPassword = (val) => {
+  let modes = 0
+  if (val.length === 0) return -1
+  if (val.length < 6) return -2
+
+  if (/\d/.test(val)) modes++       // 数字
+  if (/[a-z]/.test(val)) modes++    // 小写
+  if (/[A-Z]/.test(val)) modes++    // 大写
+  if (/\W/.test(val)) modes++       // 特殊字符
+  if (val.length > 12) modes++
+  return modes
+}
+
 export default {
-  createCode,
-  sendDataFuc,
-  isTrueUser,
-  globalPrompt
+  createCode,                   // 创建二维码
+  sendDataFuc,                  // 发送数据接口
+  isTrueUser,                   // 检测账户格式
+  globalPrompt,                 // 全局提示
+  checkPassword                 // 判断密码强度
 }
