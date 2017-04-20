@@ -6,6 +6,7 @@ import Login from '@/components/page/login/login'
 import Register from '../components/page/register/index.vue'
 import RegisterPhone from '../components/page/register/phone.vue'
 import RegisterMail from '../components/page/register/mail.vue'
+import ForgetPassword from '../components/page/forget_password/index.vue'
 
 Vue.use(Router)
 
@@ -26,6 +27,11 @@ export default new Router({
         { path: 'phone', name: 'RegisterPhone', component: RegisterPhone },
         { path: 'mail', name: 'RegisterMail', component: RegisterMail }
       ]
+    },
+    {
+      path: '/forgetPassword',
+      name: 'ForgetPassword',
+      component: ForgetPassword
     },
     {
       path: '*',
