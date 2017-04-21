@@ -2,7 +2,7 @@
   <div class="banner" :style="commonWH">
     <ul class="banner_pic f--hlc" :style="allWH">
       <li class="f--hcc flex-1" v-for="v in bannerData.picList">
-        <img :src="getImgSrc(v)" :style="picWH" />
+        <img :src="getImgSrc(v)" :style="commonWH" />
       </li>
     </ul>
 
@@ -25,16 +25,10 @@
       return {
         whichBanner: 0,
         commonWH: {
-          width: this.bannerData.width + '%',
-          height: this.bannerData.height
-        },
-        picWH: {
-          width: this.bannerData.picWidth,
-          height: this.bannerData.height
+          width: '100%'
         },
         allWH: {
-          width: this.bannerData.width * this.bannerData.picList.length + '%',
-          height: this.bannerData.height,
+          width: 100 * this.bannerData.picList.length + '%',
           transition: '500ms',
           marginLeft: 0
         },
@@ -47,7 +41,7 @@
       },
       changeBanner: function (which) {
         this.whichBanner = which
-        this.allWH.marginLeft = -(this.whichBanner * this.bannerData.width) + '%'
+        this.allWH.marginLeft = -(this.whichBanner * 100) + '%'
       },
       BannerAnimated: function (type) {
         if (type) {
