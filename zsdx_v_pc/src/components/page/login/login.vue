@@ -27,7 +27,9 @@
               <div class="error">{{passwordError}}</div>
               <input class="password br2" ref="password" type="password" placeholder="密码" />
             </div>
-            <div class="forget"><a class="ho_6">忘记密码?></a></div>
+            <div class="forget">
+              <router-link class="ho_6" to="/forgetPassword">忘记密码?></router-link>
+            </div>
             <div class="code f--hlc">
               <div class="error">{{codeError}}</div>
               <input class="code br2" ref="code" type="text" placeholder="验证码" />
