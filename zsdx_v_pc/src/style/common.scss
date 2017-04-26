@@ -67,6 +67,15 @@
     @include hover_o(0.6,300ms);
 }
 
+.ho_blur{
+    cursor: pointer;
+
+    &:hover{
+        color: #08c !important;
+        transition: 300ms;
+    }
+}
+
 // 圆角
 .br2{
     @include border-radius(2px);

@@ -1,0 +1,78 @@
+.zsdx_index_page{
+    padding-top: 69px;
+
+    .page_main_content {
+        width: 1200px;
+        margin: 0 auto;
+        letter-spacing: 1px;
+
+        .degree_courses {
+            width: 100%;
+            height: 540px;
+            overflow: hidden;
+
+            .title {
+                font-size: 36px;
+                color: #000000;
+                margin-top: 70px;
+                line-height: 56px;
+                text-align: center;
+            }
+
+            span {
+                font-size: 14px;
+                line-height: 14px;
+                color: #8d8b94;
+                text-align: center;
+                display: block;
+            }
+
+            .more_icon {
+                width: 100%;
+                height: 6px;
+                background: url("../../../img/icon/more_blue_w18_h6.png") center no-repeat;
+                margin: 15px 0 24px 0;
+            }
+        }
+
+        .list_layer{
+            width: 100%;
+
+            img{
+                width: 90px;
+                height: 90px;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .list_title,
+            p,
+            a{
+                width: 185px;
+                margin: 0 auto;
+            }
+
+            .list_title{
+                font-size: 24px;
+                color: #000;
+                text-align: center;
+                margin-top: 12px;
+                line-height: 36px;
+            }
+
+            p{
+                font-size: 12px;
+                color: #000;
+                line-height: 20px;
+                min-height: 101px;
+            }
+
+            a{
+                font-size: 12px;
+                color: #4c98f9;
+                text-align: right;
+                display: block;
+            }
+        }
+    }
+}
