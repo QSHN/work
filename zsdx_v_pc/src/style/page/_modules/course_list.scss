@@ -1,0 +1,60 @@
+@import "../../mixin/index";
+.course_layer{
+    width: 100%;
+    overflow: hidden;
+
+    .course_list{
+        width: 100%;
+        overflow: hidden;
+
+        .list{
+            position: relative;
+            width: 273px;
+            height: 360px;
+            border: 1px solid #b7b7b7;
+            float: left;
+            margin: 0 33px 33px 0;
+            overflow: hidden;
+
+            &:nth-child(4n){
+                margin-right: 0;
+            }
+
+            &.bg_yellow{
+                background: #fdf16f;
+            }
+
+            &.bg_blue{
+                background: #d7e2e4;
+            }
+        }
+
+        .live{
+            @include position(absolute, 1, 7px, false, false, -17px);
+            width: 70px;
+            height: 18px;
+            line-height: 16px;
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            background: #eb5305;
+            transform: rotate(-45deg);
+            overflow: hidden;
+        }
+
+        .pic{
+            width: 267px;
+            height: 147px;
+            margin: 3px auto 0 auto;
+            overflow: hidden;
+
+            img{
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+        }
+    }
+
+
+}

@@ -76,6 +76,10 @@
     }
 }
 
+.ho_b1{
+    @include hover_b(1.1,300ms);
+}
+
 // 圆角
 .br2{
     @include border-radius(2px);

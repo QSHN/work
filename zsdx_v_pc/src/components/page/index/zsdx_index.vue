@@ -22,6 +22,13 @@
     </div>
 
     <page-nav :navData="navData"></page-nav>
+
+    <div class="ZIP_course_layer">
+      <div class="ZIP_course_list" v-for="v in courseData">
+        <switch-course-bar :courseData="v.switchData"></switch-course-bar>
+        <course-list :courseData="v.course"></course-list>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,10 +36,12 @@
   import banner from '../../_modules/banner/index.vue'
   import pageNav from '../../_modules/nav/3dnav.vue'
   import noEffectNav from '../../_modules/nav/no_effect_nav.vue'
+  import switchCourseBar from '../../_modules/switch_course_bar/index.vue'
+  import courseList from '../../_modules/course_list/index.vue'
 
   export default {
     name: 'zsdx_index_page',
-    components: { banner, pageNav, noEffectNav },
+    components: { banner, pageNav, noEffectNav, switchCourseBar, courseList },
     data () {
       return {
         height: window.innerHeight - 69 - 292,
@@ -75,6 +84,184 @@
             content: '金融数量化分析技能，能够在金融机构和企事业单位从事投资策略、金融产品分析及定价、资产管理与风险控制。',
             href: '#',
             a: '查看金融学学士学位'
+          }
+        ],
+        courseData: [
+          {
+            switchData: {
+              title: '经济管理',
+              list: ['会计基础', '西方经济学', '管理学', '统计学', '企业管理']
+            },
+            course: [
+              {
+                isLive: false,
+                pic: '1.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: true
+              },
+              {
+                isLive: true,
+                pic: '2.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: true,
+                type: false
+              },
+              {
+                isLive: true,
+                pic: '3.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: false
+              },
+              {
+                isLive: true,
+                pic: '3.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: false
+              },
+              {
+                isLive: false,
+                pic: '1.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: true
+              },
+              {
+                isLive: true,
+                pic: '2.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: true,
+                type: false
+              },
+              {
+                isLive: true,
+                pic: '3.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: false
+              },
+              {
+                isLive: true,
+                pic: '3.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: false
+              }
+            ]
+          },
+          {
+            switchData: {
+              title: '医学',
+              list: ['基础医学', '西方经济学', '管理学', '统计学', '企业管理']
+            },
+            course: [
+              {
+                isLive: false,
+                pic: '1.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: true
+              },
+              {
+                isLive: true,
+                pic: '2.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: true,
+                type: false
+              },
+              {
+                isLive: true,
+                pic: '3.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: false
+              },
+              {
+                isLive: true,
+                pic: '3.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: false
+              },
+              {
+                isLive: false,
+                pic: '1.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: true
+              },
+              {
+                isLive: true,
+                pic: '2.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: true,
+                type: false
+              },
+              {
+                isLive: true,
+                pic: '3.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: false
+              },
+              {
+                isLive: true,
+                pic: '3.png',
+                title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
+                name: '林子雨',
+                info: '随到随学',
+                price: 12.00,
+                certification: false,
+                type: false
+              }
+            ]
           }
         ]
       }

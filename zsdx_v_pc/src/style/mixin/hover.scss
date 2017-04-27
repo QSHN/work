@@ -11,9 +11,11 @@
 }
 
 //- 放大
-//@mixin hover_o($alpha,$speed) {
-//  &:hover{
-//    opacity: $alpha;
-//    transition: $speed;
-//  }
-//}
+@mixin hover_b($size, $speed) {
+    cursor: pointer;
+
+    &:hover{
+        transform: scale($size);
+        transition: $speed;
+    }
+}
