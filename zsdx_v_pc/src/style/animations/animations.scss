@@ -72,6 +72,14 @@
     }
 }
 
+// 横向渡过,没上下
+@include keyframes(cross2){
+  0%{ left: 0; }
+  90%{ left: -50%; }
+  99.99999999%{ left: -50%; }
+  100%{ left: 0; }
+}
+
 // 手机二维码动画
 @include keyframes(phone){
   0% { margin-left: 0; }

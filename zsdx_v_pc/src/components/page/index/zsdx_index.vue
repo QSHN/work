@@ -26,9 +26,11 @@
     <div class="ZIP_course_layer">
       <div class="ZIP_course_list" v-for="v in courseData">
         <switch-course-bar :courseData="v.switchData"></switch-course-bar>
-        <course-list :courseData="v.course"></course-list>
+        <course-list :courseData="v.course" :isLoad="false" ></course-list>
       </div>
     </div>
+
+    <round-bar :roundData="roundData"></round-bar>
   </div>
 </template>
 
@@ -38,10 +40,11 @@
   import noEffectNav from '../../_modules/nav/no_effect_nav.vue'
   import switchCourseBar from '../../_modules/switch_course_bar/index.vue'
   import courseList from '../../_modules/course_list/index.vue'
+  import roundBar from '../../_modules/round_bar/index.vue'
 
   export default {
     name: 'zsdx_index_page',
-    components: { banner, pageNav, noEffectNav, switchCourseBar, courseList },
+    components: { banner, pageNav, noEffectNav, switchCourseBar, courseList, roundBar },
     data () {
       return {
         height: window.innerHeight - 69 - 292,
@@ -99,7 +102,7 @@
                 title: '国考“告别缘木求鱼”“三日刮目相看”兴知教育名师公开课',
                 name: '林子雨',
                 info: '随到随学',
-                price: 12.00,
+                price: 0.00,
                 certification: false,
                 type: true
               },
@@ -178,7 +181,7 @@
           {
             switchData: {
               title: '医学',
-              list: ['基础医学', '西方经济学', '管理学', '统计学', '企业管理']
+              list: ['基础医学', '西方经济学']
             },
             course: [
               {
@@ -263,7 +266,20 @@
               }
             ]
           }
-        ]
+        ],
+        roundData: {
+          rTitle: '入驻机构',
+          description: '查看更多入驻机构、院校。',
+          list: [
+            {pic: '01.jpg', title: '中山大学'},
+            {pic: '01.jpg', title: '清华大学'},
+            {pic: '01.jpg', title: '北京大学'},
+            {pic: '01.jpg', title: '交通大学'},
+            {pic: '01.jpg', title: '香港大学'},
+            {pic: '01.jpg', title: '上海大学'},
+            {pic: '01.jpg', title: '暨南大学'}
+          ]
+        }
       }
     },
     methods: {

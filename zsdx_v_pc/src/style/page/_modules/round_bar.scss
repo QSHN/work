@@ -1,0 +1,112 @@
+@import "../../mixin/index";
+.round_bar{
+    width: 1224px;
+    margin: 55px auto 120px auto;
+
+    .bar_title{
+        width: 100%;
+        font-size: 24px;
+        line-height: 124px;
+        font-weight: bold;
+        color: #000;
+        text-align: center;
+    }
+
+    .box{
+        width: 100%;
+        height: 121px;
+        overflow: hidden;
+
+        .box_left{
+            @include border-radius-left(4px);
+            width: 364px;
+            height: 100%;
+            background: #0088cc;
+
+            img{
+                margin-bottom: 5px;
+            }
+
+            a{
+                font-size: 14px;
+                color: #063161;
+            }
+        }
+
+        .box_content{
+            width: 851px;
+            height: 100%;
+            overflow: hidden;
+
+
+            .scroll_div{
+                position: relative;
+                height: 100%;
+            }
+
+            .ul_layer{
+                @include position(absolute, false, 0, false, false, 0);
+                height: 100%;
+                animation: cross2 30s infinite linear;
+            }
+
+            ul{
+                height: 100%;
+            }
+
+            li{
+                position: relative;
+                height: 100%;
+                overflow: hidden;
+
+                img{
+                    @include border-radius(25px);
+                    width: 50px;
+                    height: 50px;
+                    margin-bottom: 18px;
+                }
+
+                a{
+                    font-size: 12px;
+                    line-height: 12px;
+                    color: #000000;
+                }
+
+                &:after{
+                    @include position(absolute, false, 25.5px, 0, false, false);
+                    content: "";
+                    width: 1px;
+                    height: 70px;
+                    display: block;
+                    background: #e2dede;
+                }
+            }
+        }
+
+        .box-right{
+            position: relative;
+            width: 9px;
+            height: 100%;
+
+            &:before,
+            &:after{
+                content: "";
+                display: block;
+                background: #0088cc;
+            }
+
+            &:before{
+                @include position(absolute, false, 0, false, false, 0);
+                width: 2px;
+                height: 100%;
+            }
+
+            &:after{
+                @include position(absolute, false, 13.5px, false, false, 0);
+                @include border-radius-right(4px);
+                width: 9px;
+                height: 94px;
+            }
+        }
+    }
+}

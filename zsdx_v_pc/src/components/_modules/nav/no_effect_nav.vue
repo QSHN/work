@@ -1,6 +1,6 @@
 <template>
   <nav class="no_effect_nav f--hcc">
-    <li v-for="v in navData"><a :href="v.href" class="ho_blur">{{v.name}}</a></li>
+    <li v-for="v in navData"><a :href="v.href" class="ho_blue">{{v.name}}</a></li>
   </nav>
 </template>
 

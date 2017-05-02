@@ -48,14 +48,11 @@
             font-size: 14px;
             color: #000;
             line-height: 14px;
-
-            &:after{
-                @include flex(1);
-                content: "";
-            }
+            margin-right: 50px;
+            cursor: pointer;
 
             &:last-child{
-                &:after{ display: none; }
+                margin-right: 0;
             }
         }
     }

@@ -58,6 +58,14 @@
     @include justify-content(center);
 }
 
+// 方向：垂直; 对齐：水平垂直，垂直居中
+.f--scc{
+  @include flexbox;
+  @include flex-direction(column);
+  @include align-items(center);
+  @include justify-content(center);
+}
+
 // 经过样式
 .ho_8{
     @include hover_o(0.8,300ms);
@@ -67,7 +75,7 @@
     @include hover_o(0.6,300ms);
 }
 
-.ho_blur{
+.ho_blue{
     cursor: pointer;
 
     &:hover{

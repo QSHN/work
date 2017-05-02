@@ -1,10 +1,8 @@
 <template>
   <div class="switch_course_bar">
     <div class="title">{{courseData.title}}</div>
-    <nav class="f--hlc">
-      <li v-for="v,i in courseData.list"
-          class="f--hlc"
-          :class="[i != courseData.list.length - 1 ? 'flex-1' : '']">
+    <nav class="f--hcc">
+      <li v-for="v,i in courseData.list" class="ho_blue">
         {{ v }}
       </li>
     </nav>

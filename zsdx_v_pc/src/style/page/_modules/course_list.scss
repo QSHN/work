@@ -20,26 +20,22 @@
                 margin-right: 0;
             }
 
-            &.bg_yellow{
+            &.bg_yellow,
+            &.bg_yellow .type{
                 background: #fdf16f;
             }
 
-            &.bg_blue{
+            &.bg_blue,
+            &.bg_blue .type{
                 background: #d7e2e4;
             }
         }
 
         .live{
-            @include position(absolute, 1, 7px, false, false, -17px);
+            @include position(absolute, 1, 0, false, false, 0);
             width: 70px;
-            height: 18px;
-            line-height: 16px;
-            text-align: center;
-            font-size: 14px;
-            color: #fff;
-            background: #eb5305;
-            transform: rotate(-45deg);
-            overflow: hidden;
+            height: 41px;
+            background: url("../../../img/icon/live_red_w70_h41.png");
         }
 
         .pic{
@@ -52,6 +48,77 @@
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
+            }
+        }
+
+        .content{
+            position: relative;
+            width: 245px;
+            height: 207px;
+            margin: 0 auto;
+            padding: 0 11px;
+            background: #fff;
+
+            .title{
+                padding-top: 13px;
+                height: 54px;
+                line-height: 27px;
+                font-size: 16px;
+                color: #000;
+            }
+
+            .name,
+            .info{
+                position: relative;
+                padding-left: 25px;
+                font-size: 12px;
+                color: #8d8b94;
+                line-height: 16px;
+                margin-top: 11px;
+
+                &:before{
+                    @include position(absolute, 1, 0, false, false, 0);
+                    width: 15px;
+                    height: 16px;
+                    content: "";
+                    display: block;
+                    background: url("../../../img/icon/teacher_icon_w15_h16.png");
+                }
+            }
+
+            .info:before{
+                width: 16px;
+                background: url("../../../img/icon/course_icon_w16.png");
+            }
+
+            .price{
+                margin-top: 14px;
+                font-size: 14px;
+
+                &.green{
+                    color: #357f1b;
+                }
+
+                &.red{
+                    color: #c80505;
+                    font-family: Verdana;
+                    font-style: italic;
+                }
+            }
+
+            .certification{
+                @include position(absolute, 1, false, false, 19px, -4px);
+                width: 75px;
+                height: 17px;
+                background: url("../../../img/icon/certification_w75_h17.png");
+            }
+
+            .type{
+                @include position(absolute, 1, false, 3px, 3px, false);
+                width: 36px;
+                height: 16px;
+                font-size: 12px;
+                color: #000000;
             }
         }
     }
