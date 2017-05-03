@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折线图</title>
+</head>
+<body>
+    <script>
+        /*
+        * @constrctor { Function } 折线图类
+        * @param { options: Object } 可配参数
+        * @param { options.ctx: Context } 绘图上下文
+        * @param { options.paddingTop: number } 坐标轴到画布上边的距离
+        * @param { options.paddingRight: number } 坐标轴到画布右边的距离
+        * @param { options.paddingBottom: number } 坐标轴到画布下边的距离
+        * @param { options.paddingLeft: number } 坐标轴到画布左边的距离
+        * @param { options.arrowWdith: number } 箭头宽度
+        * @param { options.arrowHeight: number } 箭头高度
+        * @param { options.data: number } 数据
+        * */
+        function LineChart(options) {
+            this.ctx = options.ctx;
+
+            this.paddingTop = options.paddingTop || 30;
+            this.paddingRight = options.paddingRight || 30;
+            this.paddingBottom = options.paddingBottom || 30;
+            this.paddingLeft = options.paddingLeft || 30;
+
+            this.arrowWdith = options.arrowWdith || 15;
+            this.arrowHeight = options.arrowHeight || 30;
+
+            this.data = options.data;
+
+            // 该对象记录坐标轴中三个点的坐标
+            this.vertex = {
+                top: {
+                    x: this.paddingLeft,
+                    y: this.paddingTop
+                },
+                origin: {
+                    x: this.paddingLeft,
+                    y: this.ctx.canvas.height - this.paddingBottom
+                },
+                right: {
+                    x: this.ctx.canvas.width - this.paddingRight,
+                    y: this.ctx.canvas.height - this.paddingBottom
+                }
+            }
+        }
+
+        LineChart.prototype = {
+
+            // 绘制整个折线图
+            draw: function() {
+                var point = this.getPoint();
+                this.drawCoord();
+                this.drawArrow();
+                this.drawPoint(point);
+                this.drawLine(point);
+            },
+
+            // 绘制坐标轴
+            drawCoord: function() {
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.vertex.top.x, this.vertex.top.y);
+                this.ctx.lineTo(this.vertex.origin.x, this.vertex.origin.y);
+                this.ctx.lineTo(this.vertex.right.x, this.vertex.right.y);
+                this.ctx.stroke();
+            },
+
+            // 绘制箭头
+            drawArrow: function() {
+
+                // 绘制上面的箭头
+                var topArrow = {
+                    left: {
+                        x: this.vertex.top.x - this.arrowWdith / 2,
+                        y: this.vertex.top.y + this.arrowHeight
+                    },
+                    origin: {
+                        x: this.vertex.top.x,
+                        y: this.vertex.top.y + this.arrowHeight / 2
+                    },
+                    right: {
+                        x: this.vertex.top.x + this.arrowWdith / 2,
+                        y: this.vertex.top.y + this.arrowHeight
+                    }
+                };
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.vertex.top.x, this.vertex.top.y);
+                this.ctx.lineTo(topArrow.left.x, topArrow.left.y);
+                this.ctx.lineTo(topArrow.origin.x, topArrow.origin.y);
+                this.ctx.lineTo(topArrow.right.x, topArrow.right.y);
+                this.ctx.closePath();
+                this.ctx.stroke();
+
+                // 绘制右面的箭头
+                var rightArrow = {
+                    left: {
+                        x: this.vertex.right.x - this.arrowHeight,
+                        y: this.vertex.right.y - this.arrowWdith / 2,
+                    },
+                    origin: {
+                        x: this.vertex.right.x - this.arrowHeight / 2,
+                        y: this.vertex.right.y
+                    },
+                    right: {
+                        x: this.vertex.right.x - this.arrowHeight,
+                        y: this.vertex.right.y + this.arrowWdith / 2
+                    }
+                };
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.vertex.right.x, this.vertex.right.y);
+                this.ctx.lineTo(rightArrow.left.x, rightArrow.left.y);
+                this.ctx.lineTo(rightArrow.origin.x, rightArrow.origin.y);
+                this.ctx.lineTo(rightArrow.right.x, rightArrow.right.y);
+                this.ctx.closePath();
+                this.ctx.stroke();
+            },
+
+            // 把数据转换为坐标 ==> [{x,y}, {x,y}, {x,y}]
+            /*
+            * 该方法内部做了三件事件：
+            * 1、通过数据的大小得到距离自定义坐标轴的高度
+            * 2、通过数据的数量得到距离自定义坐标轴的宽度
+            * 3、根据这些相对于自定义坐标轴的距离，求出相当于画布的距离
+            * */
+            getPoint: function() {
+
+                var self = this;
+
+                /*
+                * 把数据转换为Y轴坐标(现在得到的坐标都是相对于自定义坐标轴的距离)：
+                * 1、先求坐标轴高度
+                * 2、在求数据中的最大值
+                * 3、坐标高度 / 数据最大值 = 单位数据对应坐标轴的高度
+                * 4、遍历所有的数据 * 比例 = 所有数据占用坐标轴的高度
+                * */
+                var coordHeight = this.vertex.origin.y - this.vertex.top.y - this.arrowHeight;
+                // 这里可以使用apply能够平铺数组传递参数的特性，来给max传参
+                var maxData = Math.max.apply(null, this.data);
+                // 求比例
+                var yRatio = coordHeight / maxData;
+
+                /*
+                 * 根据数据的数量得到X轴坐标(现在得到的坐标都是相对于自定义坐标轴的距离)：
+                 * 1、先求坐标轴宽度
+                 * 2、再求数据的数量
+                 * 3、坐标宽度 / 数据数量 = 单位数据占用坐标的宽度
+                 * 4、数据下标 * 比例 = 所有数据占用坐标轴的宽度
+                 * */
+                var coordWidth = this.vertex.right.x - this.vertex.origin.x - this.arrowHeight;
+                var xRatio = coordWidth / this.data.length;
+
+                // 数据一次性转换为点的x、y坐标，最后得到的结构 ==> [{x,y}, {x,y}, {x,y}]
+                var point = this.data.map(function(val, i) {
+                    return {
+                        x: (i + 1) * xRatio,
+                        y: val * yRatio
+                    };
+                });
+
+                /*
+                * 上面得到的坐标，是相对于自定义坐标轴的距离，
+                * 接下来要把这些坐标转换为相对于画布的距离，
+                * 转换算法：
+                * canvasX = originX + pointX
+                * canvasY = originY - pointY
+                * */
+                return point = point.map(function(obj, i) {
+                    return {
+                        x: self.vertex.origin.x + obj.x,
+                        y: self.vertex.origin.y - obj.y
+                    }
+                });
+            },
+
+            // 绘制点
+            drawPoint: function(point) {
+                var self = this;
+
+                // 遍历所有点的坐标，依次绘制点
+                point.forEach(function(obj, i) {
+                    self.ctx.beginPath();
+                    self.ctx.arc(obj.x, obj.y, 2, 0, Math.PI*2);
+                    self.ctx.fill();
+                });
+            },
+
+            // 绘制折线
+            drawLine: function(point) {
+                var self = this;
+
+                // 遍历所有点的坐标，依次绘制线
+                self.ctx.beginPath();
+                point.forEach(function(obj, i) {
+                    self.ctx.lineTo(obj.x, obj.y);
+                });
+                self.ctx.stroke();
+            }
+        }
+    </script>
+
+    <script>
+        // 动态创建canvas，获取上下文
+        var cvs = document.createElement('canvas');
+        var ctx = cvs.getContext('2d');
+        cvs.width = 600;
+        cvs.height = 400;
+        cvs.style.border = '1px solid red';
+        document.body.appendChild(cvs);
+
+        // 创建折线图实例，绘制
+        var lineChart = new LineChart({ ctx: ctx, data: [2, 5, 8, 1, 3, 10] });
+        lineChart.draw();
+
+    </script>
+</body>
+</html>

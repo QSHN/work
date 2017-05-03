@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="800" height="300"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 需求：不同色彩的等腰三角形
+        * 1、第一个顶点坐标为100，10；底为50，高为60
+        * 2、第一个顶点坐标为200，10；底为60，高为50
+        * */
+
+        /*
+        * 现在存在一个问题，就是每次stroke都会对页面中的所有路径进行重绘，
+        * 造成后面的色彩覆盖掉前面的色彩。
+        *
+        * 要解决这个的问题，需要借助一个api：
+        * ctx.beginPath()
+        * 作用：新开辟一条路径（清除当前页面中的路径）
+        * */
+
+        ctx.strokeStyle = 'pink';
+        ctx.moveTo(100, 10);
+        ctx.lineTo(125, 70);
+        ctx.lineTo(75, 70);
+        ctx.lineTo(100, 10);
+        ctx.stroke();
+
+        // 清除掉上面路径
+        ctx.beginPath();
+
+        alert(1);
+        ctx.strokeStyle = 'green';
+        ctx.moveTo(200, 10);
+        ctx.lineTo(230, 60);
+        ctx.lineTo(170, 60);
+        ctx.lineTo(200, 10);
+        ctx.stroke();
+
+        // 清除掉上面路径
+        ctx.beginPath();
+
+        alert(2);
+        ctx.strokeStyle = 'blue';
+        ctx.stroke();
+    </script>
+</body>
+</html>

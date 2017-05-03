@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./flappy_bird_v1_主游戏对象基本模型/js/util.js"></script>
+</head>
+<body>
+
+    <script>
+        /*
+        * 路径点判断：
+        * ctx.isPointInPath(x, y)
+        * 作用：判断指定的坐标，在不在当前的路径之内
+        * */
+
+        var ctx = util.getCtx(600, 300, 'body');
+        ctx.rect(100, 100, 100, 100);
+        ctx.stroke();
+
+        ctx.canvas.onclick = function(e) {
+            var cvsX = e.pageX - ctx.canvas.offsetLeft;
+            var cvsY = e.pageY - ctx.canvas.offsetTop;
+            alert(ctx.isPointInPath(cvsX, cvsY));
+        }
+    </script>
+</body>
+</html>

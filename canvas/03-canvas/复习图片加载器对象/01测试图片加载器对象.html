@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="util.js"></script>
+    <script src="e.js"></script>
+    <script src="imgLoad.js"></script>
+</head>
+<body>
+    <script>
+        // 未使用图片加载器
+        var img = new Image();
+        img.src = '../img/DMMScoutNPC.png';
+        console.log(img.width);
+
+        // 使用图片加载器
+        new ImgLoad({
+            scene: '../img/scene.jpg',
+            ladyLiberty: '../img/ladyLiberty.jpg',
+            NPC1: '../img/NPC1.png'
+        }).load().on('imgAllLoaded', function(imgs) {
+            console.log(imgs.scene.width, imgs.ladyLiberty.width, imgs.NPC1.width);
+        });
+    </script>
+</body>
+</html>

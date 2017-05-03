@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red" width="500"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 画弧路径：
+        * ctx.arc(oX, oY, r, 弧的起始弧度, 弧的结束弧度，是否逆时针画(可选参数));
+        * arc在绘制弧路径之前，会先从路径结束点lineTo当弧的起点，然后再绘制弧。
+        * 半径大小，起始弧度，结束弧度，绘制方向共同决定了弧的大小。
+        * */
+
+        // 角度转换为弧度
+        function angleToRadian(angle) {
+            return Math.PI / 180 * angle;
+        }
+
+        ctx.arc(100, 100, 30, angleToRadian(0), angleToRadian(90));
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(200, 100, 30, angleToRadian(0), angleToRadian(90), true);
+        ctx.stroke();
+
+        /*ctx.beginPath();
+        ctx.arc(300, 100, 30, angleToRadian(180), angleToRadian(360));
+        ctx.stroke();*/
+    </script>
+</body>
+</html>

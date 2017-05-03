@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function getCtx(width, height, container) {
+            var cvs = document.createElement('canvas');
+            var ctx = cvs.getContext('2d');
+            cvs.width = width;
+            cvs.height = height;
+            cvs.style.border = '1px solid red';
+
+            // 如果传入了容器，那么就先获取容器，然后把画布添加进去
+            container && (document.querySelector(container).appendChild(cvs));
+            return ctx;
+        }
+
+        /*
+         * 需求：让一个矩形围绕自己的中心旋转
+         * */
+        var ctx = getCtx(600, 400, 'body');
+        ctx.strokeRect(100, 100, 50, 50);
+
+        /*
+         * 步骤：
+         * 1、开启定时器
+         * 2、先在开头保存当前状态，在结尾回滚状态，中间各种折腾不会对外界产生任何干扰
+         * 3、先清除画布
+         * 4、平移画布原点到矩形中心
+         * 5、旋转坐标系
+         * 6、绘制矩形，矩形的坐标更新为-宽/2，-高/2。
+         * */
+
+        var rotateRadian = 0;
+        setInterval(function() {
+            ctx.save();
+
+            ctx.clearRect(-50, -50, ctx.canvas.width, ctx.canvas.height);
+
+            // 使用了状态的保存与回滚，平移与旋转就不会累加了，旋转的角度需要我们手动累加
+            ctx.translate(100 + 50 / 2, 100 + 50 / 2);
+            ctx.rotate(rotateRadian += Math.PI/90);
+            ctx.fillRect(-50 / 2, -50 / 2, 50, 50);
+
+            ctx.restore();
+        }, 1000 / 60);
+    </script>
+</body>
+</html>

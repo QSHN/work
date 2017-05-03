@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 预测文字
+        * ctx.measureText('文字')
+        * 返回值：一个对象，该对象中有一个width，代表要绘制这段文字时，需要占用多少宽度
+        * */
+        console.log(ctx.measureText('霹雳扒拉').width);
+
+        /*
+        * 求圆上一点坐标：
+        * 1、x = 圆心x + 半径 * Math.cos(弧度)
+        * 2、y = 圆心y + 半径 * Math.sin(弧度)
+        * */
+
+        // 在100，100点，画一个半径60，起点为0，结束为90的扇形
+        ctx.beginPath();
+        ctx.moveTo(100, 100);
+        ctx.arc(100, 100, 60, 0, Math.PI/2);
+        ctx.closePath();
+        ctx.stroke();
+
+        /*
+        * 画扇形的角平分线:
+        * 1、扇形中间的角度
+        * 2、利用上面的公式求出扇形弧边上中间的坐标
+        * 3、moveTo到圆心
+        * 4、lineTo到求出的点坐标
+        * 5、描边
+        * */
+
+        var sectorAngle = 45;
+        var lineX = 100 + (60 + 20) * Math.cos(Math.PI/4);
+        var lineY = 100 + (60 + 20) * Math.sin(Math.PI/4);
+        ctx.beginPath();
+        ctx.moveTo(100, 100);
+        ctx.lineTo(lineX, lineY);
+        ctx.lineTo(lineX + ctx.measureText('霹雳扒拉').width, lineY);
+        ctx.strokeStyle = 'red';
+        ctx.stroke();
+
+        // 绘制文字
+        ctx.textBaseline = 'bottom';
+        ctx.fillText('霹雳扒拉', lineX, lineY - 5);
+    </script>
+</body>
+</html>

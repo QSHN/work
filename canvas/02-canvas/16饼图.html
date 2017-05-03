@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        /*
+        * 绘制饼图：
+        * 一：先求出数据对应扇形的角度
+        * 1、求出数据总和
+        * 2、360 / 总和 = 1单位数据占用的角度
+        * 3、遍历数据 * 1单位数据占用的角度 = 数据对应的角度
+        *
+        * 二：根据每个扇形的角度，求出每个扇形在圆上的起始位置与结束位置
+        * 规律：下一个扇形的起始弧度 = 上一个扇形的结束弧度
+        * 下一个扇形的结束弧度 = 上一个扇形的结束弧度 + 当前扇占用的弧度
+        * 1、定义数组用来存储每个扇形绘制时的起始弧度和结束弧度
+        * 2、遍历这些数据，依次按照画扇的步骤进行绘制即可，最终多个扇构成一个饼
+        *
+        *
+        * 绘制带有文字完整的饼图：
+        * 1、需要根据数据求出每一个对应扇形的起始弧度、中间弧度、结束弧度
+        * 2、然后依托与起始弧度与结束弧度绘制扇
+        * 3、依托中间弧度绘制文字与文字衬托线
+        * */
+
+
+        /*
+         * @constrctor { Function } 饼图类
+         * @param { options: Object } 可配参数
+         * @param { options.ctx: Context } 绘图上下文
+         * @param { options.x: number } 饼圆心X
+         * @param { options.y: number } 饼圆心Y
+         * @param { options.r: number } 饼半径
+         * @param { options.textSpace: number } 文字到饼的间距
+         * @param { options.data: number } 数据 ==> [{val: number, msg: string},{},...]
+         * */
+        function PipeChart(options) {
+            this.ctx = options.ctx;
+            this.x = options.x || 200;
+            this.y = options.y || 200;
+            this.r = options.r || 70;
+            this.textSpace = options.textSpace || 20;
+            this.data = options.data;
+            this.colors = 'blue,hotpink,green,deeppink,violet,skyblue,lavender,lavenderblush'.split(',');
+        }
+
+        PipeChart.prototype = {
+
+            // 绘制饼图
+            draw: function() {
+                var sectors = this.getSectors();
+                this.drawSector(sectors);
+                this.drawText(sectors);
+            },
+
+            // 根据数据得到每个扇的起始弧度、中间弧度、结束弧度
+            getSectors: function() {
+
+                // 求数据总和 & 1单位数据占用弧度
+                var sum = 0, ratio;
+                this.data.forEach(function(obj, i) {
+                    sum += obj.val;
+                });
+                ratio = Math.PI*2 / sum;
+
+                /*
+                * 规律：
+                * 每一个扇自身大小 = ratio * 对应数据
+                * 下一个扇的起始 = 上一个扇的结束
+                * 下一个扇的中间 = 上一个扇的结束 + 自身大小 / 2
+                * 下一个扇的结束 = 上一个扇的结束 + 自身大小
+                * */
+                var sectors = [], current, prevEnd;
+                this.data.forEach(function(obj, i) {
+                    current = ratio * obj.val;                      // 自身大小
+                    prevEnd = i === 0? 0: sectors[i - 1].end;       // 求上一个扇的结束弧度
+                    sectors.push({
+                        start: prevEnd,
+                        center: prevEnd + current / 2,
+                        end: prevEnd + current
+                    });
+                });
+
+                return sectors;
+            },
+
+            // 绘制所有扇
+            drawSector: function(sectors) {
+                var self = this;
+                sectors.forEach(function(obj, i) {
+                    self.ctx.beginPath();
+                    self.ctx.moveTo(self.x, self.y);
+                    self.ctx.arc(self.x, self.y, self.r, obj.start, obj.end);
+                    self.ctx.closePath();
+                    self.ctx.fillStyle = self.colors[i];
+                    self.ctx.fill();
+                });
+            },
+
+            // 绘制所有文字与衬托线
+            drawText: function(sectors) {
+                var self = this;
+
+                /*
+                * 1、求文字坐标&文字宽度
+                * textX = 圆心x + (半径 + 文字间距) * Math.cos(弧度)
+                * textY = 圆心y + (半径 + 文字间距) * Math.sin(弧度)
+                * 2、根据左右半球设置相关样式
+                * 3、绘制衬托线与文字
+                * */
+
+                sectors.forEach(function(obj, i) {
+
+                    // 求文字坐标&文字宽度
+                    var textX = self.x + (self.r + self.textSpace) * Math.cos(obj.center);
+                    var textY = self.y + (self.r + self.textSpace) * Math.sin(obj.center);
+                    var textWidth = self.ctx.measureText(self.data[i].msg).width;
+
+                    // 设置相关样式
+                    if(obj.center > Math.PI*0.5 && obj.center < Math.PI*1.5) {
+                        self.ctx.textAlign = 'right';
+                        textWidth = -Math.abs(textWidth);
+                    }else {
+                        self.ctx.textAlign = 'left';
+                        textWidth = Math.abs(textWidth);
+                    }
+                    self.ctx.strokeStyle = self.colors[i];
+                    self.ctx.fillStyle = self.colors[i];
+
+                    // 绘制衬托线与文字
+                    self.ctx.beginPath();
+                    self.ctx.moveTo(self.x, self.y);
+                    self.ctx.lineTo(textX, textY);
+                    self.ctx.lineTo(textX + textWidth, textY);
+                    self.ctx.stroke();
+                    self.ctx.fillText(self.data[i].msg, textX, textY - 5);
+                });
+            }
+        };
+    </script>
+    <script>
+        // 动态创建canvas，获取上下文
+        var cvs = document.createElement('canvas');
+        var ctx = cvs.getContext('2d');
+        cvs.width = 600;
+        cvs.height = 400;
+        cvs.style.border = '1px solid red';
+        document.body.appendChild(cvs);
+
+        // 创建饼图实例，绘制
+        var pipeChart = new PipeChart({
+            ctx: ctx,
+            data: [
+                {val: 18, msg: '喜欢打网游'},
+                {val: 25, msg: '喜欢在家看美女'},
+                {val: 30, msg: '喜欢看偶像剧'},
+                {val: 40, msg: '喜欢自恋'}
+            ]
+        });
+        pipeChart.draw();
+    </script>
+</body>
+</html>

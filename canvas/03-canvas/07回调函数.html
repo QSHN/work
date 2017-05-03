@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        // 当遍历到第3个值的时候，回调被执行
+        function forArr(arr, fn) {
+            for(var i = 0, len = arr.length; i < len; i++) {
+
+                // 打印当前遍历的情况
+                console.log(i);
+
+                // 第3个值，执行回调
+                if(i == 2) {
+                    fn();
+                }
+            }
+        }
+
+        forArr([1,2,3,4,5], function() {
+            console.log('回调被执行');
+            console.log('第三个值被打印了，做一些处理');
+        });
+    </script>
+</body>
+</html>

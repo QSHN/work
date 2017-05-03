@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        // 当遍历到第3个值的时候，指定多个回调
+        function forArr(arr, fns) {
+            for(var i = 0, len = arr.length; i < len; i++) {
+
+                // 打印当前遍历的情况
+                console.log(i);
+
+                // 第3个值，执行回调
+                if(i == 2) {
+
+                    // 执行所有回调
+                    fns.forEach(function(fn) {
+                        fn();
+                    });
+                }
+            }
+        }
+
+        // 当遍历到第三个值的，做多件事情
+        forArr([1,2,3,4,5], [
+            function() {
+                console.log('回调被执行');
+            },
+            function() {
+                console.log('第三个值被打印了，做一些处理');
+            },
+            function() {
+                console.log('一个又一个回调');
+            },
+        ]);
+    </script>
+</body>
+</html>

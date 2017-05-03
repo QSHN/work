@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./util.js"></script>
+    <script src="./person.js"></script>
+</head>
+<body>
+    <script>
+        var ctx = util.getCtx(600, 300, 'body');
+
+        // 动态创建img，在img资源加载完毕时候，绘制小人
+        var img = new Image();    // 等价于 document.createElement('img')
+        img.src = '../img/DTGF-Serenade.png';
+        img.onload = function() {
+
+            // 创建小人实例
+            var xiXueNanJue = new Person({
+                ctx: ctx,
+                img: img,
+                widthFrame: 4,
+                heightFrame: 4,
+            });
+
+            // 开启定时器、清除画布、更新小人下一次绘制时的数据、然后绘制
+            var timer = setInterval(function() {
+                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                ctx.strokeRect(100, 100, 100, 100);
+                xiXueNanJue.update();
+                xiXueNanJue.draw();
+            }, 1000 / 60);
+
+            // 实例提供了一个on方法，用来让外界监听小人的某些事件
+            xiXueNanJue.on('out', function(direction) {
+                if(direction === '下') {
+                    console.log('下地狱')
+                }
+            });
+            xiXueNanJue.on('out', function(direction) {
+                if(direction === '上') {
+                    console.log('见上帝')
+                }
+            });
+            xiXueNanJue.on('die', function(direction) {
+                clearInterval(timer);
+            });
+
+            // 监听键盘事件，动态切换小人行走方向
+            document.addEventListener('keydown', function(e) {
+                xiXueNanJue.changeDirection(e.keyCode);
+            });
+        }
+    </script>
+</body>
+</html>

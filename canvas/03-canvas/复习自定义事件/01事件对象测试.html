@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="e.js"></script>
+</head>
+<body>
+    <script>
+        var e = new E();
+        e.on('吃饭啦', function() {
+            console.log('流口水');
+        });
+        e.on('吃饭啦', function() {
+            console.log('犯困');
+        });
+        e.on('放假啦', function() {
+            console.log('莫名的开心');
+        });
+
+        e.trigger('吃饭啦');
+    </script>
+</body>
+</html>

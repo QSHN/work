@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="800" height="300"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 需求：按下鼠标可以自由拖动绘制图形；放开鼠标终止绘制。
+        *
+        * 1、监听mousedow事件
+        * 2、事件发生时，获取鼠标按下的位置在canvas中的坐标，基于这个坐标moveTo。
+        * 3、监听mousemove事件
+        * 4、事件发生时，获取移动到的位置，基于这个位置lineTo。
+        * 5、监听鼠标mouseup事件
+        * 6、事件发生时，移除mousemove事件的监听
+        * */
+
+        ctx.strokeStyle = 'pink';
+
+        // 监听mousedow事件
+        cvs.onmousedown = function(e) {
+            var x = e.pageX - cvs.offsetLeft;
+            var y = e.pageY - cvs.offsetTop;
+            ctx.moveTo(x, y);
+
+            // 按下鼠标时，监听移动事件，绘制图形
+            cvs.onmousemove = function(e) {
+                var x = e.pageX - cvs.offsetLeft;
+                var y = e.pageY - cvs.offsetTop;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            }
+
+            // 鼠标放开事件，移除mousemove
+            cvs.onmouseup = function() {
+                cvs.onmousemove = null;
+            }
+        }
+    </script>
+</body>
+</html>

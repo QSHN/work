@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function getCtx(width, height, container) {
+            var cvs = document.createElement('canvas');
+            var ctx = cvs.getContext('2d');
+            cvs.width = width;
+            cvs.height = height;
+            cvs.style.border = '1px solid red';
+
+            // 如果传入了容器，那么就先获取容器，然后把画布添加进去
+            container && (document.querySelector(container).appendChild(cvs));
+            return ctx;
+        }
+
+        /*
+        * 状态：
+        * 在context绘制上下文中，
+        * 所有的属性值都是状态，但是这只是其中的一部分，这部分对我们是可见的，可修改的；
+        * 还有一些状态，是内置的，我们不可见，不可修改，
+        * 比如：其中包括矩阵相关的状态(平移、旋转、缩放)。
+        *
+        * 注意：context的状态，不包含路径。
+        * */
+
+        /*
+        * 状态的保存：
+        * ctx.save()
+        * 作用：把context上下文当前的所有状态备份一份，可以多次调用，多次备份。
+        * */
+
+        /*
+        * 状态回滚：
+        * ctx.restore()
+        * 作用：倒着回滚备份的状态为当前状态。
+        * */
+
+        var ctx = getCtx(600, 300, 'body');
+        ctx.save();
+
+        ctx.fillStyle = 'red';
+        ctx.save();
+
+        ctx.fillStyle = 'blue';
+        ctx.save();
+
+        ctx.fillRect(0, 0, 20, 20);     // 蓝色
+
+        ctx.restore();
+        ctx.fillRect(50, 0, 20, 20);     // 蓝色
+
+        ctx.restore();
+        ctx.fillRect(100, 0, 20, 20);     // 红色
+
+        ctx.restore();
+        ctx.fillRect(150, 0, 20, 20);     // 黑色
+
+        ctx.restore();
+        ctx.fillRect(200, 0, 20, 20);     // 取不出来了，黑色
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function getCtx(width, height, container) {
+            var cvs = document.createElement('canvas');
+            var ctx = cvs.getContext('2d');
+            cvs.width = width;
+            cvs.height = height;
+            cvs.style.border = '1px solid red';
+
+            // 如果传入了容器，那么就先获取容器，然后把画布添加进去
+            container && (document.querySelector(container).appendChild(cvs));
+            return ctx;
+        }
+
+        /*
+        * 缩放：
+        * ctx.scale(x, y)
+        * 作用：缩放画布的坐标系，参数的含义是在当前的基础上继续缩放多少倍
+        * */
+        var ctx = getCtx(600, 400, 'body');
+
+        //  缩放前绘制
+        ctx.fillRect(0, 0, 400, 400);
+
+        // 缩放坐标系后，按照相同的坐标绘制矩形
+        ctx.scale(0.5, 0.5);
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(0, 0, 400, 400);
+
+        // 缩放坐标系后，按照相同的坐标绘制矩形
+        ctx.scale(0.5, 0.5);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(0, 0, 400, 400);
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var div = document.createElement('div');
+        div.style.height = '200px';
+        div.style.backgroundColor = 'blue';
+        document.body.appendChild(div);
+
+        // 原生的api中，对于一个DOM元素，日后什么时刻想监听事件就什么事件监听
+        div.addEventListener('click', function() {
+            console.log('被点击');
+        });
+        div.addEventListener('click', function() {
+            console.log('被点击2');
+        });
+    </script>
+</body>
+</html>

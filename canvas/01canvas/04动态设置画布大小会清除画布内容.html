@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--页面中的canvasDom相当安装了PS软件-->
+<canvas style="border: 1px solid red" width="500" height="500"></canvas>
+<script>
+    var cvs = document.querySelector('canvas');
+    var ctx = cvs.getContext('2d');
+
+    // 绘制一个填充矩形
+    ctx.fillRect(10, 10, 200, 200);
+
+    // 动态修改画布的宽，结果画布内容会消失
+    cvs.width = 300;
+</script>
+</body>
+</html>

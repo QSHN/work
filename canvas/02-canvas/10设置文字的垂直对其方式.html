@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="500" height="600"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        ctx.font = '900 30px 宋体';
+
+        /*
+        * 设置文字垂直对其方式：
+        * ctx.textBaseline = 'top' || 'hanging' || 'middle' || 'alphabetic' || 'ideographic' || 'bottom'
+        * 其中：top、middle、alphabetic、bottom常用
+        * */
+
+        ctx.textBaseline = 'top';
+        ctx.fillText('abcd', 200, 40);
+
+        ctx.textBaseline = 'hanging';
+        ctx.fillText('abcd', 200, 140);
+
+        ctx.textBaseline = 'middle';
+        ctx.fillText('abcd', 200, 240);
+
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillText('abcd', 200, 340);
+
+        ctx.textBaseline = 'ideographic';
+        ctx.fillText('abcd', 200, 440);
+
+        ctx.textBaseline = 'bottom';
+        ctx.fillText('abcd', 200, 540);
+
+        // 绘制参考点
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(200, 40, 4, 4);
+        ctx.fillRect(200, 140, 4, 4);
+        ctx.fillRect(200, 240, 4, 4);
+        ctx.fillRect(200, 340, 4, 4);
+        ctx.fillRect(200, 440, 4, 4);
+        ctx.fillRect(200, 540, 4, 4);
+    </script>
+</body>
+</html>

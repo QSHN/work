@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        ctx.font = '900 30px 宋体';
+        ctx.fillText('不行', 20, 120);
+
+        // 默认情况下，文字参考点在文字的左下角
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(20, 120, 4, 4);
+    </script>
+</body>
+</html>

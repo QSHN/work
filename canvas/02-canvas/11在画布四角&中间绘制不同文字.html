@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+        ctx.font = '900 30px 宋体';
+
+        /*
+        * 在画布四角&中间绘制不同文字
+        * */
+
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'top';
+        ctx.fillText('青龙', 0, 0);
+
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'top';
+        ctx.fillText('白虎', cvs.width, 0);
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('米老鼠', cvs.width / 2, cvs.height / 2);
+
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText('朱雀', 0, cvs.height);
+
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText('玄武', cvs.width, cvs.height);
+    </script>
+</body>
+</html>

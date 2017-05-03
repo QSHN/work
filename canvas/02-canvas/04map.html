@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        /*
+        * map：
+        * es5中数组新增的一个方法。
+        * 作用：一组数据通过一些规则映射得到另外一组数据
+        * 语法：arr.map(function(val, i){ return 10 })
+        * 返回值：一个新的数组
+        * */
+
+        var arr = [1,2,3,4,5];
+        var newArr = arr.map(function(val, i) {
+            return val * 10;
+        });
+        console.log(newArr);
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="800" height="300"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = 'yellow';
+        ctx.fillStyle = 'green';
+
+        // 绘制一个200*200的矩形
+        ctx.moveTo(20, 20);
+        ctx.lineTo(220, 20);
+        ctx.lineTo(220, 220);
+        ctx.lineTo(20, 220);
+        ctx.closePath();
+
+        // 与矩形路径相反的方向绘制一个三角形80*80
+        ctx.moveTo(120, 40);
+        ctx.lineTo(80, 120);
+        ctx.lineTo(160, 120);
+        ctx.closePath();
+
+        ctx.fill();
+    </script>
+</body>
+</html>

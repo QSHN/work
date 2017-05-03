@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function Person(age) {
+            this.age = age
+        }
+
+        // run方法最终的表现，依赖与age属性的状态
+        Person.prototype.run = function() {
+            if(this.age < 4) {
+                console.log('滚来滚去');
+            }else if(this.age >= 4 && this.age < 12) {
+                console.log('跳来跳去');
+            }else if(this.age >= 12) {
+                console.log('开车');
+            }
+        }
+
+        var xiaohong = new Person(2);
+        xiaohong.run();
+
+        // 把age属性值修改后，run方法的表现就变了，这就是基于状态的方法。
+        xiaohong.age = 50;
+        xiaohong.run();
+    </script>
+</body>
+</html>

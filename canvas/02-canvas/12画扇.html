@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 画扇的步骤：
+        * 0、清除之前的路径
+        * 1、重置路径起点为圆心
+        * 2、arc画弧，arc方法会自动从路径结束点到弧的起点连一条路径，然后画弧
+        * 3、闭合路径，让弧的结束点与路径起点相连，这样一个扇形路径就有了
+        * 4、描边
+        * */
+
+        ctx.beginPath();
+        ctx.moveTo(100, 100);
+        ctx.arc(100, 100, 60, 0, Math.PI/4);
+        ctx.closePath();
+        ctx.stroke();
+    </script>
+</body>
+</html>

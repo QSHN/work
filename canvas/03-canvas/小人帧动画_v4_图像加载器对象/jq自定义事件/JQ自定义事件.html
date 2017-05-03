@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.1.0.js"></script>
+</head>
+<body>
+    <button>开枪</button>
+    <script>
+        // jQ自定义事件使用
+
+        $('body').on('晚上灯自动关了', function() {
+            console.log('我吓鸟了');
+        });
+        $('body').on('晚上灯自动关了', function() {
+            console.log('心脏病犯了');
+        });
+
+
+        $('body').trigger('晚上灯自动关了');
+    </script>
+</body>
+</html>

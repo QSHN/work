@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        ctx.font = '900 30px 宋体';
+
+        /*
+        * 设置文字水平对其方式：
+        * ctx.textAlign = 'left start' || 'center' || 'right end'
+        * */
+
+        ctx.textAlign = 'left';
+        ctx.fillText('你快回来', 200, 40);
+
+        ctx.textAlign = 'center';
+        ctx.fillText('我真的好想你', 200, 140);
+
+        ctx.textAlign = 'right';
+        ctx.fillText('我就这样狠心伤害我', 200, 240);
+
+        // 绘制参考点
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(200, 40, 4, 4);
+        ctx.fillRect(200, 140, 4, 4);
+        ctx.fillRect(200, 240, 4, 4);
+    </script>
+</body>
+</html>

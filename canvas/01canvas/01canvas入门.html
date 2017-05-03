@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+
+        /*
+        * 获取绘图环境（获取绘图上下文）：
+        * 语法：var ctx = cvs.getContext('2d' || 'webgl')
+        * */
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 1、移动钢笔到指定位置
+        * 语法：ctx.moveTo(x,y)
+        *
+        * 2、画子路径
+        * 语法：ctx.lineTo(x,y)
+        *
+        * 3、描边或填充
+        * 语法：ctx.stroke() 描边
+        * 语法：ctx.fill() 填充
+        * */
+
+        ctx.moveTo(20, 20);
+        ctx.lineTo(50, 20);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(20, 50);
+        ctx.lineTo(20, 20);
+        ctx.fill();
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red" width="500" height="500"></canvas>
+    <img src="./img/ladyLiberty.jpg" style="display: none;">
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+        var img = document.querySelector('img');
+
+        /*
+        * 图像绘制方式1，3个参数：
+        * ctx.drawImage(要绘制的图像资源，x，y)
+        * 作用：把图像绘制到指定位置
+        * */
+
+        /*// 要绘制img，必须得保证这个img的资源已经下载完毕
+        img.onload = function() {
+            ctx.drawImage(img, 10, 10);
+        };*/
+
+        /*
+         * 图像绘制方式2，5个参数：
+         * ctx.drawImage(要绘制的图像资源，x，y, width, height)
+         * 作用：把图像绘制到指定位置并指定其大小
+         * */
+
+        /*// 要绘制img，必须得保证这个img的资源已经下载完毕
+        img.onload = function() {
+            ctx.drawImage(img, 10, 10, 100, 100);
+        };*/
+
+        /*
+         * 图像绘制方式3，9个参数：
+         * ctx.drawImage(要绘制的图像资源，
+         *      clipStartX, clipStartY, clipWidth, clipHeight,
+         *      x，y, width, height)
+         * 作用：把裁剪的图像按照指定大小绘制到指定位置
+         * */
+
+        // 要绘制img，必须得保证这个img的资源已经下载完毕
+        img.onload = function() {
+            ctx.drawImage(img,
+                    300, 200, 200, 200,
+                    10, 10, 100, 100);
+        };
+    </script>
+</body>
+</html>

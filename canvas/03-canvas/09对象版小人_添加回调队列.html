@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red" width="500" height="300"></canvas>
+    <img src="./img/NPCrabbitbaby-2.png" style="display: none;">
+    <script>
+        /*
+        * @construcotr { Function } 小人类
+        * @param { options: Object } 可选参数
+        * @param { options.ctx: Context } 绘制上下文
+        * @param { options.img: Image } 图像
+        * @param { options.x: Image } 图像绘制x位置
+        * @param { options.y: Image } 图像绘制y位置
+        * @param { options.widthFrame: Image } 图像宽有多少张
+        * @param { options.heightFrame: Image } 图像高有多少张
+        * */
+        function Person(options) {
+            this.ctx = options.ctx;
+            this.img = options.img;
+            this.x = options.x || 10;
+            this.y = options.y || 10;
+            this.widthFrame = options.widthFrame || 1;
+            this.heightFrame = options.heightFrame || 1;
+            this.callbacks = options.callbacks;
+
+            // 计算一帧宽高
+            this.width = this.img.width / this.widthFrame;
+            this.height = this.img.height / this.heightFrame;
+
+            // index用来控制小人某个方向的第一个动作,
+            // direction用来控制行走方向。
+            this.index = 0;
+            this.direction = 0;
+        }
+
+        // 扩展原型
+        Person.prototype = {
+
+            // 按照实例的属性绘制小人
+            draw: function() {
+                this.ctx.drawImage(this.img,
+                    this.width * this.index, this.height * this.direction, this.width, this.height,
+                    this.x, this.y, this.width, this.height);
+            },
+
+            // 刷新小人数据
+            // 1、更新小人动作
+            // 2、根据小人方向更新位置，当发现小人走出画布时，触发回调
+            update: function() {
+                this.index = ++this.index % 4;
+                switch (this.direction) {
+                    // 左
+                    case 1:
+                        this.x -= 2;
+                        if(this.x < -this.width) {
+                            this.trigger('左');
+                        }
+                        break;
+                    // 上
+                    case 3:
+                        this.y -= 2;
+                        if(this.y < -this.height) {
+                            this.trigger('上');
+                        }
+                        break;
+                    // 右
+                    case 2:
+                        this.x += 2;
+                        if(this.x > this.ctx.canvas.width) {
+                            this.trigger('右');
+                        }
+                        break;
+                    // 下
+                    case 0:
+                        this.y += 2;
+                        if(this.y > this.ctx.canvas.height) {
+                            this.trigger('下');
+                        }
+                        break;
+                }
+            },
+
+            // 通用的用来触发回调的函数
+            trigger: function(direction) {
+                this.callbacks.forEach(function(fn) {
+                    fn(direction);
+                });
+            },
+
+            // 根据keyCode修改小人的行走方向
+            changeDirection: function(keyCode) {
+                switch (keyCode) {
+                        // 左
+                    case 37:
+                        this.direction = 1;
+                        break;
+                        // 上
+                    case 38:
+                        this.direction = 3;
+                        break;
+                        // 右
+                    case 39:
+                        this.direction = 2;
+                        break;
+                        // 下
+                    case 40:
+                        this.direction = 0;
+                        break;
+                }
+            }
+        };
+    </script>
+
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+        var img = document.querySelector('img');
+
+        img.onload = function() {
+
+            // 创建小人实例
+            var tuzijie = new Person({
+                ctx: ctx,
+                img: img,
+                widthFrame: 4,
+                heightFrame: 4,
+                callbacks: [
+                    function(direction) {
+                        if(direction == '左') {
+                            tuzijie.changeDirection(39);
+                        }else if(direction == '右') {
+                            tuzijie.changeDirection(37);
+                        }
+                    },
+                    function(direction) {
+                        if(direction == '左') {
+                            console.log('第二个处理');
+                        }else if(direction == '右') {
+                            console.log('第二个处理');
+                        }
+                    }
+                ]
+            });
+
+            // 监听键盘事件，切换小人行走方向
+            window.onkeydown = function(e) {
+                tuzijie.changeDirection(e.keyCode);
+            };
+
+            // 不断更新小人数据，绘制小人
+            setInterval(function() {
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
+                tuzijie.update();
+                tuzijie.draw();
+            }, 100);
+        };
+
+        /*
+        * 需求：当小人从不同的方向走出画布时，我需要知道，然后做出一些相应的处理。
+        * */
+    </script>
+</body>
+</html>

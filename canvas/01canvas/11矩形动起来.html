@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="800" height="300"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        // 矩形类
+        function Rect(options) {
+            this.ctx = options.ctx;
+            this.x = options.x;
+            this.y = options.y;
+            this.width = options.width;
+            this.height = options.height;
+            this.strokeStyle = options.strokeStyle || 'skyblue';
+            this.fillStyle = options.fillStyle || 'yellow';
+        }
+
+        Rect.prototype = {
+
+            // 路径
+            renderPath: function() {
+                this.ctx.moveTo(this.x, this.y);
+                this.ctx.lineTo(this.x + this.width, this.y);
+                this.ctx.lineTo(this.x + this.width, this.y + this.height);
+                this.ctx.lineTo(this.x, this.y + this.height);
+                this.ctx.lineTo(this.x, this.y);
+            },
+
+            // 描边
+            renderStroke: function() {
+                /*
+                * 每次绘制之前，先把之前的路径清除掉，防止重绘它们，
+                * 然后再绘制属于自己的路径，进行属性设置，最后绘制。
+                * */
+                this.ctx.beginPath();
+                this.renderPath();
+                this.ctx.strokeStyle = this.strokeStyle;
+                this.ctx.stroke();
+            },
+
+            // 填充
+            renderFill: function() {
+                /*
+                 * 每次绘制之前，先把之前的路径清除掉，防止重绘它们，
+                 * 然后再绘制属于自己的路径，进行属性设置，最后绘制。
+                 * */
+                this.ctx.beginPath();
+                this.renderPath();
+                this.ctx.fillStyle = this.fillStyle;
+                this.ctx.fill();
+            }
+        }
+
+        // 使用
+        var rect = new Rect({
+            ctx: ctx,
+            x: 10,
+            y: 10,
+            width: 60,
+            height: 60,
+            strokeStyle: 'blue'
+        });
+
+        /*
+        * 开启一个定时器，
+        * 每次先清除画布，
+        * 然后更新矩形实例的x坐标，
+        * 然后按照最新的坐标绘制矩形。
+        * */
+        setInterval(function() {
+            ctx.clearRect(0, 0, cvs.width, cvs.height);
+            rect.x += 4;
+            rect.renderStroke();
+        }, 100);
+
+    </script>
+</body>
+</html>

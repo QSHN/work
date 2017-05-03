@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red" width="500"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 线交点样式：
+        * ctx.lineJoin = 'miter' || 'round' || 'bevel'
+        * miter: 默认值，尖尖角
+        * round: 圆头
+        * bevel：斜面
+        * */
+
+        ctx.lineWidth = 10;
+
+        ctx.lineJoin = 'miter';
+        ctx.moveTo(10, 10);
+        ctx.lineTo(70, 70);
+        ctx.lineTo(130, 10);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineJoin = 'round';
+        ctx.moveTo(150, 10);
+        ctx.lineTo(210, 70);
+        ctx.lineTo(270, 10);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineJoin = 'bevel';
+        ctx.moveTo(290, 10);
+        ctx.lineTo(350, 70);
+        ctx.lineTo(410, 10);
+        ctx.stroke();
+    </script>
+</body>
+</html>

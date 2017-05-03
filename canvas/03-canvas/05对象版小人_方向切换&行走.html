@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red" width="500" height="300"></canvas>
+    <img src="./img/NPCrabbitbaby-2.png" style="display: none;">
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+        var img = document.querySelector('img');
+
+        /*
+        * @construcotr { Function } 小人类
+        * @param { options: Object } 可选参数
+        * @param { options.ctx: Context } 绘制上下文
+        * @param { options.img: Image } 图像
+        * @param { options.x: Image } 图像绘制x位置
+        * @param { options.y: Image } 图像绘制y位置
+        * @param { options.widthFrame: Image } 图像宽有多少张
+        * @param { options.heightFrame: Image } 图像高有多少张
+        * */
+        function Person(options) {
+            this.ctx = options.ctx;
+            this.img = options.img;
+            this.x = options.x || 10;
+            this.y = options.y || 10;
+            this.widthFrame = options.widthFrame || 1;
+            this.heightFrame = options.heightFrame || 1;
+
+            // 计算一帧宽高
+            this.width = this.img.width / this.widthFrame;
+            this.height = this.img.height / this.heightFrame;
+
+            this.index = 1;
+            this.direction = 2;
+        }
+
+        Person.prototype = {
+
+            draw: function() {
+                this.ctx.drawImage(this.img,
+                    this.width * this.index, this.height * this.direction, this.width, this.height,
+                    this.x, this.y, this.width, this.height);
+            },
+
+            update: function() {
+                this.index = ++this.index % 4;
+                switch (this.direction) {
+                    // 左
+                    case 1:
+                        this.x -= 2;
+                        break;
+                    // 上
+                    case 3:
+                        this.y -= 2;
+                        break;
+                    // 右
+                    case 2:
+                        this.x += 2;
+                        break;
+                    // 下
+                    case 0:
+                        this.y += 2;;
+                        break;
+                }
+            },
+
+            changeDirection: function(keyCode) {
+                switch (keyCode) {
+                        // 左
+                    case 37:
+                        this.direction = 1;
+                        break;
+                        // 上
+                    case 38:
+                        this.direction = 3;
+                        break;
+                        // 右
+                    case 39:
+                        this.direction = 2;
+                        break;
+                        // 下
+                    case 40:
+                        this.direction = 0;
+                        break;
+                }
+            }
+        };
+    </script>
+
+    <script>
+        img.onload = function() {
+            var tuzijie = new Person({
+                ctx: ctx,
+                img: img,
+                widthFrame: 4,
+                heightFrame: 4
+            });
+
+            window.onkeydown = function(e) {
+                tuzijie.changeDirection(e.keyCode);
+            };
+
+            setInterval(function() {
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
+                tuzijie.update();
+                tuzijie.draw();
+            }, 100);
+        };
+    </script>
+</body>
+</html>

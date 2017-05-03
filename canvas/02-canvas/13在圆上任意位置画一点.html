@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 求圆上一点坐标：
+        * 1、x = 圆心x + 半径 * Math.cos(弧度)
+        * 2、y = 圆心y + 半径 * Math.sin(弧度)
+        * */
+
+        // 在100，100点，画一个半径60的圆
+        ctx.beginPath();
+        ctx.arc(100, 100, 60, 0, Math.PI*2);
+        ctx.stroke();
+
+        // 在圆上30度的地方，绘制一点
+        var pointX = 100 + 60 * Math.cos(Math.PI/6);
+        var pointY = 100 + 60 * Math.sin(Math.PI/6);
+        ctx.beginPath();
+        ctx.arc(pointX, pointY, 4, 0, Math.PI*2);
+        ctx.fillStyle = 'red';
+        ctx.fill();
+    </script>
+</body>
+</html>

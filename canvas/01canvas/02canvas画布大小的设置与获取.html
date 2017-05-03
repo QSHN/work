@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <!--<canvas style="border: 1px solid red" width="500" height="500"></canvas>-->
+    <canvas style="border: 1px solid red; width: 500px; height: 500px"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+        /*
+        * 设置画布大小有两种方式：
+        *
+        * 1、直接在canvas的html结构中添加width与height属性
+        * 2、通过canvasDOM对象的width与height属性
+        *
+        * 注意事项：
+        * 1、canvas绘制的图形，都是像素图(位图)，
+        * 所以所有关于大小的属性，都不需要添加单位，默认就是px为单位
+        *
+        * 2、不要通过css相关的语法设置画布大小，
+        * 这种方式设置的是canvasDOM的大小，并非画布大小,
+        * 这种方式会对画布进行拉伸。
+        * */
+        /*;
+        cvs.width = 200;
+        cvs.height = 200;*/
+
+        // 绘制30*30的矩形
+        ctx.moveTo(20, 20);
+        ctx.lineTo(50, 20);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(20, 50);
+        ctx.lineTo(20, 20);
+        ctx.fill();
+
+        // 获取当前的画布大小
+        console.log(cvs.width);
+        console.log(cvs.height);
+    </script>
+</body>
+</html>

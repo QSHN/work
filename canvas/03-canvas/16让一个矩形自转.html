@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function getCtx(width, height, container) {
+            var cvs = document.createElement('canvas');
+            var ctx = cvs.getContext('2d');
+            cvs.width = width;
+            cvs.height = height;
+            cvs.style.border = '1px solid red';
+
+            // 如果传入了容器，那么就先获取容器，然后把画布添加进去
+            container && (document.querySelector(container).appendChild(cvs));
+            return ctx;
+        }
+
+        /*
+        * 需求：让一个矩形围绕自己的中心旋转
+        * */
+        var ctx = getCtx(600, 400, 'body');
+        ctx.strokeRect(100, 100, 50, 50);
+
+        /*
+        * 步骤：
+        * 0、为了让旋转的中心点为矩形中心点，先平移画布原点到矩形中心
+        * 1、开启定时器
+        * 2、先清除画布
+        * 3、旋转坐标系
+        * 4、绘制矩形，矩形的坐标更新为-宽/2，-高/2。
+        * */
+        ctx.translate(100 + 50 /2, 100 + 50 / 2);
+        setInterval(function(){
+            ctx.clearRect(-50, -50, ctx.canvas.width, ctx.canvas.height);
+            ctx.rotate(Math.PI/90);
+            ctx.strokeRect(-25, -25, 50, 50);
+        }, 1000 / 60);
+
+    </script>
+</body>
+</html>

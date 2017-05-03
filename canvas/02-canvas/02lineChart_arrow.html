@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折线图</title>
+</head>
+<body>
+    <script>
+        /*
+        * @constrctor { Function } 折线图类
+        * @param { options: Object } 可配参数
+        * @param { options.ctx: Context } 绘图上下文
+        * @param { options.paddingTop: number } 坐标轴到画布上边的距离
+        * @param { options.paddingRight: number } 坐标轴到画布右边的距离
+        * @param { options.paddingBottom: number } 坐标轴到画布下边的距离
+        * @param { options.paddingLeft: number } 坐标轴到画布左边的距离
+        * @param { options.arrowWdith: number } 箭头宽度
+        * @param { options.arrowHeight: number } 箭头高度
+        * */
+        function LineChart(options) {
+            this.ctx = options.ctx;
+
+            this.paddingTop = options.paddingTop || 30;
+            this.paddingRight = options.paddingRight || 30;
+            this.paddingBottom = options.paddingBottom || 30;
+            this.paddingLeft = options.paddingLeft || 30;
+
+            this.arrowWdith = options.arrowWdith || 15;
+            this.arrowHeight = options.arrowHeight || 30;
+
+            // 该对象记录坐标轴中三个点的坐标
+            this.vertex = {
+                top: {
+                    x: this.paddingLeft,
+                    y: this.paddingTop
+                },
+                origin: {
+                    x: this.paddingLeft,
+                    y: this.ctx.canvas.height - this.paddingBottom
+                },
+                right: {
+                    x: this.ctx.canvas.width - this.paddingRight,
+                    y: this.ctx.canvas.height - this.paddingBottom
+                }
+            }
+        }
+
+        LineChart.prototype = {
+
+            // 绘制坐标轴
+            drawCoord: function() {
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.vertex.top.x, this.vertex.top.y);
+                this.ctx.lineTo(this.vertex.origin.x, this.vertex.origin.y);
+                this.ctx.lineTo(this.vertex.right.x, this.vertex.right.y);
+                this.ctx.stroke();
+            },
+
+            // 绘制箭头
+            drawArrow: function() {
+
+                // 绘制上面的箭头
+                var topArrow = {
+                    left: {
+                        x: this.vertex.top.x - this.arrowWdith / 2,
+                        y: this.vertex.top.y + this.arrowHeight
+                    },
+                    origin: {
+                        x: this.vertex.top.x,
+                        y: this.vertex.top.y + this.arrowHeight / 2
+                    },
+                    right: {
+                        x: this.vertex.top.x + this.arrowWdith / 2,
+                        y: this.vertex.top.y + this.arrowHeight
+                    }
+                };
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.vertex.top.x, this.vertex.top.y);
+                this.ctx.lineTo(topArrow.left.x, topArrow.left.y);
+                this.ctx.lineTo(topArrow.origin.x, topArrow.origin.y);
+                this.ctx.lineTo(topArrow.right.x, topArrow.right.y);
+                this.ctx.closePath();
+                this.ctx.stroke();
+
+                // 绘制右面的箭头
+                var rightArrow = {
+                    left: {
+                        x: this.vertex.right.x - this.arrowHeight,
+                        y: this.vertex.right.y - this.arrowWdith / 2,
+                    },
+                    origin: {
+                        x: this.vertex.right.x - this.arrowHeight / 2,
+                        y: this.vertex.right.y
+                    },
+                    right: {
+                        x: this.vertex.right.x - this.arrowHeight,
+                        y: this.vertex.right.y + this.arrowWdith / 2
+                    }
+                };
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.vertex.right.x, this.vertex.right.y);
+                this.ctx.lineTo(rightArrow.left.x, rightArrow.left.y);
+                this.ctx.lineTo(rightArrow.origin.x, rightArrow.origin.y);
+                this.ctx.lineTo(rightArrow.right.x, rightArrow.right.y);
+                this.ctx.closePath();
+                this.ctx.stroke();
+            },
+
+            // 绘制点
+            drawPoint: function() {
+
+            },
+
+            // 绘制折线
+            drawLine: function() {
+
+            }
+        }
+    </script>
+
+    <script>
+        // 动态创建canvas，获取上下文
+        var cvs = document.createElement('canvas');
+        var ctx = cvs.getContext('2d');
+        cvs.width = 600;
+        cvs.height = 400;
+        cvs.style.border = '1px solid red';
+        document.body.appendChild(cvs);
+
+        // 创建折线图实例，绘制
+        var lineChart = new LineChart({ ctx: ctx });
+        lineChart.drawCoord();
+        lineChart.drawArrow();
+    </script>
+</body>
+</html>

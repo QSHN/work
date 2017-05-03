@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var arr = [2,2,2,3,3,3];
+
+        // 需求：删除数组中所有的3
+
+//        for(var i = 0, len = arr.length; i < len; i++) {
+//            if(arr[i] === 3) {
+//                arr.splice(i, 1);
+//                i--;
+//            }
+//        }
+//        console.log(arr);
+
+
+        // 倒着删除数组中的数据
+        for(var i = arr.length - 1; i >= 0; i--) {
+            if(arr[i] === 3) {
+                arr.splice(i, 1);
+            }
+        }
+        console.log(arr);
+    </script>
+</body>
+</html>

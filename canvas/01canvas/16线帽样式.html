@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red" width="500"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 线帽样式：
+        * ctx.lineCap = 'butt' || 'round' || 'square'
+        * butt: 默认值，啥特性都没
+        * round: 圆头
+        * square：线头两段各增加线宽的一半，俗称5毛钱特效
+        * */
+
+        /*ctx.lineWidth = 10;
+
+        ctx.lineCap = 'butt';
+        ctx.moveTo(10, 10);
+        ctx.lineTo(400, 10);
+
+        ctx.lineCap = 'round';
+        ctx.moveTo(10, 40);
+        ctx.lineTo(400, 40);
+
+        ctx.lineCap = 'square';
+        ctx.moveTo(10, 70);
+        ctx.lineTo(400, 70);
+
+        // 按照最新的lineCap状态绘制所有线条
+        ctx.stroke();*/
+
+        /*------------------------------------------*/
+
+        ctx.lineWidth = 10;
+
+        ctx.lineCap = 'butt';
+        ctx.moveTo(10, 10);
+        ctx.lineTo(400, 10);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineCap = 'round';
+        ctx.moveTo(10, 40);
+        ctx.lineTo(400, 40);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.lineCap = 'square';
+        ctx.moveTo(10, 70);
+        ctx.lineTo(400, 70);
+        ctx.stroke();
+    </script>
+</body>
+</html>

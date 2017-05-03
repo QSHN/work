@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas style="border: 1px solid red" width="800" height="300"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 线宽，设置描边宽度：
+        * ctx.lineWidth = 5
+        * */
+
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'red';
+        ctx.moveTo(10, 10);
+        ctx.lineTo(400, 10);
+        ctx.stroke();
+
+        /*
+        * 闭合路径，让当前路径的起点与结束点相连。
+        * ctx.closePath();
+        * */
+
+        // 绘制一个30*30的矩形
+        ctx.moveTo(20, 20);
+        ctx.lineTo(50, 20);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(20, 50);
+        //ctx.lineTo(20, 20);
+        //ctx.lineTo(50, 20);
+        ctx.closePath();
+        ctx.stroke();
+    </script>
+</body>
+</html>

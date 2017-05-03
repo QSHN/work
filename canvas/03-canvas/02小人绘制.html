@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red" width="500" height="500"></canvas>
+    <img src="./img/NPCrabbitbaby-2.png" style="display: none;">
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+        var img = document.querySelector('img');
+
+        /*// 要绘制img，必须得保证这个img的资源已经下载完毕
+        img.onload = function() {
+            ctx.drawImage(img,
+                    120, 0, 40, 65,
+                    20, 20, 40, 65);
+        };*/
+
+        /*---------------------------------------------*/
+
+        // 要绘制img，必须得保证这个img的资源已经下载完毕
+        /*img.onload = function() {
+            var index = 0;
+            setInterval(function() {
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
+                ctx.drawImage(img,
+                        40 * index, 0, 40, 65,
+                        20, 20, 40, 65);
+                index = ++index % 4;
+            }, 200);
+        };*/
+
+        // 帧(一帧就是一张图像)动画
+
+        /*----------------------------------------------------*/
+
+        /*
+        * 对x轴的切换，用来控制小人某个方向不同动作切换；
+        * 对y轴的切换，用来控制小人行走的方向。
+        * */
+        // 要绘制img，必须得保证这个img的资源已经下载完毕
+        img.onload = function() {
+            var index = 0;
+            var direction = 3;
+            setInterval(function() {
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
+                ctx.drawImage(img,
+                        40 * index, 65 * direction, 40, 65,
+                        20, 20, 40, 65);
+                index = ++index % 4;
+            }, 200);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red" width="500" height="500"></canvas>
+    <img src="./img/ladyLiberty.jpg" style="display: none;">
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+        var img1 = new Image();
+        img1.src = './img/DTGF-parasol.png';
+        var img2 = new Image();
+        img2.src = './img/TANK-G14D.png';
+
+        /*
+        * 需求：同时绘制两个图片
+        * 难点：如何保证两个图片都加载完毕
+        * */
+
+        // 用来记录已经加载了几张图片
+        var loaded = 0;
+
+        img1.onload = function() {
+            loaded++;
+            if(loaded >= 2) {
+                console.log('全部加载完毕，可以一起绘制了');
+            }
+        }
+
+        img2.onload = function() {
+            loaded++;
+            if(loaded >= 2) {
+                console.log('全部加载完毕，可以一起绘制了');
+            }
+        }
+    </script>
+</body>
+</html>

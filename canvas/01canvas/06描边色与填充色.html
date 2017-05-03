@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--页面中的canvasDom相当安装了PS软件-->
+    <canvas style="border: 1px solid red"></canvas>
+    <script>
+        var cvs = document.querySelector('canvas');
+        var ctx = cvs.getContext('2d');
+
+        /*
+        * 设置描边色：
+        * ctx.strokeStyle = css所有的颜色表示方法 || 渐变模式 || 图片背景模式
+        *
+        * 设置填充色：
+        * ctx.fillStyle = css所有的颜色表示方法 || 渐变模式 || 图片背景模式
+        * */
+
+        ctx.moveTo(20, 20);
+        ctx.lineTo(50, 20);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(20, 50);
+        ctx.lineTo(20, 20);
+
+        // 要让属性样式生效，必须要在绘制方法前去设置，
+        // 否则就会按照默认属性绘制图形。
+        ctx.strokeStyle = 'red';
+        ctx.fillStyle = 'blue';
+
+        // 同一条路径可以被重复的填充与描边以及其他方式的绘制。
+        ctx.fill();
+        ctx.fill();
+        ctx.fill();
+        ctx.stroke();
+        ctx.stroke();
+        ctx.stroke();
+    </script>
+</body>
+</html>

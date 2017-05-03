@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="e.js"></script>
+</head>
+<body>
+    <button>开枪</button>
+    <script>
+        var e = new E();
+        e.on('猎人打了一枪', function(){
+            console.log('狼死了')
+        });
+        e.on('猎人打了一枪', function(){
+            console.log('老虎吓跑了')
+        });
+
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function(){
+            e.trigger('猎人打了一枪');
+        });
+    </script>
+</body>
+</html>
