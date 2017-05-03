@@ -116,10 +116,164 @@
   100% { margin-left: -1200px; }
 }
 
+// 变长变短交替
 @include keyframes(long_short_show){
   50% {
     -ms-transform: scaleY(0);
     -webkit-transform: scaleY(0);
     transform: scaleY(0);
   }
+}
+
+// in-xxx 进来方向
+@keyframes in-top {
+    from {
+        -webkit-transform: rotate3d(-1, 0, 0, 90deg);
+        transform: rotate3d(-1, 0, 0, 90deg);
+    }
+    to {
+        -webkit-transform: rotate3d(0, 0, 0, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+}
+
+@keyframes in-right {
+    from {
+        -webkit-transform: rotate3d(0, -1, 0, 90deg);
+        transform: rotate3d(0, -1, 0, 90deg);
+    }
+    to {
+        -webkit-transform: rotate3d(0, 0, 0, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+}
+
+@keyframes in-bottom {
+    from {
+        -webkit-transform: rotate3d(1, 0, 0, 90deg);
+        transform: rotate3d(1, 0, 0, 90deg);
+    }
+    to {
+        -webkit-transform: rotate3d(0, 0, 0, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+}
+
+@keyframes in-left {
+    from {
+        -webkit-transform: rotate3d(0, 1, 0, 90deg);
+        transform: rotate3d(0, 1, 0, 90deg);
+    }
+    to {
+        -webkit-transform: rotate3d(0, 0, 0, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+}
+
+// out-xxx 出来方向
+@keyframes out-top {
+    0% {
+        -webkit-transform: rotate3d(0, 0, 0, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+    99% {
+        -webkit-transform: rotate3d(-1, 0, 0, 104deg);
+        transform: rotate3d(-1, 0, 0, 104deg);
+    }
+    100% { opacity: 0; }
+}
+
+@keyframes out-right {
+    0% {
+        -webkit-transform: rotate3d(0, 0, 0, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+    99% {
+        -webkit-transform: rotate3d(0, -1, 0, 104deg);
+        transform: rotate3d(0, -1, 0, 104deg);
+    }
+    100% { opacity: 0; }
+}
+
+@keyframes out-bottom {
+    0% {
+        -webkit-transform: rotate3d(0, 0, 0, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+    99% {
+        -webkit-transform: rotate3d(1, 0, 0, 104deg);
+        transform: rotate3d(1, 0, 0, 104deg);
+    }
+    100% { opacity: 0; }
+}
+
+@keyframes out-left {
+    0% {
+        -webkit-transform: rotate3d(0, 0, 0, 0deg);
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+    99% {
+        -webkit-transform: rotate3d(0, 1, 0, 104deg);
+        transform: rotate3d(0, 1, 0, 104deg);
+    }
+    100% { opacity: 0; }
+}
+
+
+// 鼠标经过动画
+.in-top .hover {
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-animation: in-top 300ms ease 0ms 1 forwards;
+    animation: in-top 300ms ease 0ms 1 forwards;
+}
+
+.in-right .hover {
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    -webkit-animation: in-right 300ms ease 0ms 1 forwards;
+    animation: in-right 300ms ease 0ms 1 forwards;
+}
+
+.in-bottom .hover {
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-animation: in-bottom 300ms ease 0ms 1 forwards;
+    animation: in-bottom 300ms ease 0ms 1 forwards;
+}
+
+.in-left .hover {
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    -webkit-animation: in-left 300ms ease 0ms 1 forwards;
+    animation: in-left 300ms ease 0ms 1 forwards;
+}
+
+// 鼠标离开动画
+.out-top .hover {
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-animation: out-top 300ms ease 0ms 1 forwards;
+    animation: out-top 300ms ease 0ms 1 forwards;
+}
+
+.out-right .hover {
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    -webkit-animation: out-right 300ms ease 0ms 1 forwards;
+    animation: out-right 300ms ease 0ms 1 forwards;
+}
+
+.out-bottom .hover {
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-animation: out-bottom 300ms ease 0ms 1 forwards;
+    animation: out-bottom 300ms ease 0ms 1 forwards;
+}
+
+.out-left .hover {
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    -webkit-animation: out-left 300ms ease 0ms 1 forwards;
+    animation: out-left 300ms ease 0ms 1 forwards;
 }

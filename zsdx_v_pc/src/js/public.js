@@ -138,10 +138,43 @@ export const checkPassword = (val) => {
   return modes
 }
 
+// 判断鼠标进来离开的方向
+export const getMouseDirection = (e, self) => {
+  let w = self.offsetWidth
+  let h = self.offsetHeight
+  let x = (e.pageX - self.offsetLeft - (w / 2) * (w > h ? (h / w) : 1))
+  let y = (e.pageY - self.offsetTop - (h / 2) * (h > w ? (w / h) : 1))
+  let d = Math.round(Math.atan2(y, x) / 1.57079633 + 5) % 4
+  return d
+}
+
+// 根据鼠标进来离开的方向添加class
+export const addMouseClass = (e, self, state) => {
+  let direction = getMouseDirection(e, self)
+  let classSuffix = ''
+  self.className = ''
+  switch (direction) {
+    case 0 :
+      classSuffix = '-top'
+      break
+    case 1 :
+      classSuffix = '-right'
+      break
+    case 2 :
+      classSuffix = '-bottom'
+      break
+    case 3 :
+      classSuffix = '-left'
+      break
+  }
+  self.classList.add(state + classSuffix)
+}
+
 export default {
   createCode,                   // 创建二维码
   sendDataFuc,                  // 发送数据接口
   isTrueUser,                   // 检测账户格式
   globalPrompt,                 // 全局提示
-  checkPassword                 // 判断密码强度
+  checkPassword,                // 判断密码强度
+  addMouseClass                 // 根据鼠标进来离开的方向添加class
 }

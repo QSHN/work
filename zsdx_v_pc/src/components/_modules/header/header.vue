@@ -3,7 +3,7 @@
     <nav class="header_nav f--hlc">
       <router-link class="logo ho_6" to="/"><img src="../../../img/icon/logo_green_w150.png"/></router-link>
       <router-link class="text ho_6" to="/">课程</router-link>
-      <router-link class="text ho_6" to="/">学院</router-link>
+      <router-link class="text ho_6" to="/college">学院</router-link>
     </nav>
 
     <div class="search_layer f--hlc flex-1">
