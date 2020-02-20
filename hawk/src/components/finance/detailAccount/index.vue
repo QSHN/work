@@ -1,0 +1,339 @@
+<template>
+    <f7-page>
+        <f7-navbar title="科目" back-link>
+            <f7-nav-right>
+                <f7-link href="#" @click="selectAccountSet">选择账套</f7-link>
+            </f7-nav-right>
+        </f7-navbar>
+
+        <div class="p_content">
+            <div>
+                <div class="list-item">
+                    <label>当前账套</label>
+                    <span style="padding-right: 20px;">{{accountSet && accountSet.accountSetName}}</span>
+                </div>
+                <div class="list-item" style="background: #f8f8f8;">
+                    <label>搜索</label>
+                    <input class="item-input"
+                           type="text"
+                           placeholder="搜索科目"
+                           v-model="search" />
+                </div>
+            </div>
+
+            <div class="layer">
+                <div class="left" v-if="currentId !== '0'">
+                    <ul>
+                        <li v-for="(v, i) in subjectType"
+                            :key="i"
+                            @click="currentId = v._id"
+                            :class="{active: v._id == currentId}">
+                            {{v.name}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <ul>
+                        <li v-for="(v, i) in getSubjectList"
+                             @click="go(v.code, v.name)"
+                             :key="i">
+                            <div class="li_t">
+                                <span>{{v.code}}</span>
+                                {{v.name}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </f7-page>
+</template>
+
+<script>
+import {mapGetters, mapMutations, mapActions} from 'vuex';
+import axios from 'axios'
+import DatePicker from 'vue2-datepicker'
+import moment from 'moment'
+import NP from 'number-precision'
+import { formatMoney } from 'accounting'
+export default {
+    name: "index",
+    components: {
+        DatePicker
+    },
+    data () {
+        return {
+            currentId: 1,
+            accountingPeriod: null,
+            search: '',
+            accountList: [],
+            accountSet: null,
+            subjectList: [],
+            subjectType: [
+                {
+                    _id: 1,
+                    name: '资产',
+                    isEdit: false
+                },
+                {
+                    _id: 2,
+                    name: '负债',
+                    isEdit: false
+                },
+                {
+                    _id: 7,
+                    name: '共同',
+                    isEdit: false
+                },
+                {
+                    _id: 3,
+                    name: '权益',
+                    isEdit: false
+                },
+                {
+                    _id: 4,
+                    name: '成本',
+                    isEdit: false
+                },
+                {
+                    _id: 5,
+                    name: '损益',
+                    isEdit: false
+                },
+                {
+                    _id: 6,
+                    name: '表外',
+                    isEdit: false
+                }
+            ],
+            groupList: []
+        }
+    },
+    computed: {
+        ...mapGetters([
+            'myProfile'
+        ]),
+        getSubjectList () {
+            let list
+            if (this.search) {
+                list = this.subjectList.filter(v => v.code.includes(this.search) || v.name.includes(this.search))
+                list = this.subjectList.filter(v => list.find(f => v._id === f._id || v.pFirstId === f._id || v.pSecondId === f._id))
+            } else {
+                let g = this.groupList.filter(v => v.type === this.currentId)
+                list = this.subjectList.filter(v => g.filter(i => v.typeId === i._id).length)
+            }
+            return list
+        }
+    },
+    methods: {
+        moment,
+        formatMoney,
+        updateMyInfo (accountSetId) {
+            this.$store.dispatch('SAVE_USER_KEY', { accountSetId: accountSetId })
+        },
+        selectAccountSet () {
+            let buttons = []
+            this.accountList.forEach(v => {
+                if (!(v.status === '编辑中' || v.status === '已停用' || v.status === '已删除')) {
+                    buttons.push({
+                        text: v.accountSetName,
+                        onClick: () => {
+                            this.updateMyInfo(v._id)
+                            this.updateAccountSet()
+                            this.$forceUpdate()
+                        }
+                    })
+                }
+            })
+            buttons.push({
+                text: '取消'
+            })
+            $dialog.create({
+                title: '选择账套',
+                buttons: buttons,
+                verticalButtons: true,
+            }).open();
+        },
+        updateAccountSet () {
+            let accountSet = this.accountList.find(v => v._id === this.myProfile.accountSetId)
+            this.accountSet = accountSet
+            this.accountingPeriod = this.accountSet.currentAccountingPeriod || this.accountSet.accountingYear + '-' + this.accountSet.accountingPeriod
+        },
+        loadSubject () {
+            axios.post(CONFIG.server.tradeApiUrl + 'subject/type/query', {
+                accountSetId: this.accountSet._id
+            }).then(res => {
+                this.groupList = res.data
+            }).catch(err => {
+                $alert(err.message)
+            })
+            axios.post(CONFIG.server.tradeApiUrl + 'subject/subject/query', {
+                accountSetId: this.accountSet._id
+            }).then(res => {
+                this.subjectList = res.data
+            }).catch(err => {
+                $alert(err.message)
+            })
+        },
+        go (code, name) {
+            this.$f7router.navigate('/finance/detailAccount/detail', {
+                props: {
+                    accountSet: this.accountSet,
+                    subjectCode: code,
+                    subjectName: name
+                }
+            })
+        }
+    },
+    created() {
+        $preloader.show();
+        axios.post(CONFIG.server.tradeApiUrl + 'accountSet/query', {
+            companyId: this.myProfile.bClientId
+        }).then(res => {
+            $preloader.hide();
+            this.accountList = res.data
+            if (!this.myProfile.accountSetId) {
+                this.selectAccountSet()
+            } else {
+               this.updateAccountSet()
+            }
+            this.loadSubject()
+        }).catch(err => {
+            $alert('查询账套列表失败')
+            $preloader.hide();
+        })
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+    .list-item{
+        background: #FFFFFF;
+        /*width: 100%;*/
+        height: 46px;
+        font-size: 14px;
+        line-height: 46px;
+        border-bottom: 1px solid #f8f8f8;
+        margin: 0;
+        padding: 0 0 0 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .list-type div{
+        width: 50%;
+        text-align: right;
+        margin-right: 10px;
+        color: darkgray;
+    }
+    .list-item .item-input{
+        width: 50%;
+        background:none;
+        outline:none;
+        border:0px;
+        float: right;
+        text-align: right;
+        font-size: 14px;
+        line-height: 46px;
+        padding-right: 15px;
+        box-sizing: border-box;
+        color: #333;
+    }
+
+    .p_content {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        background: #fff;
+        flex-direction: column;
+
+        .layer {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .left {
+            width: 80px;
+            border-right: 1px solid #D8D8D8;
+            overflow: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+
+            .back, li {
+                height: 45px;
+                line-height: 45px;
+                text-align: center;
+                background: #3385FF;
+                font-size: 14px;
+                color: #fff;
+            }
+
+            li {
+                padding: 0 10px;
+                height: 44px;
+                line-height: 44px;
+                border-bottom: 1px solid #D8D8D8;
+                color: #666;
+                background: #fff;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;/*文本不换行*/
+
+                &.active {
+                    background: #F8F8F8;
+                }
+            }
+        }
+
+        .right {
+            flex-grow: 1;
+            overflow: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+
+            .title {
+                height: 45px;
+                line-height: 45px;
+                font-size: 14px;
+                color: #666;
+                background: #F8F8F8;
+                padding-left: 10px;
+            }
+
+            li {
+                color: #333;
+                display: flex;
+                height: 44px;
+                line-height: 44px;
+                border-bottom: 1px solid #D8D8D8;
+                background: #fff;
+
+
+                .li_t {
+                    flex-grow: 1;
+                    padding: 0 10px;
+                    flex-direction: row;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;/*文本不换行*/
+                    display: flex;
+
+                    span {
+                        width: 120px;
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+</style>

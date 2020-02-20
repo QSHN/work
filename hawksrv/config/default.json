@@ -1,0 +1,51 @@
+﻿{
+    "db": {
+        "connectionString": "mongodb://dds-wz9783f3c06adbb41.mongodb.rds.aliyuncs.com:3717,dds-wz9783f3c06adbb42.mongodb.rds.aliyuncs.com:3717/xiaoniu?replicaSet=mgset-11632475",
+        "user": "abc",
+        "password": "abc"
+    },
+   "tradeApiUrl": "http://apitest.sanfanerp.com",    
+    "secret": "sanfanerp.com",
+    "port": "8081",
+
+    "aliyun": {
+        "user": {
+            "accessKeyId": "LTAIpLBnEpyk7eTn",
+            "secretAccessKey": "qknnMwM7f5E72qmqRAalWegUnX4T0c"
+        },
+        "sms": {
+            "signName": "小牛外勤",
+            "templateCode": "SMS_166280602"
+        },
+        "oss": {
+            "role": "acs:ram::1856142433359782:role/sanfanrole",
+            "expiracy": 3600,
+            "region": "oss-cn-shenzhen",
+            "bucket": "xiaoniu-bet"
+        }
+    },
+    "jpush": {
+    "key":"f4670bd35855482ce09f4b28",
+    "secret":"0e7712ce3beed3b43a919b53"
+    },
+   "xgpush": {
+    "ios": {
+      "appId": "6257049acb750",
+      "secretKey": "0a586377889f7e36032e6a8f22f59930",
+      "environment": "dev"
+    },
+    "android": {
+      "appId": "7a8a3793655be",
+      "secretKey": "7a92c5146c20c992d0731ee21e2188af"
+    }
+
+    },
+    "pushMode": "xgpush",
+    "rongcloud": {
+        "appkey":"z3v5yqkbzi4u0",
+        "secret":"h3uexdpncO"
+    },
+    "cronRun":false
+
+	 
+}
