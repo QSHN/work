@@ -1,0 +1,164 @@
+.banner {
+  width: 100%;
+  height: 525px;
+  background: url("../../../assets/image/index/bg_green_1@2x.png") no-repeat;
+  background-size: cover;
+
+  .container {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .banner_left {
+    padding: 70px 0 0 59px;
+  }
+
+  .logo {
+    width: 399px;
+    height: 216px;
+  }
+
+  p {
+      width: 400px;
+      margin-left: 17px;
+      color: #fff;
+
+      em {
+          color: #FFBF31;
+          font-style: normal;
+      }
+  }
+
+  .left_c {
+    margin: 22px 0 0 17px;
+    display: flex;
+
+    .code {
+      width: 120px;
+      height: 120px;
+      margin-right: 9px;
+    }
+
+    .list_layer {
+      .list {
+        width: 190px;
+        height: 50px;
+        margin-bottom: 16px;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        cursor: pointer;
+
+        &:nth-child(1) {
+          position: relative;
+          background: url("../../../assets/image/index/btn_tel_long@2x.png") no-repeat;
+          background-size: cover;
+
+          &:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "400-688-1280";
+            width: 190px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #fff;
+            color: #01B38B;
+            font-size: 15px;
+            transition: 500ms;
+            opacity: 0;
+          }
+          &:hover:after { opacity: 1; }
+        }
+
+        &:nth-child(2) {
+          display: flex;
+          background: url("../../../assets/image/index/btn_qq_wechat_long@2x.png") no-repeat;
+          background-size: cover;
+        }
+      }
+
+      .qq_btn,
+      .weixin_btn {
+        &:before{
+          content: "";
+          width: 100%;
+          height: 100%;
+          background: #fff;
+          opacity: 0;
+          display: block;
+          transition: 300ms;
+        }
+        &:hover:before{
+          opacity: .2;
+        }
+      }
+
+      .qq_btn {
+        width: 89px;
+        height: 100%;
+        display: block;
+      }
+
+      .weixin_btn {
+        position: relative;
+        flex: 1;
+        height: 100%;
+
+        &:after{
+          position: absolute;
+          top: 50px;
+          right: 0;
+          content: "";
+          width: 118px;
+          height: 0;
+          background: url("../../../assets/image/index/qr_core_wechat@2x.png") no-repeat top left;
+          background-size: 118px 118px;
+          display: block;
+          transition: 300ms;
+        }
+
+        &:hover:after{
+          height: 118px;
+        }
+      }
+    }
+  }
+
+  .banner_right{
+    width: 520px;
+    height: 460px;
+    background: url("../../../assets/image/index/pic_iphone@2x.png") no-repeat;
+    background-size: cover;
+    align-self: flex-end;
+    margin-right: 83px;
+  }
+}
+.sub_nav {
+  width: 100%;
+  overflow: hidden;
+  background: #f8f8f8;
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+  }
+
+  li, a {
+    position: relative;
+    width: 200px;
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+    margin-right: 1px;
+    color: #000;
+    cursor: pointer;
+    transition: 300ms;
+
+
+    &:hover { background: #fff; }
+  }
+}

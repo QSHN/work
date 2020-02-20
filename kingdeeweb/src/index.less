@@ -1,0 +1,72 @@
+@import '~iview/src/styles/index.less';
+
+@menu-dark-title: #001529;
+@menu-dark-active-bg: #000c17;
+@layout-sider-background: #001529;
+
+html {
+  overflow: auto;
+}
+//body {
+//  min-width: 1280px;
+//}
+.ivu-table-header table thead tr th {
+  //border-right: 1px solid #CED2DA !important;
+  //background:rgba(226,234,240,1);
+  user-select: none;
+  -moz-user-select: none;
+}
+
+.input_table {
+  overflow: visible !important;
+  .text {
+    padding-left: 8px;
+  }
+  .hover_layer {
+    display: none;
+
+    .package_ul {
+      width: 163px;
+
+      li {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .ivu-table-row:hover,
+  .ivu-table-row.active {
+    .text {
+      display: none;
+    }
+    .hover_layer {
+      display: block;
+    }
+  }
+}
+.ivu-table-with-summary .ivu-table-tbody tr:last-child td {
+  border-bottom: 1px solid #e8eaec;
+}
+
+.print_table {
+  .ivu-table-cell {
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 15px;
+  }
+  .ivu-table-column-center {
+    height: auto !important;
+    padding: 5px;
+  }
+}
+
+.ivu-select-selection > div {
+  display: flex;
+  align-items: center;
+
+  .ivu-select-selected-value {
+    display: flex;
+    flex-grow: 1;
+  }
+}

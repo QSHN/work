@@ -1,0 +1,132 @@
+.section {
+  width: 100%;
+  padding: 0;
+
+  .section_t {
+    width: 100%;
+    height: 260px;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+      text-align: center;
+      height:30px;
+      line-height:30px;
+      font-size:30px;
+      font-weight:600;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 20px;
+    }
+  }
+
+  .section_c {
+    width: 100%;
+    height: 600px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    //overflow: hidden;
+
+    .main {
+      height: 600px;
+      display: flex;
+      align-items: center;
+    }
+
+    .right {
+      height: 600px;
+      word-break: break-all;
+
+      .item_t {
+        position: relative;
+        font-size: 18px;
+        line-height: 18px;
+        color: #333;
+        font-weight:bold;
+
+        &:before {
+          position: absolute;
+          left: -46px;
+          top: -9px;
+          content: "";
+          width: 46px;
+          height: 46px;
+          background: url("../../assets/image/index/icon_problem_red@2x.png") no-repeat;
+          background-size: cover;
+          display: block;
+        }
+      }
+
+      .active .item_c p{
+        font-size: 13px;
+        color: #000;
+        font-weight: bold;
+        line-height: 24px;
+        margin: 20px 0 51px 0;
+      }
+
+      .active1 .item_c p{
+        font-size:12px;
+        color: #363636;
+        line-height: 20px;
+        margin-top: 20px;
+      }
+
+      .active1 .item_t:before {
+        top: -16px;
+        background: url("../../assets/image/index/icon_light_green@2x.png") no-repeat;
+        background-size: cover;
+      }
+    }
+
+    &.s1 {
+      background-image: url("../../assets/image/index/bg_gray_2@2x.png");
+
+      .left {
+        width: 758px;
+        min-width: 758px;
+        height: 534px;
+      }
+
+      .right {
+        padding: 60px 40px 0 66px;
+      }
+    }
+    &.s2 {
+      background-image: url("../../assets/image/index/bg_gray_3@2x.png");
+
+      .main {
+        flex-direction: row-reverse;
+      }
+
+      .left {
+        width: 424px;
+        min-width: 424px;
+        height: 708px;
+      }
+
+      .right {
+        padding: 75px 140px 0 0;
+      }
+    }
+    &.s3 {
+      background-image: url("../../assets/image/index/bg_map_4@2x.png");
+
+      .left {
+        width: 424px;
+        min-width: 424px;
+        height: 708px;
+      }
+
+      .right {
+        padding: 105px 140px 0 172px;
+      }
+    }
+  }
+}

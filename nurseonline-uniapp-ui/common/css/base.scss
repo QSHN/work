@@ -1,0 +1,235 @@
+$fc-normal: #595757;
+$fc-grey: #b5b5b6;
+$fc-deep: #3e3a39;
+
+$normal: #6e8cfa;
+$boder: #727171;
+
+$bg: #eeeff3;
+$white: #fff;
+
+page {
+	height: 100%;
+	color: $fc-normal;
+	font-size: 28rpx;
+	background-color: $bg;
+}
+
+page::after{
+  content: "";
+  width: 750rpx;
+  height: 2rpx;
+  position: fixed;
+  box-shadow: 0 8rpx 25rpx #AAA;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+}
+
+/* 常用颜色 */
+.bg-white {
+	background-color: $white;
+}
+
+.bg-normal {
+	background-color: $normal;
+}
+
+.font-deep {
+	color: $fc-deep;
+}
+
+.font-grey {
+	color: $fc-grey;
+}
+
+.font-blue {
+	color: $normal;
+}
+
+.font-red {
+	color: #ed5560;
+}
+
+.fc-normal {
+	color: $normal;
+}
+
+/* 图标样式 */
+.icon-01 {
+	display: inline-block;
+	background-image: url(http://file.ry600.com//snapshot/vms/site/di/di70684438lrfavs/du9sks0f7yefy23z/image//nursing_icon_01.png);
+	background-repeat: no-repeat;
+}
+
+.icon-02 {
+	@extend .icon-01;
+	background-image: url(http://file.ry600.com//snapshot/vms/site/di/di70684438lrfavs/du9sks0f7yefy23z/image//nursing_icon_02.png);
+}
+
+// .arrow {
+// 	@extend .icon-01;
+// 	background-image: url(http://file.ry600.com/snapshot/vms/site/di/di70684438lrfavs/82ojywir5vqogktm/image//wx_arrow.png);
+// }
+
+/* 文本样式 */
+.tc {
+	text-align: center;
+}
+
+.tr {
+	text-align: right;
+}
+
+.tl {
+	text-align: left;
+}
+
+/* Flex盒子样式 */
+.flex {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-msg {
+	@extend .flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.justify-around {
+	@extend .flex;
+	justify-content: space-around;
+}
+
+.justify-between {
+	@extend .flex;
+	justify-content: space-between;
+}
+
+.justify-center {
+	@extend .flex;
+	justify-content: center;
+}
+
+.align-center {
+	@extend .flex;
+	align-items: center;
+}
+
+.flex-center {
+	@extend .flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* 常用组件统一样式 */
+button {
+	background-color: $normal;
+	color: $white;
+	width: 85%;
+	font-size: 30rpx;
+	border: none;
+}
+
+button[disabled]{
+	background-color: #949494 !important;
+	color: #fff !important;
+}
+
+button.transparent {
+	background-color: transparent;
+	color: $normal;
+	border: 1px solid $normal;
+}
+
+button::after {
+	border: 0;
+}
+
+.line {
+	border: 1px solid $boder;
+}
+
+.holder {
+	color: $fc-grey;
+	font-size: 25rpx;
+}
+
+checkbox {
+	width: 32rpx;
+	height: 32rpx;
+}
+
+checkbox .wx-checkbox-input {
+	width: 30rpx;
+	height: 30rpx;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+	background: $normal;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+	width: 28rpx;
+	height: 28rpx;
+	line-height: 28rpx;
+	text-align: center;
+	font-size: 22rpx;
+	color: #fff;
+	background: transparent;
+	transform: translate(-50%, -50%) scale(1);
+	-webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+/* 常用间距 */
+.bottom-01 {
+	margin-bottom: 1px;
+}
+
+.bottom-10 {
+	margin-bottom: 10rpx;
+}
+
+.bottom-20 {
+	margin-bottom: 20rpx;
+}
+
+.padding-10 {
+	padding: 10rpx;
+}
+
+.padding-20 {
+	padding: 20rpx;
+}
+
+.padding-0-10 {
+	padding: 0 10rpx;
+}
+
+.padding-0-20 {
+	padding: 0 20rpx;
+}
+
+.padding-10-0 {
+	padding: 10rpx 0;
+}
+
+.padding-20-0 {
+	padding: 20rpx 0;
+}
+
+.border-01 {
+	border-bottom: 1px solid $bg;
+}
+
+.border-10 {
+	border-bottom: 10rpx solid $bg;
+}
+
+.border-20 {
+	border-bottom: 20rpx solid $bg;
+}

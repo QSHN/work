@@ -1,0 +1,126 @@
+.float_module {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 999;
+  transform: translateY(-50%);
+
+  li, a {
+    position: relative;
+    width: 54px;
+    height: 70px;
+    margin-bottom: 2px;
+    display: block;
+    cursor: pointer;
+
+    &:after {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      content: "";
+      width: 54px;
+      height: 70px;
+      background: #fff;
+      opacity: 0;
+      transition: 300ms;
+    }
+    &:hover:after {
+      opacity: 0.2;
+    }
+
+    &:nth-child(1) {
+      z-index: 1;
+      &:before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        width: 54px;
+        height: 70px;
+        content: "";
+        background: url("../../../assets/image/index/btn_tel_yellow@2x.png") no-repeat;
+        background-size: cover;
+        display: block;
+      }
+
+      .li_c, .li_c:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        background: #FFBF31;
+        width: 172px;
+        height: 70px;
+        transition: 300ms;
+      }
+
+      .li_c:before {
+        content: "400-688-1280";
+        font-size: 20px;
+        color: #fff;
+        display: block;
+        text-align: center;
+        line-height: 70px;
+      }
+
+      &:hover .li_c:before {
+        left: -172px;
+      }
+    }
+
+    &:nth-child(2) {
+      background: url("../../../assets/image/index/btn_qq_blue@2x.png") no-repeat;
+      background-size: cover;
+    }
+
+    &:nth-child(3) {
+      background: url("../../../assets/image/index/btn_wechat_green@2x.png") no-repeat;
+      background-size: cover;
+
+      &:before {
+        position: absolute;
+        right: 58px;
+        top: 0;
+        content: "";
+        width: 0;
+        height: 118px;
+        background: url("../../../assets/image/index/qr_core_wechat@2x.png") no-repeat top left;
+        background-size: 118px 118px;
+        display: block;
+        transition: 300ms;
+      }
+
+      &:hover:before{
+        width: 118px;
+      }
+    }
+
+    &:nth-child(4) {
+      height: 48px;
+      background: url("../../../assets/image/index/btn_up@2x.png") no-repeat;
+      background-size: cover;
+      transition: 800ms;
+      opacity: 0;
+
+      &.active {
+        opacity: 1;
+      }
+    }
+
+    &:nth-child(5) {
+      position: absolute;
+      top: 0;
+      z-index: 0;
+      right: 58px;
+      width: 114px;
+      height: 140px;
+      background: url("../../../assets/image/index/qr_core_green_right@2x.png") no-repeat;
+      background-size: cover;
+
+      &:after{
+        display: none;
+      }
+    }
+  }
+}

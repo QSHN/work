@@ -1,0 +1,140 @@
+.el-dropdown-menu__item {
+	font-size: 12px !important;
+	line-height: 28px !important;
+}
+
+.el-card.is-always-shadow {
+	box-shadow: none;
+	border: none !important;
+}
+
+.el-scrollbar__view {
+	height: 100%;
+}
+
+.el-collapse-item__header {
+	display: block !important;
+}
+
+.el-menu--horizontal {
+	border-bottom: none !important;
+}
+
+.el-menu {
+	border-right: none !important;
+}
+
+.el-menu--display,
+.el-menu--display + .el-submenu__icon-arrow {
+	display: none;
+}
+
+.el-dropdown-menu__item--divided:before,
+.el-menu,
+.el-menu--horizontal > .el-menu-item:not(.is-disabled):focus,
+.el-menu--horizontal > .el-menu-item:not(.is-disabled):hover,
+.el-menu--horizontal > .el-submenu .el-submenu__title:hover {
+	background-color: transparent;
+}
+
+.el-message__icon,
+.el-message__content {
+	display: inline-block;
+}
+
+.el-date-editor .el-range-input,
+.el-date-editor .el-range-separator {
+	height: auto;
+	overflow: hidden;
+}
+
+.el-dialog__wrapper {
+	z-index: 2048;
+}
+
+
+.el-col {
+	margin-bottom: 8px;
+}
+
+.el-main {
+	padding: 0 !important;
+}
+
+.el-dropdown-menu__item--divided:before, .el-menu, .el-menu--horizontal > .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal > .el-menu-item:not(.is-disabled):hover, .el-menu--horizontal > .el-submenu .el-submenu__title:hover {
+	background-color: transparent !important;
+}
+
+// 自定义覆盖样式
+body {
+	.el-dialog__body{
+		padding: 20px;
+	}
+}
+
+
+$cellH: 31px;
+.el-table {
+	td{
+		padding: 2px 0;
+	}
+	.cell{
+		height: $cellH;
+		line-height: $cellH;
+		white-space: nowrap;
+		.el-button--text{
+			padding: 5px 3px;
+		}
+	}
+	th{
+		padding: 8px 0 9px;
+		&>.cell{
+			text-overflow: unset;
+			white-space: normal;
+			height: auto;
+			line-height: 16px;
+		}
+	}
+}
+
+.el-form-item__label,
+.el-pagination__sizes .el-input .el-input__inner,
+.el-input,
+.el-pagination button, .el-pagination span:not([class*=suffix]),
+.el-button,
+.el-pager li,
+.avue-main .avue-tags .el-tabs--card > .el-tabs__header .el-tabs__item,
+.el-dropdown
+{
+	font-size: $mainFs;
+}
+
+.el-form{
+	.el-form-item__content,
+	.el-form-item__label{
+		line-height: 36px;
+	}
+}
+.el-input{
+	.el-date-editor.el-input__inner,
+	.el-input__inner{
+		height: 28px;
+	}
+	&.el-input--small input{
+		height: 28px !important;
+	}
+}
+
+.el-button{
+	padding: 7px 10px;
+	border-radius: 2px;
+	height: 28px;
+}
+
+.el-message-box{
+  .el-input__inner{
+    margin-left: 40px;
+    width: 85%;
+    height: 38px;
+  }
+}

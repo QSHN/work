@@ -1,0 +1,105 @@
+
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+.clearfloat{zoom:1}
+.item_con{
+  border-radius: 4px;
+  background-color: #f6f6f6;
+  padding: 10px;
+  margin-top: 10px;
+  min-width: 220px;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid #ededed;
+  .head{
+    float: left;
+    width: 40px;
+    height: 40px;
+    background-color: #c3c3c3;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-right: 10px;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .content{
+    float: left;
+    width: calc(~"100% - 50px");
+
+    p{
+      min-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #a6a6a6;
+    }
+    .info{
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .process_right{
+      float: left;
+      width: 14px;
+      margin: 17px 10px;
+      img{
+        width: 100%;
+      }
+    }
+    .approve_con{
+      float: left;
+      width: 50px;
+      color: #a6a6a6;
+      position: relative;
+      text-align: center;
+      .pass{
+        color: #01B38B;
+      }
+      .rejected{
+        color: red;
+      }
+      .head_con{
+        img{
+          width: 50px;
+        }
+        border: 1px solid #dddddd;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        overflow: hidden;
+      }
+      .status_con{
+        width: 14px;
+        position: absolute;
+        top: 36px;
+        right: 0px;
+        img{
+          width: 100%;
+        }
+      }
+      .name_con{
+        color: #333333;
+        font-weight: bold;
+        margin-top: 4px;
+        text-align: center;
+        font-size: 13px;
+      }
+      .role_con{
+        font-size: 11px;
+      }
+    }
+    .title{
+      font-size: 16px;
+      color: #000c17;
+    }
+    .wait{
+      color: darkorange;
+    }
+    .error{
+      color: red;
+    }
+    .pass{
+      color: #01B38B;
+    }
+  }
+}

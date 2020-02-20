@@ -1,0 +1,79 @@
+.drag-main-card {
+  min-width: 1380px;
+  .drag-box-card {
+    display: inline-block;
+    width: 100%;
+
+    .drag-list-wrapper {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+
+      .drag-list-con {
+        height: 100%;
+        width: 24%;
+        min-width: 280px;
+
+        .drop-outline {
+          height: 100%;
+          .drag-area {
+            min-height: 600px;
+            padding: 5px 0;
+            border-radius: 4px;
+            background: rgba(245, 245, 245, 1);
+          }
+        }
+
+        .drag-item {
+          margin: 5px;
+          padding: 0;
+          .drag-list-item {
+            background: #fff;
+          }
+        }
+
+        h3 {
+          background: #fff;
+          padding: 10px 15px;
+          display: block;
+
+          a {
+            float: right;
+          }
+        }
+
+        .drop-box {
+          border: 1px solid #eeeeee;
+          height: 455px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
+// 列表页所用
+.drag-tasks-flex {
+  min-height: 450px;
+  max-height: 900px;
+  overflow-y: scroll;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  background: #f8f8f9;
+
+  .drag-list-item {
+    width: 400px;
+    margin: 5px;
+  }
+
+  /* 设置滚动条的样式 */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* 滚动条滑块 */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+}

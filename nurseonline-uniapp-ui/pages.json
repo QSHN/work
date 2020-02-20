@@ -1,0 +1,426 @@
+{
+	"pages": [
+		{
+			"path": "pages/tab/home",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"disableScroll":true
+			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "优佳护",
+				"disableScroll":true
+			}
+		},
+		{
+			"path": "pages/login/wxLogin",
+			"style": {
+				"navigationBarTitleText": "微信绑定"
+			}
+		},
+		{
+			"path": "pages/user/wxbind"
+		},
+		{
+			"path": "pages/register/index",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/register/password",
+			"style": {
+				"navigationBarTitleText": "设置密码"
+			}
+		},
+		{
+			"path": "pages/login/password",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		},
+		{
+			"path": "pages/forget/username",
+			"style": {
+				"navigationBarTitleText": "忘记密码"
+			}
+		},
+		{
+			"path": "pages/forget/sendcode",
+			"style": {
+				"navigationBarTitleText": "忘记密码"
+			}
+		},
+		{
+			"path": "pages/tab/order",
+			"style": {
+				"navigationBarTitleText": "服务订单",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/tab/account",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/tab/police",
+			"style": {
+				"navigationBarTitleText": "紧急求助"
+			}
+		},
+		{
+			"path": "pages/user/account",
+			"style": {
+				"navigationBarTitleText": "账户设置"
+			}
+		},
+		{
+			"path": "pages/user/vipinfo",
+			"style": {
+				"navigationBarTitleText": "会员信息"
+			}
+		},
+		{
+			"path": "pages/user/userinfo",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		},
+		{
+			"path": "pages/user/phone",
+			"style": {
+				"navigationBarTitleText": "更绑手机号码"
+			}
+		},
+		{
+			"path": "pages/user/identity",
+			"style": {
+				"navigationBarTitleText": "实名认证"
+			}
+		},
+		{
+			"path": "pages/user/identityTwo",
+			"style": {
+				"navigationBarTitleText": "实名认证"
+			}
+		},
+		{
+			"path": "pages/user/identityDetail",
+			"style": {
+				"navigationBarTitleText": "实名认证详情"
+			}
+		},
+		{
+			"path": "pages/message/index",
+			"style": {
+				"navigationBarTitleText": "消息中心"
+			}
+		},
+		{
+			"path": "pages/insurance/apply",
+			"style": {
+				"navigationBarTitleText": "长护险申请"
+			}
+		},
+		{
+			"path": "pages/insurance/people",
+			"style": {
+				"navigationBarTitleText": "长护险申请"
+			}
+		},
+		{
+			"path": "pages/insurance/test",
+			"style": {
+				"navigationBarTitleText": "生活能力测评"
+			}
+		},
+		{
+			"path": "pages/insurance/list",
+			"style": {
+				"navigationBarTitleText": "我的长护险"
+			}
+		},
+		
+		{
+			"path": "pages/order/detail",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/appointment/list",
+			"style": {
+				"navigationBarTitleText": "预约列表",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/appointment/detail",
+			"style": {
+				"navigationBarTitleText": "预约详情"
+			}
+		},
+		{
+			"path": "pages/appointment/confirm",
+			"style": {
+				"navigationBarTitleText": "预约确认"
+			}
+		},
+		{
+			"path": "pages/appointment/success",
+			"style": {
+				"navigationBarTitleText": "预约成功"
+			}
+		},
+		{
+			"path": "pages/address/list",
+			"style": {
+				"navigationBarTitleText": "我的地址",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/address/edit",
+			"style": {
+				"navigationBarTitleText": "编辑地址"
+			}
+		},
+		{
+			"path": "pages/address/add",
+			"style": {
+				"navigationBarTitleText": "添加地址"
+			}
+		},
+		{
+			"path": "pages/login/agreement",
+			"style": {
+				"navigationBarTitleText": "用户服务协议"
+			}
+		},
+		{
+			"path": "pages/city/list",
+			"style": {
+				"navigationBarTitleText": "城市选择"
+			}
+		},
+		{
+			"path": "pages/date/list",
+			"style": {
+				"navigationBarTitleText": "选择服务开始时间"
+			}
+		},
+		{
+			"path": "pages/order/rate",
+			"style": {
+				"navigationBarTitleText": "订单评价",
+				"backgroundColor": "#fff"
+			}
+		},
+		{
+			"path": "pages/invoice/list",
+			"style": {
+				"navigationBarTitleText": "按订单开票"
+			}
+		},
+		{
+			"path": "pages/invoice/issue",
+			"style": {
+				"navigationBarTitleText": "开具发票"
+			}
+		},
+		{
+			"path": "pages/invoice/history",
+			"style": {
+				"navigationBarTitleText": "开票历史"
+			}
+		},
+		{
+			"path": "pages/invoice/detail",
+			"style": {
+				"navigationBarTitleText": "发票详情"
+			}
+		},
+		{
+			"path": "pages/invoice/orders",
+			"style": {
+				"navigationBarTitleText": "发票明细"
+			}
+		},
+		{
+			"path": "pages/followUp/detail",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/test/index"
+		},
+		{
+			"path": "pages/test/room"
+		}
+    ],
+	"subPackages": [{
+		"root": "subPagesA",
+		"pages": [{
+			"path": "custs/list",
+			"style": {
+				"navigationBarTitleText": "服务对象",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "custs/bind",
+			"style": {
+				"navigationBarTitleText": "创建服务对象"
+			}
+		},
+		{
+			"path": "custs/detail",
+			"style": {
+				"navigationBarTitleText": "服务对象详情"
+			}
+		},
+		{
+			"path": "custs/family",
+			"style": {
+				"navigationBarTitleText": "个人及家庭情况"
+			}
+		},
+		{
+			"path": "custs/recordCreate",
+			"style": {
+				"navigationBarTitleText": "新增就诊记录"
+			}
+		},
+		{
+			"path": "custs/recordEdit",
+			"style": {
+				"navigationBarTitleText": "就诊记录详情"
+			}
+		},
+		{
+			"path": "custs/createIdCard",
+			"style": {
+				"navigationBarTitleText": "创建服务对象"
+			}
+		},
+		{
+			"path": "custs/create",
+			"style": {
+				"navigationBarTitleText": "创建服务对象"
+			}
+		},
+		{
+			"path": "service/list"
+		},
+		{
+			"path": "service/confirm",
+			"style": {
+				"navigationBarTitleText": "自定义服务套餐"
+			}
+		},
+		{
+			"path": "service/detail"
+		},
+		{
+			"path": "service/submit"
+		},
+		{
+			"path": "service/pay",
+			"style": {
+				"navigationBarTitleText": "预约付款"
+			}
+		},
+		{
+			"path": "service/payFollowUp",
+			"style": {
+				"navigationBarTitleText": "预约付款"
+			}
+		},
+		{
+			"path": "service/agreement",
+			"style": {
+				"navigationBarTitleText": "知情告知书"
+			}
+		},
+		{
+			"path": "service/phoneVisit",
+			"style": {
+				"navigationBarTitleText": "电话随访信息登记"
+			}
+		},
+				{
+			"path": "service/doorVisit",
+			"style": {
+				"navigationBarTitleText": "上门随访信息登记"
+			}
+		},
+		{
+			"path": "service/upload",
+			"style": {
+				"navigationBarTitleText": "上传就医证明"
+			}
+		}]
+	}],
+	"tabBar": {	
+		"list": [
+			{
+				"pagePath": "pages/tab/home",
+				"text": "首页",
+				"iconPath": "static/images/tabImages/home.png",
+				"selectedIconPath": "static/images/tabImages/home_fill.png"
+			},
+			{
+				"pagePath": "pages/tab/order",
+				"text": "服务订单",
+				"iconPath": "static/images/tabImages/order.png",
+				"selectedIconPath": "static/images/tabImages/order_fill.png"
+			},
+			{
+				"pagePath": "pages/tab/account",
+				"text": "账户中心",
+				"iconPath": "static/images/tabImages/account.png",
+				"selectedIconPath": "static/images/tabImages/account_fill.png"
+			},
+			{
+				"pagePath": "pages/tab/police",
+				"text": "紧急求助",
+				"iconPath": "static/images/tabImages/help.png",
+				"selectedIconPath": "static/images/tabImages/help_fill.png"
+			}
+		],
+		"color": "#a0a0a0",
+		"selectedColor": "#6e8cfa",
+		"backgroundColor": "#fff",
+		"borderStyle": "white"
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "优佳护",
+		"navigationBarBackgroundColor": "#6E8CFA",
+		"backgroundColor": "#eeeff3"
+	},
+	"condition": { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式（list 的索引项）
+		"list": [
+			{
+				"name": "normal", //模式名称
+				"path": "pages/tab/home" //启动页面，必选
+			},
+			{
+				"name": "test",
+				"path": "pages/test/index"
+			}
+		]
+	}
+}

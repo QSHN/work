@@ -1,0 +1,539 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	//启动登录
+		{
+			"path": "pages/launch",
+			"style": {
+				"navigationBarTitleText": "优佳护"
+			}
+		},
+		{
+			"path": "pages/Login/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/Login/reg/index",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/Login/change-pwd/index",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		},
+		{
+			"path": "pages/Login/third-login/wechatBind",
+			"style": {
+				"navigationBarTitleText": "绑定用户"
+			}
+		},
+		{
+			"path": "pages/Login/third-login/bindCode",
+			"style": {
+				"navigationBarTitleText": "验证码校验"
+			}
+		},
+	//身份验证 
+		{
+			"path": "pages/PersonalCenter/IdentityConfirm/index",
+			"style": {
+				"navigationBarTitleText": "身份认证"
+			}
+		},
+		{
+			"path": "pages/PersonalCenter/IdentityConfirm/step2",
+			"style": {
+				"navigationBarTitleText": "身份认证"
+			}
+		},
+		{
+			"path": "pages/PersonalCenter/IdentityConfirm/step3",
+			"style": {
+				"navigationBarTitleText": "身份认证"
+			}
+		},
+		{
+			"path": "pages/PersonalCenter/IdentityConfirm/waitReview",
+			"style": {
+				"navigationBarTitleText": "审核中",
+				"enablePullDownRefresh": true//状态下拉刷新
+			}
+		},
+		{
+			"path": "pages/PersonalCenter/IdentityConfirm/reviewPass",
+			"style": {
+				"navigationBarTitleText": "审核通过"
+			}
+		},
+		{
+			"path": "pages/PersonalCenter/IdentityConfirm/reviewFail",
+			"style": {
+				"navigationBarTitleText": "审核失败"
+			}
+		},
+	// tabBar
+		{
+			"path": "pages/HomePage/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance":50
+			}
+		},
+		{
+			"path": "pages/Order/index",
+			"style": {
+				"navigationBarTitleText": "服务预约单",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance":50
+			}
+		},
+		{
+			"path": "pages/PersonalCenter/index",
+			"style": {
+				"navigationBarTitleText": "账户",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/Alarm/index",
+			"style": {
+				"navigationBarTitleText": "紧急求助",
+				"enablePullDownRefresh": false
+			}
+		}
+		],
+	//分包-packageA:个人中心相关页面、其它相关
+	//分包-packageB:订单相关、预约相关
+	"subPackages": [
+	{//packageA
+        "root": "packageA",
+        "pages": [{
+            "path": "Calendar/index",
+            "style": { 
+				"navigationBarTitleText": "排班表",
+				"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "UserInfo/index",
+				"style": {
+					"navigationBarTitleText": "账户信息"
+				}
+			},
+			{
+				"path": "UserInfo/userInfo",
+				"style": {
+					"navigationBarTitleText": "个人信息"
+				}
+			},
+			{
+				"path": "UserInfo/basicInfo",
+				"style": {
+					"navigationBarTitleText": "基本信息"
+				}
+			},
+				//身份认证-身份信息、基本信息、执业信息
+			{
+				"path": "UserInfo/trueme",
+				"style": {
+					"navigationBarTitleText": "身份认证"
+				}
+			},
+				{
+					"path": "UserInfo/trueme.1",
+					"style": {
+						"navigationBarTitleText": "身份信息"
+					}
+				},
+				{
+					"path": "UserInfo/trueme.2",
+					"style": {
+						"navigationBarTitleText": "基本信息"
+					}
+				},
+				{
+					"path": "UserInfo/trueme.3",
+					"style": {
+						"navigationBarTitleText": "执业信息"
+					}
+				},
+			{
+				"path": "UserInfo/goodat",
+				"style": {
+					"navigationBarTitleText": "擅长服务"
+				}
+			},
+			{
+				"path": "UserInfo/professDirection",
+				"style": {
+					"navigationBarTitleText": "专科方向"
+				}
+			},
+			{
+				"path": "Setting/index",
+				"style": {
+					"navigationBarTitleText": "设置"
+				}
+			},
+			{
+				"path": "Setting/bindPhone",
+				"style": {
+					"navigationBarTitleText": "手机号绑定"
+				}
+			},
+			{
+				"path": "Setting/oldPhoneConfirm",
+				"style": {
+					"navigationBarTitleText": "更改绑定手机号"
+				}
+			},
+			{
+				"path": "MyAddress/index",
+				"style": {
+					"navigationBarTitleText": "我的地址",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "MyAddress/edit",
+				"style": {
+					"navigationBarTitleText": "修改地址"
+				}
+			},
+			{
+				"path": "MyAddress/add",
+				"style": {
+					"navigationBarTitleText": "新增地址"
+				}
+			},
+			{
+				"path": "Study/index",
+				"style": {
+					"navigationBarTitleText": "学习培训"
+				}
+			},
+			{
+				"path": "Exam/index",
+				"style": {
+					"navigationBarTitleText": "考核内容"
+				}
+			},
+			{
+				"path": "Exam/examPass",
+				"style": {
+					"navigationBarTitleText": "考核结果"
+				}
+			},
+			{
+				"path": "Exam/retest",
+				"style": {
+					"navigationBarTitleText": "重新考核"
+				}
+			},
+				//余额-账单、充值、提现、提现记录、提现详情
+			{
+				"path": "Wallet/index",
+				"style": {
+					"navigationBarTitleText": "余额",
+					"enablePullDownRefresh" : true
+				}
+			},
+				{
+					"path": "Wallet/detail",
+					"style": {
+						"navigationBarTitleText": "账单",
+						"enablePullDownRefresh" : true
+					}
+				},
+				{
+					"path": "Wallet/recharge",
+					"style": {
+						"navigationBarTitleText": "充值"
+					}
+				},
+				{
+					"path": "Wallet/toCash",
+					"style": {
+						"navigationBarTitleText": "提现"
+					}
+				},
+				{
+					"path": "Wallet/toCashRecord",
+					"style": {
+						"navigationBarTitleText": "提现记录",
+						"enablePullDownRefresh" : true
+					}
+				},
+				{
+					"path": "Wallet/toCashDetail",
+					"style": {
+						"navigationBarTitleText": "提现详情"
+					}
+				},
+
+			{
+				"path": "Msg/index",
+				"style": {
+					"navigationBarTitleText": "消息通知"
+				}
+			},
+			{
+				"path": "Integral/index",
+				"style": {
+					"navigationBarTitleText": "积分"
+				}
+			},
+			{
+				"path": "WordInfo/index",
+				"style": {
+					"navigationBarTitleText": "用户服务协议"
+				}
+			},
+			{
+				"path": "WordInfo/helpInfo",
+				"style": {
+					"navigationBarTitleText": "帮助说明"
+				}
+			},
+			{
+				"path": "WordInfo/receiveInfo",
+				"style": {
+					"navigationBarTitleText": "接单服务协议"
+				}
+			},
+			{
+				"path": "WordInfo/aboutUs",
+				"style": {
+					"navigationBarTitleText": "关于我们"
+				}
+			},
+			{
+				"path": "MyOrg/index",
+				"style": {
+					"navigationBarTitleText": "成功入驻",
+					"enablePullDownRefresh" : true
+				}
+			},
+			{
+				"path": "MyOrg/orgLog",
+				"style": {
+					"navigationBarTitleText": "入驻历史记录",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "MyOrg/orgUnjoined",
+				"style": {
+					"navigationBarTitleText": "入驻机构",
+					"enablePullDownRefresh": true
+				}
+			}
+		]
+    },
+	{//packageB
+		"root": "packageB",
+		"pages": [
+		//接单流程
+			{
+				"path": "ReceiveOrder/index",
+				"style": {
+					"navigationBarTitleText": "接单信息"
+				}
+			},
+			{
+				"path": "ReceiveOrder/receive",
+				"style": {
+					"navigationBarTitleText": "确认接单"
+				}
+			},
+			{
+				"path": "ReceiveOrder/refuse",
+				"style": {
+					"navigationBarTitleText": "拒绝接单"
+				}
+			},
+			{
+				"path": "ReceiveOrder/refuseSuccess",
+				"style": {
+					"navigationBarTitleText": "拒单成功"
+				}
+			},
+		//服务对象就诊信息
+			{
+				"path": "VisLog/index",
+				"style": {
+					"navigationBarTitleText": "就诊信息"
+				}
+			},
+			{
+				"path": "VisLog/visLogDetail",
+				"style": {
+					"navigationBarTitleText": "就诊信息详情"
+				}
+			},			
+		//预约相关
+			{
+				"path": "OrderDetail/index",
+				"style": {
+					"navigationBarTitleText": "预约详情",
+					"enablePullDownRefresh": true
+				}
+			},
+			{
+				"path": "OrderDetail/consumptive",
+				"style": {
+					"navigationBarTitleText": "耗材领取"
+				}
+			},
+			{
+				"path": "OrderDetail/serveDone",
+				"style": {
+					"navigationBarTitleText": "服务完成记录"
+				}
+			},
+		//到达预估
+			{
+				"path": "Reach/index",
+				"style": {
+					"navigationBarTitleText": "到达确认"
+				}
+			},
+			{
+				"path": "Reach/beginJudge",
+				"style": {
+					"navigationBarTitleText": "开始评估"
+				}
+			},
+			{
+				"path": "Reach/judgeMain",
+				"style": {
+					"navigationBarTitleText": "主要诊断&症状"
+				}
+			},
+			{
+				"path": "Reach/judgeMain1",
+				"style": {
+					"navigationBarTitleText": "选择主要诊断"
+				}
+			},
+			{
+				"path": "Reach/judgeMain1next",
+				"style": {
+					"navigationBarTitleText": "选择诊断"
+				}
+			},
+			{
+				"path": "Reach/judgeMain2",
+				"style": {
+					"navigationBarTitleText": "选择主要症状"
+				}
+			},
+			{
+				"path": "Reach/judgeMain2next",
+				"style": {
+					"navigationBarTitleText": "选择症状"
+				}
+			},
+			{
+				"path": "Reach/judgeContent",
+				"style": {
+					"navigationBarTitleText": "服务内容"
+				}
+			},
+			{
+				"path": "Reach/judgeFamily",
+				"style": {
+					"navigationBarTitleText": "个人及家庭情况"
+				}
+			},
+			{
+				"path": "Reach/judgeHistory",
+				"style": {
+					"navigationBarTitleText": "既往史"
+				}
+			},
+			{
+				"path": "Reach/submitJudgeMust",
+				"style": {
+					"navigationBarTitleText": "护理评估（必填）"
+				}
+			},
+			{
+				"path": "Reach/submitJudgeOpt",
+				"style": {
+					"navigationBarTitleText": "护理评估（选填）"
+				}
+			},
+		//领取单
+			{
+				"path": "Consumptive/index",
+				"style": {
+					"navigationBarTitleText": "领取单"
+				}
+			},
+			{
+				"path": "Consumptive/detail",
+				"style": {
+					"navigationBarTitleText": "领取单详情"
+				}
+			}
+		]
+	}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "优佳护-医护",
+		"navigationBarBackgroundColor": "#6E8CFA",
+		"backgroundColor": "white",
+		"backgroundTextStyle":"dark"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#6E8CFA",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/HomePage/index",
+			"iconPath": "static/img/tabBar/homepage.png",
+			"selectedIconPath": "static/img/tabBar/homepage-click.png",
+			"text": "首页"
+		}
+		,{
+		"pagePath": "pages/Order/index",
+		"iconPath": "static/img/tabBar/order.png",
+		"selectedIconPath": "static/img/tabBar/order-click.png",
+			"text": "预约单"
+		}
+		,{
+			"pagePath": "pages/PersonalCenter/index",
+			"iconPath": "static/img/tabBar/personalCenter.png",
+			"selectedIconPath": "static/img/tabBar/personalCenter-click.png",
+			"text": "我的"
+		}
+		,{
+			"pagePath": "pages/Alarm/index",
+			"iconPath": "static/img/tabBar/alarm.png",
+			"selectedIconPath": "static/img/tabBar/alarm-click.png",
+			"text": "紧急求助"
+		}
+		]
+	},
+	"condition": { //模式配置，仅开发期间生效
+		"current": 1, //当前激活的模式（list 的索引项）
+		"list": [
+			{
+				"name": "normal", //模式名称
+				"path": "pages/launch" //启动页面，必选
+			},
+			{
+				"name": "test",
+				"path": "pages/PersonalCenter/index"
+			}
+		]
+	}
+}

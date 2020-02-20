@@ -1,0 +1,489 @@
+/* 项目基本样式 */
+page {
+	height: 100%;
+	color: #555;
+	font-size: 28upx;
+	background-color: #f4f4f4;
+}
+page::after{
+  content: "";
+  width: 750rpx;
+  height: 2rpx;
+  position: fixed;
+  box-shadow: 0 8rpx 25rpx #333;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+}
+/* 项目统一样式设置 */
+.font-small {
+	font-size: 24upx;
+}
+
+.font-big {
+	font-size: 32upx;
+}
+
+.bg-white{
+	background-color: #fff;
+}
+
+.red {
+	color: #ff0000;
+}
+
+.orange {
+	color: #ff7f00;
+}
+
+.yellow {
+	color: #ffa500;
+}
+
+.grey {
+	color: #a3a3a3;
+}
+
+.bg-color {
+	color: #f4f4f4;
+}
+
+/* 常见样式 */
+.tc {
+	text-align: center;
+}
+
+.tr {
+	text-align: right;
+}
+
+.tl {
+	text-align: left;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.cl {
+	display: block;
+    zoom: 1;
+}
+
+.cl::after{
+	clear: both;
+	content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.mc {
+	margin: 0 auto;
+}
+
+.rds {
+	border-radius: 10upx;
+}
+
+/* flex 盒子常见样式 */
+.flex-box {
+	display: flex;
+}
+
+.flex-center {
+	justify-content: center;
+	align-items: center;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.horizontal-center {
+	justify-content: center;
+}
+
+.horizontal-around {
+	justify-content: space-around;
+}
+
+.horizontal-between {
+	justify-content: space-between;
+}
+
+.vertical-center {
+	align-items: center;
+}
+
+$fc-normal: #595757;
+$fc-grey: #b5b5b6;
+$fc-deep: #3e3a39;
+
+$normal: #6e8cfa;
+$boder: #727171;
+
+$bg: #eeeff3;
+$white: #fff;
+
+page {
+	height: 100%;
+	color: $fc-normal;
+	font-size: 28upx;
+	background-color: $bg;
+}
+
+/* 常用颜色 */
+.bg-white {
+	background-color: $white;
+}
+
+.fc-normal {
+	color: $normal;
+}
+
+/* 图标样式 */
+.icon-01 {
+	display: inline-block;
+	background-image: url(http://file.ry600.com//snapshot/vms/site/di/di70684438lrfavs/du9sks0f7yefy23z/image//nursing_icon_01.png);
+	background-repeat: no-repeat;
+}
+
+.icon-02 {
+	@extend .icon-01;
+	background-image: url(http://file.ry600.com//snapshot/vms/site/di/di70684438lrfavs/du9sks0f7yefy23z/image//nursing_icon_02.png);
+}
+
+.arrow {
+	@extend .icon-01;
+	background-image: url(http://file.ry600.com/snapshot/vms/site/di/di70684438lrfavs/82ojywir5vqogktm/image//wx_arrow.png);
+}
+
+/* 文本样式 */
+.tc {
+	text-align: center;
+}
+
+.tr {
+	text-align: right;
+}
+
+.tl {
+	text-align: left;
+}
+
+/* Flex盒子样式 */
+.flex {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-msg {
+	@extend .flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.justify-around {
+	@extend .flex;
+	justify-content: space-around;
+}
+
+.justify-between {
+	@extend .flex;
+	justify-content: space-between;
+}
+
+.justify-center {
+	@extend .flex;
+	justify-content: center;
+}
+
+.align-center {
+	@extend .flex;
+	align-items: center;
+}
+
+.flex-center {
+	@extend .flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* 常用组件统一样式 */
+button {
+	background-color: $normal;
+	color: $white;
+	width: 85%;
+	font-size: 26upx;
+	border: none;
+}
+
+.line {
+	border: 1px solid $boder;
+}
+
+.holder {
+	color: $fc-grey;
+	font-size: 25upx;
+}
+
+checkbox {
+	width: 26upx;
+	height: 26upx;
+}
+
+checkbox .wx-checkbox-input {
+	width: 26upx;
+	height: 26upx;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+	background: $normal;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+	width: 24upx;
+	height: 24upx;
+	line-height: 24upx;
+	text-align: center;
+	font-size: 22upx;
+	color: #fff;
+	background: transparent;
+	transform: translate(-50%, -50%) scale(1);
+	-webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+/* 常用间距 */
+.bottom-01 {
+	margin-bottom: 1px;
+}
+
+.bottom-20 {
+	margin-bottom: 20upx;
+}
+
+.padding-10 {
+	padding: 10upx;
+}
+
+.padding-20 {
+	padding: 20upx;
+}
+
+.padding-0-10 {
+	padding: 0 10upx;
+}
+
+.padding-0-20 {
+	padding: 0 20upx;
+}
+
+.padding-10-0 {
+	padding: 10upx 0;
+}
+
+.padding-20-0 {
+	padding: 20upx 0;
+}
+
+.border-01 {
+	border-bottom: 1px solid $bg;
+}
+.font-grey {
+	color:  #b5b5b6;
+}
+
+/*tar 个人参考*/
+	// 通用
+	button::after{
+		border: none;
+	}
+	//color
+	.color6e8cfa{color: #6e8cfa!important}
+	.color6d8bf9{color: #6d8bf9!important}
+	.color-fff{color: #fff!important}
+	.color-c25087{color: #c25087}
+	//bgc
+	.bgc-6e8cfa{background-color: #6e8cfa!important}
+	.bgc-eeeff3{background-color:#eeeff3;}
+	.bgc-fff{background-color:#fff;}
+	.bgc999{background-color: #999}
+	//border
+	.borderC-6e8cfa{border:1px solid #6e8cfa;}
+	.border-bottom{border-bottom: 1px solid #ebedf0;}
+	.border-bottom-8{border-bottom: 8px solid #ebedf0;}
+	.border-dash{border:1px dashed #727171}
+	.hr-btm{border-bottom: 2px solid #EDEEF2}
+	
+	//justify-content
+	.justify-content-space{justify-content: space-between}
+	.justify-content-flexend{justify-content: flex-end}
+	.justify-content-flexstart{justify-content: flex-start}
+	.justify-content-center{justify-content: center}
+	
+	//width
+	.width120{width:120upx}
+	.width500{width:500upx}
+	.width100p{width:100%;}
+	.width80p{width:80%;}
+	.width50p{width:50%;}
+	.width45p{width:45%;}
+	.width30p{width:30%;}
+	.width70p{width: 70%}
+	.width75p{width: 75%}
+	.width80vw{width:80vw;}
+	.min-height100vh{min-height: 100vh}
+	.max-width46-5p{max-width:46.5%}
+	.max-w-23p{max-width: 23%}
+	.max-width92p{max-width:92%}
+	.width60p{width:60%}
+	
+	.r10{right:10upx}
+	.r20{right:20upx}
+	.r30{right:30upx}
+	.t70{top:70upx;}
+	
+	//position
+	.text-alignR{text-align: right}
+	.text-alignC{text-align: center}
+	.text-alignL{text-align: left}
+	.overflow-h{overflow: hidden}
+	.fr{float: right}
+	.inline-block{display:inline-block}
+	.positionA-r1{position:absolute;right:1upx;}
+	.padding-10-0{padding: 10upx 0upx;}
+	//display
+	.displayB{display: block}
+	.positionA{position:absolute}
+	.positionR{position:relative}
+	.positionF{position:fixed}
+	//border
+	.boder-radius10{
+		border-radius: 10upx;
+	}
+	
+	//margin
+	.margin-20{margin:20upx}
+	.mr20{margin-right:20upx;}
+	.m0a{margin: 0 auto}
+	.mt0{margin-top:0upx!important;}
+	.mt5{margin-top:5upx!important;}
+	.mt10{margin-top:10upx;}
+	.mt20{margin-top:20upx;}
+	.mt30{margin-top:30upx;}
+	.mt40{margin-top:40upx;}
+	.mt40-im{margin-top:40upx!important;}
+	.mt48{margin-top:48upx;}
+	.mt50{margin-top:50upx;}
+	.mt80{margin-top:80upx;}
+	.mt200{margin-top:200upx;}
+	.mt300{margin-top:300upx;}
+	.mt200-im{margin-top: 200upx!important}
+	.mt30vh-im{margin-top: 30vh!important}
+	.mt35vh-im{margin-top: 35vh!important}
+	.mr-2vw{margin-right:-2vw;}
+	.mr10{margin-right:10upx;}
+	.mr15{margin-right:15upx;}
+	.ml10{margin-left:10upx;}
+	.ml20{margin-left:20upx;}
+	.ml50{margin-left: 50upx;}
+	.mb20{margin-bottom:20upx;}
+	.mb10{margin-bottom: 10upx;}
+	//padding
+	.pt10{padding-top:10upx;}
+	.pt0-im{padding-top:0upx!important;}
+	.pb0-im{padding-bottom:0upx!important;}
+	.pt20{padding-top:20upx}
+	.pt20-im{padding-top:20upx!important;}
+	.pb10{padding-bottom:10upx;}
+	.padding-0-20{padding:0 20upx}
+	.padding-0-40{padding:0 40upx}
+	.padding-10-20{padding:10upx 20upx}
+	.pl20{padding-left:20upx}
+	.pl40{padding-left:40upx}
+	.pl45{padding-left:45upx}
+	.pl50{padding-left:50upx}
+	.p-0-10{padding: 0 10upx;}
+	
+	//font-size
+	.font-size22{font-size:22upx}
+	.font-size24{font-size:24upx}
+	.font-size26{font-size:26upx}
+	.font-size40{font-size:40upx}
+	.font-size48{font-size:48upx}
+	.font-size50{font-size:50upx}
+	.font-size60{font-size:60upx}
+	.font-size70{font-size:70upx}
+	.font-size80{font-size:80upx}
+	.font-size180{font-size:180upx}
+	.font-size60-im{font-size:60upx!important}
+	.font-weight600{font-weight:600}
+	.t0{top:0upx}
+	.t45{top:45upx}
+	.t55{top:55upx}
+	.r0{right:0upx}
+	.r3{right:3upx}
+	.r25{right:25upx}
+	.t5{top:5upx}
+	.r5{right:5upx}
+	.t-25{top:-25upx}
+	.r-25{right:-25upx}
+	.l40{left:40upx}
+	.l3{left:3upx}
+	.l5{left:5upx}
+	.b10{bottom: 10upx}
+	.z-index999{z-index:999}
+	.z-index9999{z-index:9999}
+// 个性化
+.wraperView{
+	padding:20upx;
+	background-color:#fff;
+}
+.left-icon{
+	width:auto;
+	height:auto;
+	border-left:10upx solid #6e8cfa;
+	padding-left:10upx;
+	font-weight:600;
+}
+.uni-flex{display: flex}
+.grace-idcard-alc{text-align: center;color:#b5b5b6}
+.color666{color:#666}
+.color999{color: #999}
+.see-btn{background-color:#eeeff3!important;color:#6d8bf9;border:1px solid #6b8ef9;}
+.see-btn-step{background-color:white!important;color:#6d8bf9;border:1px solid #6b8ef9;}
+.fontSizeListText{font-size:11px;color: #a3a3a3;padding:5upx;}
+.to{flex-shrink:0;width:40upx;height:28upx}
+.activeDay{color:#6c8efa;border-bottom:4upx solid #6c8efa}
+.activeFontColor{color:#6c8efa;}
+.servicephone-box{
+			position: absolute;
+			top: 100upx;
+			right: 50upx;
+			border: 1px solid #f1f1f1;
+			border-radius: 10upx;
+			box-shadow: 1upx 2upx 4upx 2upx #eee;
+			height: 130upx;
+			width: 95upx;
+			font-size: 24upx;
+			background-color: #fff;
+			padding: 0rpx;
+			display: flex;
+			flex-direction:column;
+			.iconfont{
+				font-size: 36upx;
+				// margin-bottom: 0upx;
+				line-height: 60rpx;
+			}
+			.servicephone-text{
+				line-height: 32rpx;
+			}
+		}

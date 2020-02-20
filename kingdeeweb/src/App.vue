@@ -1,0 +1,42 @@
+<template>
+  <div id="app">
+    <router-view/>
+  </div>
+</template>
+
+<script>
+// import iviewTableDrag from './libs/iviewTableDrag'
+export default {
+  name: 'App'
+  // watch: {
+  //   '$route': {
+  //     handler () {
+  //       this.$nextTick(() => {
+  //         setTimeout(() => {
+  //           iviewTableDrag()
+  //         }, 1500)
+  //       })
+  //     },
+  //     deep: true,
+  //     immediate: true
+  //   }
+  // }
+}
+</script>
+
+<style lang="less">
+.size{
+  width: 100%;
+  height: 100%;
+}
+html,body{
+  .size;
+  /*overflow: hidden;*/
+  margin: 0;
+  padding: 0;
+}
+#app {
+  .size;
+  min-width: 1366px;
+}
+</style>

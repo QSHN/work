@@ -1,0 +1,127 @@
+/**
+ 创建： Huanggx
+ 日期： 2019-5-8
+ 描述： nursing的通用个性化样式，可以任何页面使用。
+ 警告： 这里的样式都只限定于个性化，不能直接影响ElementUI的样式，如果需要修改ElementUI的样式请到element-ui.scss。
+ */
+
+
+/**
+描述：隐藏dialog的头部。
+用法：<el-dialog class="hideHeader">
+ */
+.hideHeader {
+	/deep/ .el-dialog__header {
+		display: none;
+	}
+}
+
+/**
+描述：表格操作栏图标按钮样式。
+用法：<i class="icon-ry-... iconBtn" @click="..."></i>
+ */
+i.iconBtn{
+	cursor: pointer;
+	margin-left: 2px;
+	margin-right: 2px;
+
+	&:hover{
+		background-color: #409eff55;
+		border: 1px solid #409eff;
+		margin-left: 1px;
+		margin-right: 1px;
+	}
+}
+
+/**
+描述：使用主题颜色作为字体颜色。
+用法：<i class="icon-ry-gengduo mainColor">更多</i>
+ */
+.mainColor{
+	color: $mainBg;
+}
+
+/**
+* @description: 组件basicContainer下的自定义样式
+*/
+.basic-container {
+	padding: 8px 10px;
+	border-radius: 10px;
+	box-sizing: border-box;
+	.el-card {
+		width: 100%;
+		&:first-child {
+			padding-top: 0;
+		}
+		&--block {
+			height: 100%;
+			.el-card {
+				height: 100%;
+			}
+		}
+		.el-card__body{
+			padding: 5px;
+		}
+	}
+	.basic-header{
+		padding: 0 10px 8px;
+		border-bottom: 1px solid #E8E8E8;
+		font-size: 15px;
+	}
+	.basic-body{
+		padding-top: 8px;
+	}
+	.el-form{
+		.el-form-item{
+			margin-bottom: 6px;
+		}
+	}
+	$menuW: 220px;  //menu的宽度
+	.avue-crud__menu{
+		position: absolute;
+		top: 30px;
+		right: 15px;
+		width: $menuW;
+	}
+	&.has-basic-header{
+		.avue-crud__menu{
+			top: 8px;
+		}
+		.avue-crud__header{
+			margin-right: 0;
+		}
+
+    .el-row .avue-crud__menu{
+      top: -40px;
+    }
+	}
+	.avue-crud__header{
+		margin-right: $menuW;
+	}
+
+	/**
+	* @decription: avue树的自定义样式
+	*/
+	.avue-tree__title{
+		font-size: $mainFs;
+	}
+
+  /**
+   * 内嵌页面，新增按钮、刷新和选择列按钮左移
+   */
+  .inner-dialog .avue-crud__menu {
+    right: 60px;
+  }
+
+}
+
+/**
+ * 图片预览，默认1024的情况下不能浮于dialog上，所以设为9999
+ */
+.avue-image-preview{
+  z-index: 9999 !important;
+}
+
+.search-panel .el-form-item__content .el-input-group {
+  vertical-align: initial;
+}

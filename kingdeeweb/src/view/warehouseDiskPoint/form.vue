@@ -1,0 +1,876 @@
+<template>
+  <div>
+    <Row type="flex" justify="space-between">
+      <div style="display: flex; align-items: center;">
+        <template v-if="$route.query.id">
+          盘点状态：
+          <span :style="{marginRight: '20px', color: formData.result === '盘点中' ? '#ed4014' : '#19be6b'}">
+            {{ formData.result }}
+          </span>
+        </template>
+      </div>
+      <div>
+        <Button type="primary" style="margin-right: 10px;" @click="save(false)" :disabled="!isCanEdit">保存</Button>
+        <Button style="margin-right: 10px;" @click="save(true)" >新增</Button>
+        <Button style="margin-right: 10px;" v-if="formData.lock === '解锁'" :disabled="!$route.query.id" @click="batchFun('锁盘', $route.query.id, '解锁')">锁盘</Button>
+        <Button style="margin-right: 10px;" v-if="formData.lock === '锁盘'" :disabled="!$route.query.id" @click="batchFun('解锁', $route.query.id, '锁盘')">解锁</Button>
+        <Button style="margin-right: 10px;" @click="$router.push({
+          name: 'warehouseDiskPointList'
+        })">历史单据</Button>
+         <ButtonGroup>
+          <Button icon="ios-skip-backward" :disabled="!$route.query.id" @click="goNav('D')" style="width: 40px; display: flex; align-items: center; justify-content: center;"></Button>
+          <Button style="width: 40px; display: flex; align-items: center; justify-content: center;" :disabled="!$route.query.id" @click="goNav('L')">
+            <Icon type="ios-rewind" />
+          </Button>
+          <Button style="width: 40px; display: flex; align-items: center; justify-content: center;" :disabled="!$route.query.id" @click="goNav('N')">
+            <Icon type="ios-rewind" style="transform: rotate(180deg)" />
+          </Button>
+          <Button icon="ios-skip-forward" :disabled="!$route.query.id" @click="goNav('Z')" style="width: 40px; display: flex; align-items: center; justify-content: center;"></Button>
+        </ButtonGroup>
+      </div>
+    </Row>
+
+    <Card style="margin-top: 10px;">
+      <p slot="title">基本信息</p>
+      <Form ref="formData" :model="formData" :rules="formDataRule" label-position="top" style="margin-bottom: 8px;">
+        <Row type="flex">
+          <FormItem label="单据编号" style="margin: 0 30px 0 0;" prop="code">
+            <Input style="width: 200px" v-model="formData.code" />
+          </FormItem>
+          <FormItem label="单据日期" style="margin: 0 30px 0 0;" prop="dateTime">
+            <DatePicker type="date" style="width: 200px" v-model="formData.dateTime" :clearable="false" format="yyyy-MM-dd" :disabled="true" />
+          </FormItem>
+          <FormItem label="盘点仓库" style="margin: 0 30px 0 0;">
+            <Select v-model="formData.warehouseId" style="width:200px" @on-change="select">
+              <Icon type="md-add-circle" slot="prefix" @click.stop="$refs.selectInfoModel.show('warehouse', loadWarehouse)" style="font-size: 20px; opacity: 0.6" />
+              <Option v-for="item in warehouseList" :value="item._id" :key="item._id">{{ item.code }} - {{ item.name }}</Option>
+            </Select>
+          </FormItem>
+          <FormItem label="盘点人" style="margin: 0 30px 0 0;">
+            <Select v-model="formData.clerkId" style="width:200px">
+              <Option v-for="item in clerkList" :value="item._id" :key="item._id">{{ item.code }} - {{ item.name }}</Option>
+            </Select>
+          </FormItem>
+        </Row>
+      </Form>
+    </Card>
+
+    <Card style="margin-top: 10px;">
+      <Row>
+        <Button style="margin-right: 10px;" @click="addCommodity(true)">添加商品</Button>
+      </Row>
+
+      <Table :height="getTableHeight"
+             border
+             :columns="tableColumns"
+             :data="formData.list"
+             @on-row-click="rowClick"
+             :row-class-name="rowClassName"
+             show-summary
+             :summary-method="handleSummary"
+             class="input_table"
+             style="margin-top: 10px;">
+        <template slot-scope="{ row }" slot="action">
+          <div class="text" style="padding-left: 0;">{{ row._index + 1 }}</div>
+          <div class="hover_layer">
+            <Icon type="md-add-circle" style="font-size: 20px; color: #348EED; cursor: pointer;" @click="addCommodity(true)" />
+            <Icon type="md-remove-circle" style="font-size: 20px; color: #ed3f14; cursor: pointer;" @click="formData.list.splice(row._index, 1)" />
+          </div>
+        </template>
+
+        <template slot-scope="{ row }" slot="code">
+          {{ row.code }}
+        </template>
+        <template slot-scope="{ row }" slot="name">
+          {{ row.name }}
+        </template>
+        <template slot-scope="{ row }" slot="auxiliary">
+          {{ row.auxiliary }}
+        </template>
+        <template slot-scope="{ row }" slot="batch">
+          <template v-if="row.isBatch">
+            <div class="text">{{ row.batch }}</div>
+            <div class="hover_layer">
+              <AutoComplete
+                v-model="formData.list[row._index].batch"
+                @on-change="changeBatch($event, warehouseList.find(f => f._id === formData.warehouseId), row)"
+                :data="warehouseList.find(f => f._id === formData.warehouseId) ? warehouseList.find(f => f._id === formData.warehouseId).inventoryList.filter(f =>
+                  f.commodityId === row.commodityId &&
+                  (!f.auxiliary || (f.auxiliary === row.auxiliary))
+                ).map(m => m.batch) : []">
+              </AutoComplete>
+            </div>
+          </template>
+        </template>
+        <template slot-scope="{ row }" slot="generateDate">
+          <template v-if="row.isShelfLife">
+            <div class="text">{{ row.generateDate ||  '' }}</div>
+            <div class="hover_layer">
+              <DatePicker type="date" v-model="formData.list[row._index].generateDate" :clearable="false" format="yyyy-MM-dd" />
+            </div>
+          </template>
+        </template>
+        <template slot-scope="{ row }" slot="shelfLifeDays">
+          <template v-if="row.isShelfLife">
+            {{ row.shelfLifeDays }}
+          </template>
+        </template>
+        <template slot-scope="{ row }" slot="effectiveDate">
+          <template v-if="row.isShelfLife">
+            {{ getEffectiveDate(row) }}
+          </template>
+        </template>
+        <template slot-scope="{ row }" slot="inventory">
+          {{ row.inventory }}
+        </template>
+        <template slot-scope="{ row }" slot="unit">
+          <div class="text">{{ row.unit }}</div>
+          <div class="hover_layer">
+            <Select v-model="formData.list[row._index].unit" @on-change="changeUnit($event, row.unit, row._index)">
+              <Option v-for="(item, i) in row.unitList" :value="item.name" :key="i">{{ item.name }}</Option>
+            </Select>
+          </div>
+        </template>
+        <template slot-scope="{ row }" slot="number">
+          <div class="text">{{ row.number }}</div>
+          <div class="hover_layer">
+            <InputNumber
+              v-model="formData.list[row._index].number"
+              :min="0"
+              :step="1"
+              style="width: 110px"
+              @on-blur="changePrice(row._index)" />
+          </div>
+        </template>
+        <template slot-scope="{ row }" slot="package">
+          <div class="text">{{ row.package }}</div>
+          <div class="hover_layer">
+            <Poptip placement="bottom-start">
+              <Input :value="row.package" readonly />
+              <div slot="content">
+                <ul class="package_ul">
+                  <li v-for="(v, i) in row.packageList" :key="i">
+                    <span style="width: 30%; padding: 0 5px;">{{ v.name }}</span>
+                    <InputNumber
+                      v-model="formData.list[row._index].packageList[i].number"
+                      :min="0"
+                      :step="1"
+                      style="display: flex; flex-grow: 1;"
+                      @on-blur="changePackage(row._index)"/>
+                  </li>
+                </ul>
+              </div>
+            </Poptip>
+          </div>
+        </template>
+        <template slot-scope="{ row }" slot="conversionRate">
+          <div v-for="(v, i) in row.unitList" :key="i" v-if="i > 0">1 {{ v.name }} = {{ v.equation }} {{ row.unitList[0].name }}</div>
+        </template>
+        <template slot-scope="{ row }" slot="deficient">
+          {{ getDeficient(row) }}
+        </template>
+        <template slot-scope="{ row }" slot="deficientRate">
+          {{ getDeficientRate(row) }}
+        </template>
+        <template slot-scope="{ row }" slot="commodityDes">
+          <div class="text">{{ row.commodityDes || '' }}</div>
+          <div class="hover_layer">
+            <Input v-model="formData.list[row._index].commodityDes" />
+          </div>
+        </template>
+      </Table>
+    </Card>
+
+    <commodityModal ref="commodityModal" @addCommodity="addCommodity" />
+    <selectInfoModel ref="selectInfoModel" />
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+import {
+  parameterWarehouseDiskPoint,
+  updateWarehouseDiskPoint,
+  queryWarehouseDiskPoint
+} from '../../api/warehouseDiskPoint'
+import { queryClerk } from '../../api/clerk'
+import { queryWarehouse } from '../../api/warehouse'
+import commodityModal from '../../components/commodity/index'
+import moment from 'moment'
+import NP from 'number-precision'
+import { formatMoney } from 'accounting'
+import { queryCommodityInfo } from '../../api/commodityInfo'
+import selectInfoModel from '../../components/selectInfo/model'
+export default {
+  name: 'warehouseDiskPoint',
+  components: {
+    commodityModal,
+    selectInfoModel
+  },
+  data () {
+    return {
+      isCanEdit: true,
+      currentRow: null,
+      formData: {
+        accountSetId: null,
+        code: null,
+        dateTime: null,
+        pointTime: null,
+        warehouseId: null,
+        clerkId: null,
+        list: [],
+        lock: '解锁',
+        result: '盘点中',
+        deficientId: null,
+        deficientCode: null,
+        surplusId: null,
+        surplusCode: null,
+        custom: null
+      },
+      formDataRule: {
+        code: [
+          { required: true, message: '单据编号不能为空', trigger: 'blur' }
+        ],
+        dateTime: [
+          { required: true, message: '单据日期不能为空', type: 'date', trigger: 'change' }
+        ]
+      },
+      columns: [
+        {
+          title: ' ',
+          width: 80,
+          fixed: 'left',
+          slot: 'action',
+          align: 'center',
+          key: 'action'
+        },
+        {
+          title: '商品编码',
+          width: 150,
+          resizable: true,
+          slot: 'code',
+          renderHeader: (h, params) => {
+            return h('div', [
+              h('span', {
+                style: {
+                  color: '#ed3f14',
+                  fontSize: '14px',
+                  fontWeight: 'bolder'
+                }
+              }, '*'),
+              h('span', params.column.title)
+            ])
+          }
+        },
+        {
+          title: '商品名称',
+          width: 150,
+          resizable: true,
+          slot: 'name',
+          renderHeader: (h, params) => {
+            return h('div', [
+              h('span', {
+                style: {
+                  color: '#ed3f14',
+                  fontSize: '14px',
+                  fontWeight: 'bolder'
+                }
+              }, '*'),
+              h('span', params.column.title)
+            ])
+          }
+        },
+        {
+          title: '辅助属性',
+          width: 150,
+          resizable: true,
+          slot: 'auxiliary'
+        },
+        {
+          title: '单位',
+          width: 150,
+          resizable: true,
+          slot: 'unit',
+          renderHeader: (h, params) => {
+            return h('div', [
+              h('span', {
+                style: {
+                  color: '#ed3f14',
+                  fontSize: '14px',
+                  fontWeight: 'bolder'
+                }
+              }, '*'),
+              h('span', params.column.title)
+            ])
+          }
+        },
+        {
+          title: '账存数',
+          width: 150,
+          resizable: true,
+          slot: 'inventory'
+        },
+        {
+          title: '盘点数',
+          width: 150,
+          resizable: true,
+          slot: 'number',
+          key: 'number',
+          renderHeader: (h, params) => {
+            return h('div', [
+              h('span', {
+                style: {
+                  color: '#ed3f14',
+                  fontSize: '14px',
+                  fontWeight: 'bolder'
+                }
+              }, '*'),
+              h('span', params.column.title)
+            ])
+          }
+        },
+        {
+          title: '整件散包',
+          width: 200,
+          resizable: true,
+          slot: 'package'
+        },
+        {
+          title: '换算率',
+          width: 200,
+          resizable: true,
+          slot: 'conversionRate'
+        },
+        {
+          title: '盈亏数',
+          width: 150,
+          resizable: true,
+          slot: 'deficient'
+        },
+        {
+          title: '盘点率%',
+          width: 150,
+          resizable: true,
+          slot: 'deficientRate'
+        },
+        {
+          title: '商品行备注',
+          width: 150,
+          resizable: true,
+          slot: 'commodityDes'
+        },
+        {
+          title: ' '
+        }
+      ],
+      clerkList: [],
+      warehouseList: []
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'accountSet',
+      'myPermission',
+      'warehouseDiskPoint'
+    ]),
+    getTableHeight () {
+      return window.innerHeight - 460
+    },
+    tableColumns () {
+      let columns = this.columns
+      let isBatch = this.formData.list.find(f => f.isBatch)
+      let isShelfLife = this.formData.list.find(f => f.isShelfLife)
+      if (isBatch && columns[4].title === '单位') {
+        columns.splice(4, 0, {
+          title: '批次',
+          width: 150,
+          resizable: true,
+          slot: 'batch',
+          renderHeader: (h, params) => {
+            return h('div', [
+              h('span', {
+                style: {
+                  color: '#ed3f14',
+                  fontSize: '14px',
+                  fontWeight: 'bolder'
+                }
+              }, '*'),
+              h('span', params.column.title)
+            ])
+          }
+        })
+      }
+      if (isShelfLife && columns[5].title === '单位') {
+        columns.splice(5, 0, {
+          title: '到期日',
+          width: 150,
+          resizable: true,
+          slot: 'effectiveDate'
+        })
+        columns.splice(5, 0, {
+          title: '保质期（天）',
+          width: 150,
+          resizable: true,
+          slot: 'shelfLifeDays',
+          renderHeader: (h, params) => {
+            return h('div', [
+              h('span', {
+                style: {
+                  color: '#ed3f14',
+                  fontSize: '14px',
+                  fontWeight: 'bolder'
+                }
+              }, '*'),
+              h('span', params.column.title)
+            ])
+          }
+        })
+        columns.splice(5, 0, {
+          title: '生产日期',
+          width: 150,
+          resizable: true,
+          slot: 'generateDate',
+          renderHeader: (h, params) => {
+            return h('div', [
+              h('span', {
+                style: {
+                  color: '#ed3f14',
+                  fontSize: '14px',
+                  fontWeight: 'bolder'
+                }
+              }, '*'),
+              h('span', params.column.title)
+            ])
+          }
+        })
+      }
+      return columns
+    }
+  },
+  watch: {
+    accountSet: {
+      handler () {
+        if (this.accountSet) {
+          if (this.$route.query.id) {
+            this.loadWarehouseDiskPoint()
+          } else {
+            this.loadParameter()
+          }
+          this.loadClerk()
+          this.loadWarehouse()
+        }
+      },
+      immediate: true,
+      deep: true
+    },
+    '$route': {
+      handler () {
+        if (this.$route.name !== 'warehouseDiskPoint') return
+        if (this.accountSet) {
+          if (this.$route.query.id && this.$route.query.id !== this.formData._id) {
+            this.loadWarehouseDiskPoint()
+          }
+          this.loadClerk()
+          this.loadWarehouse()
+        }
+      },
+      deep: true,
+      immediate: true
+    }
+  },
+  methods: {
+    moment,
+    formatMoney,
+    judge (action) {
+      let bool = false
+      if (this.myPermission && this.myPermission.length) {
+        this.myPermission.forEach(f => {
+          if (f.title === '盘点单') {
+            let fData = f.operation.find(f => f.action === action)
+            if (fData) {
+              bool = fData.val
+              if (!bool) this.$Message.error(`您没有${action}盘点单的权力，请联系管理员`)
+            }
+          }
+        })
+      }
+      return bool
+    },
+    loadParameter () {
+      let time = this.moment().format('YYYY-MM-DD')
+      parameterWarehouseDiskPoint({
+        accountSetId: this.accountSet._id,
+        dateTime: {
+          $gte: new Date(time + ' 00:00:00'),
+          $lte: new Date(time + ' 23:59:59.999')
+        }
+      }).then(res => {
+        let total = res.data.total + 1
+        let pad = '0000'
+        total = pad.substring(0, pad.length - total.toString().length) + total
+        this.formData = {
+          accountSetId: this.accountSet._id,
+          code: `PDD-${time.split('-').join('')}-${total}`,
+          dateTime: new Date(),
+          pointTime: null,
+          warehouseId: null,
+          clerkId: null,
+          list: [],
+          lock: '解锁',
+          result: '盘点中',
+          deficientId: null,
+          deficientCode: null,
+          surplusId: null,
+          surplusCode: null,
+          custom: null
+        }
+      }).catch(() => {
+        this.$Message.error('获取单据参数出错')
+      })
+    },
+    loadClerk () {
+      queryClerk({ accountSetId: this.accountSet._id }).then(res => {
+        this.clerkList = res.data
+      }).catch(err => {
+        this.$Notice.error({
+          title: '职员',
+          desc: err.message
+        })
+      })
+    },
+    loadWarehouse () {
+      queryWarehouse({ accountSetId: this.accountSet._id }).then(res => {
+        this.warehouseList = res.data
+      }).catch(err => {
+        this.$Message.error(err.message)
+      })
+    },
+    loadWarehouseDiskPoint () {
+      queryWarehouseDiskPoint({
+        filter: {
+          accountSetId: this.accountSet._id,
+          _id: this.$route.query.id
+        },
+        isOne: true
+      }).then(res => {
+        this.formData = res.data
+        this.formData.dateTime = new Date(res.data.dateTime)
+        this.formData.list.forEach(f => {
+          if (f.generateDate) f.generateDate = this.moment(f.generateDate).format('YYYY-MM-DD')
+          if (f.effectiveDate) f.effectiveDate = this.moment(f.effectiveDate).format('YYYY-MM-DD')
+        })
+        this.isCanEdit = res.data.result === '盘点中'
+      }).catch(err => {
+        this.$Notice.error({
+          title: '盘点单',
+          desc: err.message
+        })
+      })
+    },
+    save (isAdd) {
+      if (!this.judge(isAdd ? '新增' : '修改')) return
+      if (isAdd) {
+        if (this.$route.query.id) {
+          this.$router.replace({
+            name: this.$route.name
+          })
+        } else {
+          location.reload()
+        }
+        return
+      }
+      this.$refs.formData.validate((valid) => {
+        if (valid) {
+          if (!this.formData.warehouseId) {
+            this.$Message.error('请选择盘点仓库')
+          } else if (this.formData.list.length === 0) {
+            this.$Message.error('请添加盘点商品')
+          } else if (this.formData.list.filter(f =>
+            !f.commodityId ||
+            !f.number ||
+            !f.unit ||
+            (f.isBatch && !f.batch) ||
+            (f.isShelfLife && (!f.generateDate || !f.shelfLifeDays))
+          ).length) {
+            this.$Message.error(`盘点商品的标记红点的项必录，请检查！`)
+          } else {
+            updateWarehouseDiskPoint(this.formData).then(res => {
+              this.$Message.success(`保存成功`)
+              if (isAdd) {
+                if (this.$route.query.id) {
+                  this.$router.replace({
+                    name: this.$route.name
+                  })
+                } else {
+                  location.reload()
+                }
+              } else {
+                if (this.$route.query.id) {
+                  location.reload()
+                } else {
+                  this.$router.replace({
+                    name: this.$route.name,
+                    query: { id: res.data.result._id }
+                  })
+                }
+              }
+            }).catch(err => {
+              this.$Message.error(err.message)
+            })
+          }
+        }
+      })
+    },
+    rowClassName (row, index) {
+      return index === this.currentRow ? 'active' : ''
+    },
+    rowClick (row, index) {
+      this.currentRow = index
+    },
+    addCommodity (bool, list = []) {
+      if (bool && list.length) {
+        let fData = this.warehouseList.find(f => f._id === this.formData.warehouseId)
+        list.forEach(v => {
+          if (!this.formData.list.find(f => f.commodityId === v._id && f.auxiliary === v.auxiliary)) {
+            let iData = fData.inventoryList.find(m =>
+              m.commodityId === v._id &&
+              (!v.auxiliary || (m.auxiliary === v.auxiliary)) &&
+              (!v.isBatch || (m.batch && m.batch === v.batch)) &&
+              (!v.isShelfLife || (m.generateDate && this.moment(m.generateDate).isSame(this.moment(v.generateDate), 'day'))) &&
+              (!v.isShelfLife || (m.shelfLifeDays && m.shelfLifeDays === v.shelfLifeDays))
+            )
+            this.formData.list.push({
+              commodityId: v._id,
+              code: v.code,
+              name: v.name,
+              auxiliary: v.auxiliary,
+              groupId: v.groupId,
+              unit: v.unit,
+              unitList: v.measureUnit.conversion,
+              inventory: iData.inventory || 0,
+              number: iData.inventory || 0,
+              commodityDes: null,
+              isBatch: v.character.batch,
+              isShelfLife: v.character.shelfLife,
+              batch: '',
+              shelfLifeDays: v.character.shelfLife ? v.character.shelfLifeData.shelfLifeDays || 0 : null,
+              generateDate: null,
+              effectiveDate: null,
+              package: null,
+              packageNumber: null,
+              packageList: v.measureUnit.conversion.map(m => Object.assign({ number: null }, m))
+            })
+          }
+        })
+      } else {
+        this.$refs.commodityModal.show(bool)
+      }
+    },
+    handleSummary ({ columns, data }) {
+      const sums = {}
+      columns.forEach((column, index) => {
+        const key = column.key
+        if (index === 0) {
+          sums[key] = {
+            key,
+            value: '合计'
+          }
+          return
+        }
+        const values = data.map(item => item[key])
+        if (!values.every(value => isNaN(value))) {
+          const v = values.reduce((prev, curr) => {
+            const value = Number(curr)
+            if (!isNaN(value)) {
+              return prev + curr
+            } else {
+              return prev
+            }
+          }, 0)
+          sums[key] = {
+            key,
+            value: this.formatMoney(v, '', 2)
+          }
+        } else {
+          sums[key] = {
+            key,
+            value: ' '
+          }
+        }
+      })
+      return sums
+    },
+    changePrice (index) {
+      let data = this.formData.list[index]
+      if (data.packageNumber && data.number !== data.packageNumber) {
+        this.$set(this.formData.list[index], 'packageList', data.unitList.map(m => Object.assign({ number: null }, m)))
+        this.$set(this.formData.list[index], 'package', null)
+      }
+    },
+    changeUnit (val, oldVal, index) {
+      let data = this.formData.list[index]
+      if (data.packageNumber && val !== oldVal) {
+        this.changePackage(index)
+      }
+    },
+    changePackage (index) {
+      let data = this.formData.list[index]
+      if (data.packageList && data.packageList.length) {
+        let number = 0
+        let text = ''
+        let equation = 1
+        data.packageList.forEach(f => {
+          if (f.number) {
+            number = NP.plus(number, NP.times(f.number || 0, f.equation))
+            text += (text.length ? '+' : '') + f.number + f.name
+          }
+          if (f.name === data.unit) equation = f.equation
+        })
+        if (number > 0) {
+          number = NP.divide(number, equation)
+          this.$set(this.formData.list[index], 'number', number)
+          this.$set(this.formData.list[index], 'packageNumber', number)
+          this.$set(this.formData.list[index], 'package', text)
+          this.changePrice(index)
+        }
+      }
+    },
+    getDeficient (row) {
+      let result = 0
+      if (row.number) {
+        result = NP.minus(row.number || 0, row.inventory || 0)
+      }
+      return result === 0 ? '' : result
+    },
+    getDeficientRate (row) {
+      let result = 0
+      if (row.number) {
+        result = NP.times(NP.divide(NP.minus(row.number || 0, row.inventory || 0), row.inventory || 1), 100)
+      }
+      return result === 0 ? '' : result
+    },
+    batchFun (title, id, val) {
+      if (!this.judge(title)) return
+      this.$Modal.confirm({
+        title: `${title}盘点单`,
+        content: `确定${title}盘点单`,
+        onOk: () => {
+          batchWarehouseDiskDeficient({
+            action: { lock: val },
+            ids: [id]
+          }).then(res => {
+            this.$Message.success(`成功${title}盘点单`)
+            this.loadWarehouseDiskDeficient()
+          }).catch(err => {
+            this.$Message.error(err.message)
+          })
+        }
+      })
+    },
+    select (id) {
+      let fData = this.warehouseList.find(f => f._id === id)
+      if (fData) {
+        let ids = fData.inventoryList.map(m => m.commodityId)
+        queryCommodityInfo({
+          filter: {
+            accountSetId: this.accountSet._id,
+            _id: { $in: ids }
+          },
+          pageInfo: {
+            limit: 99999999999999,
+            page: 1
+          }
+        }).then(res => {
+          let result = fData.inventoryList.map(f => {
+            let v = res.data.list.find(v => v._id === f.commodityId)
+            return {
+              commodityId: v._id,
+              code: v.code,
+              name: v.name,
+              auxiliary: f.auxiliary,
+              groupId: v.groupId,
+              unit: v.unit,
+              unitList: v.measureUnit.conversion,
+              inventory: f.inventory,
+              number: f.inventory,
+              commodityDes: null
+            }
+          })
+          this.formData.list = result
+        }).catch(err => {
+          this.$Notice.error({
+            title: '商品',
+            desc: err.message
+          })
+        })
+      }
+    },
+    getEffectiveDate (row) {
+      let date = null
+      if (row.shelfLifeDays && row.generateDate) {
+        date = this.moment(row.generateDate).add(parseFloat(row.shelfLifeDays), 'days')
+        if (!this.moment(this.formData.list[row._index].effectiveDate).isSame(date, 'day')) {
+          this.$set(this.formData.list[row._index], 'effectiveDate', date)
+        }
+      }
+      return date ? this.moment(date).format('YYYY-MM-DD') : null
+    },
+    changeBatch (val, warehouse, row) {
+      if (warehouse) {
+        let iData = warehouse.inventoryList.find(f =>
+          f.commodityId === row.commodityId &&
+          (!f.auxiliary || (f.auxiliary === row.auxiliary)) &&
+          (!val || (f.batch && f.batch === val))
+        )
+        if (iData) {
+          this.$set(this.formData.list[row._index], 'generateDate', this.moment(iData.generateDate).format('YYYY-MM-DD'))
+        }
+      }
+    },
+    goNav (type) {
+      let navList = this.warehouseDiskPoint
+      if (!navList.length) {
+        navList = JSON.parse(localStorage.getItem('warehouseDiskPoint'))
+      }
+      let index = navList.indexOf(this.$route.query.id)
+      let goIndex = null
+      switch (type) {
+        case 'D':
+          if (index <= 0) {
+            this.$Message.error('已是当前搜索列表页第一条')
+          } else {
+            goIndex = 0
+          }
+          break
+        case 'L':
+          if (index <= 0) {
+            this.$Message.error('已是当前搜索列表页第一条')
+          } else {
+            goIndex = index - 1
+          }
+          break
+        case 'N':
+          if (index >= navList.length - 1) {
+            this.$Message.error('已是当前搜索列表页最后一条')
+          } else {
+            goIndex = navList.length - 1
+          }
+          break
+        case 'Z':
+          if (index >= navList.length - 1) {
+            this.$Message.error('已是当前搜索列表页最后一条')
+          } else {
+            goIndex = index + 1
+          }
+          break
+      }
+      if (goIndex !== null) {
+        this.$router.push({
+          name: this.$route.name,
+          query: { id: navList[goIndex] }
+        })
+      }
+    }
+  }
+}
+</script>
